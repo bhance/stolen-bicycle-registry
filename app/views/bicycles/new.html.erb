@@ -1,37 +1,42 @@
 <% provide(:title, 'Register') %>
-<div>Required
-<%= form_for @bicycle do |f| %>
+<div id='errors'>
+ <%= render 'shared/errors', object: @bicycle %>
+</div>
+
+<%= form_for @bicycle, :url => bicycles_path, :html => { :multipart => true }, remote: true do |f| %>
   <%= f.label 'Theft Date' %>
   <%= f.date_field :date %>
   <%= f.label 'City' %>
   <%= f.text_field :city, placeholder: 'City' %> 
   <%= f.label 'State' %>
-  <%= f.select :state, ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'AS', 'DC', 'FM', 'GU', 'MH', 'MP', 'PW', 'PR', 'VI', 'AA', 'AE', 'AP'] %>
+  <%= f.select :region, ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'AS', 'DC', 'FM', 'GU', 'MH', 'MP', 'PW', 'PR', 'VI', 'AA', 'AE', 'AP', '--'], selected: '--' %>
+  <%= f.label 'Country' %>
+  <%= f.select :country, ['Canada', 'United States', '--'], selected: '--' %>
   <%= f.label 'Description' %>
-  <%= f.text_area :description, placeholder: 'Min 20 characters' %>
-</div>
-<hr>
-<div>Optional
+  <%= f.text_area :description, placeholder: 'Min 30 characters' %>
+
   <%= f.label 'Serial' %>
-  <%= f.text_field :serial, placeholder: 'PP1234' %>
+  <%= f.text_field :serial, placeholder: 'PP123495877' %>
   <%= f.label 'Do you have proof of ownership?' %>
   <%= f.select :verified_ownership, [['yes', true], ['no', false]] %>
   <%= f.label 'Police report number' %>
-  <%= f.text_field :police_report %>
+  <%= f.text_field :police_report, placeholder: '1235463754' %>
   <%= f.label 'Reward' %>
-  <%= f.text_field :reward %>
+  <%= f.text_field :reward, placeholder: '$50' %>
   <%= f.label 'Year' %>
-  <%= f.text_field :year %>
+  <%= f.text_field :year, placeholder: '2007' %>
   <%= f.label 'Brand' %>
-  <%= f.text_field :brand %>
+  <%= f.text_field :brand, placeholder: 'Schwinn' %>
   <%= f.label 'Model' %>
-  <%= f.text_field :model %>
+  <%= f.text_field :model, placeholder: 'Le Tour' %>
   <%= f.label 'Color' %>
-  <%= f.color_field :color %>
+  <%= f.color_field :color, placeholder: 'Blue/Gray mix' %>
   <%= f.label 'Size' %>
-  <%= f.text_field :size %>
+  <%= f.text_field :size, placeholder: '27' %>
   <%= f.label 'Unit of Measurement' %>
   <%= f.select :size_type, ['cm', 'in'] %>
+  <%= f.label 'Photo' %>
+  <%= f.file_field :photo %>
+  <%= f.submit 'Register' %>
 
-  <%= f.submit %>
 <% end %>

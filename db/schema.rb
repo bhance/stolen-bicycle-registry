@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131014180608) do
+ActiveRecord::Schema.define(version: 20131014223659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20131014180608) do
   create_table "bicycles", force: true do |t|
     t.date     "date"
     t.string   "city"
-    t.string   "state"
-    t.integer  "zip"
+    t.string   "region"
+    t.string   "postal_code"
     t.string   "serial"
     t.boolean  "verified_ownership"
     t.string   "police_report"
@@ -34,5 +34,11 @@ ActiveRecord::Schema.define(version: 20131014180608) do
     t.string   "size_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "country"
   end
+
 end

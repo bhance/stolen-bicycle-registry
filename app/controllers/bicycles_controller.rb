@@ -1,10 +1,20 @@
 class BicyclesController < ApplicationController
+
   def new
     @bicycle = Bicycle.new
   end
 
   def create
-
+    @bicycle = Bicycle.new(bicycle_params)
+    if @bicycle.save
+      render 'show'
+    else
+      respond_to do |format|
+        puts 'You made it to the sad path!'
+        format.html { render 'new' }
+        format.js
+      end
+    end
   end
 
   private
@@ -13,7 +23,8 @@ class BicyclesController < ApplicationController
     params.require(:bicycle).permit(
       :date,
       :city,
-      :state,
+      :region,
+      :country,
       :zip,
       :serial,
       :verified_ownership,
@@ -25,7 +36,9 @@ class BicyclesController < ApplicationController
       :model,
       :color,
       :size,
-      :size_type
+      :size_type,
+      :photo
     )
   end
+
 end
