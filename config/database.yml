@@ -5,7 +5,3 @@ development:
 test:
   adapter: postgresql
   database: stolen_bicycle_registry_test
-
-production:
-  adapter: postgresql
-  database: stolen_bicycle_registry_production
