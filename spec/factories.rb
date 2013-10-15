@@ -42,7 +42,7 @@ FactoryGirl.define do
     zip                 '97212'
   end
 
-  factory :canadian, class: bicycle
+  factory :canadian, class: Bicycle do
     country 'Canada'
     region  'BC'
   end   
