@@ -1,0 +1,48 @@
+<% provide(:title, 'All users') %>
+<h1>Search</h1>
+
+<div class='container'>
+<%= form_tag '/search', method: 'get' do %>
+  <%= label_tag(:serial, 'Serial Number (full or partial):', placeholder: 'PR2345...') %>
+  <%= text_field_tag(:serial, params[:serial]) %>
+  <%= submit_tag('Search') %>
+<% end %>
+<%= link_to 'Advanced Search', '#' %>
+
+<%= will_paginate %>
+<table>
+  <tr>
+    <td colspan='5'>Bicycle Details</td>
+    <td colspan='5'>Theft Details</td>
+  </tr>
+  <tr>
+    <td>Photo</td>
+    <td>Serial</td>
+    <td>Year</td>
+    <td>Brand</td>
+    <td>Model</td>
+    <!-- colspan span break -->
+    <td>City</td>
+    <td>Region</td>
+    <td>Postal</td>
+    <td>Country</td>
+    <td>Stolen on</td>
+  </tr>
+  <% @bicycles.each do |bicycle| %>
+    <tr>
+      <td><%= bicycle.photo.nil? ? 'No' : 'Yes' %></td>
+      <td><%= bicycle.serial %></td>
+      <td><%= bicycle.year %></td>
+      <td><%= bicycle.brand %></td>
+      <td><%= bicycle.model %></td>
+      <!-- colspan span break -->
+      <td><%= bicycle.city %></td>
+      <td><%= bicycle.region %></td>
+      <td><%= bicycle.postal_code %></td>
+      <td><%= bicycle.country %></td>
+      <td><%= bicycle.date %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate %>
+</div>

@@ -1,6 +1,5 @@
 class Bicycle < ActiveRecord::Base
   before_save :right_postal_code
-
   validates_presence_of :date
   validates :region, presence: true, inclusion: { in: %w( AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AS DC FM GU MH MP PW PR VI AA AE AP ) }
   validates_presence_of :city
@@ -34,5 +33,17 @@ class Bicycle < ActiveRecord::Base
     elsif canada? && /^\D{1}\d{1}\D{1}(\s|-)?\d{1}\D{1}\d{1}$/.match(postal_code)
       errors.add(:base, "Postal code must be in this format 'A0A 0A0'")
     end
+  end
+
+  def self.serial_search(number)
+    if number.present? #in case search is pressed with blank query
+      where('serial ILIKE :number', number: "%#{number}%")
+    else
+      all
+    end
+  end
+
+  def self.advanced_search(search_criteria)
+    Bicycle.basic_search(search_criteria)
   end
 end

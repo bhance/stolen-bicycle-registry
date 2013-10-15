@@ -1,5 +1,5 @@
 StolenBicycleRegistry::Application.routes.draw do
-
+  match '/search', to: 'bicycles#index', via: 'get'
   devise_for :users
   resources :bicycles, except: [:index]
 

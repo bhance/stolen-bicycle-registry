@@ -1,4 +1,13 @@
 class BicyclesController < ApplicationController
+  def index
+    if params[:serial]
+      @bicycles = Bicycle.serial_search(params[:serial]).paginate(page: params[:page], :per_page => 15).order('date DESC')
+    elsif params[:advanced]
+      @bicycles = Bicycle.all #temporary
+    else
+      @bicycles = Bicycle.all.paginate(page: params[:page], :per_page => 15).order('date DESC')
+    end
+  end
 
   def new
     @bicycle = Bicycle.new
@@ -10,7 +19,6 @@ class BicyclesController < ApplicationController
       render 'show'
     else
       respond_to do |format|
-        puts 'You made it to the sad path!'
         format.html { render 'new' }
         format.js
       end
@@ -40,5 +48,4 @@ class BicyclesController < ApplicationController
       :photo
     )
   end
-
 end
