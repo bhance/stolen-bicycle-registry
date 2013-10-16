@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   validates :encrypted_password, presence: true
 
   validates :email, uniqueness: true
+  has_many :bicycles
 
 private
 

@@ -17,6 +17,7 @@ class Bicycle < ActiveRecord::Base
                              :medium => "300x300>", 
                              :thumb => "100x100>" }, 
                     :default_url => "/images/:style/missing.png"
+  belongs_to :user
 
   private
 

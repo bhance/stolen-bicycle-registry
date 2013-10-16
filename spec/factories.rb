@@ -14,7 +14,7 @@ FactoryGirl.define do
   factory :canadian_user, class: User do
     first_name "First_name"
     last_name "Last_name"
-    sequence(:email) { |n| "person_#{n}@example.com"}    
+    sequence(:email) { |n| "canadian_person_#{n}@example.com"}    
     country "Canada"
     city "City"
     region "Manitoba"
@@ -24,10 +24,10 @@ FactoryGirl.define do
   end
 
   factory :bicycle do
-    date                '03/15/2011'
+    date                '03/12/2011'
     city                'Vancouver'
-    region              'OR'
-    description         'This is my bike'
+    region              'WA'
+    description         'I went to get groceries at Safeway and when I came back out  my bike was gone'
     country             'United States'
     serial              'ZB23R45'
     verified_ownership  false
@@ -35,15 +35,20 @@ FactoryGirl.define do
     reward              300
     year                2002 
     brand               'Rivendell'
-    model               'Aquarius'
+    model               'Atlantis'
     color               'Seafoam Green'
     size                54
     size_type           'cm'
-    zip                 '97212'
+    postal_code         '97212'
   end
 
   factory :canadian, class: Bicycle do
     country 'Canada'
     region  'BC'
-  end   
+  end
+
+  # factory :user_and_bicycle do
+  #   user = create(:american_user)
+  #   bicycle = create(:bicycle, user_id: user.id)
+  # end 
 end
