@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/home">Home</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "How It Works", about_path %></li>
+          <li><%= link_to "Philosophy", philosophy_path %></li>
+          <li><%= link_to "FAQ", faq_path %></li>
+        </ul>
+      </li>
+      <li class="active"><%= link_to "Prevention", prevention_path %></li>
+      <li class="active"><a href="http://blog.stolenbicycleregistry.com/" target="_blank">Blog</a></li>
+      <li class="active"><%= link_to "Links", links_path %></li>
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li><%= link_to "Log-out", destroy_user_session_path %></li>
+      <% else %>
+        <li><%= link_to "Log-in", user_session_path %></li>
+      <% end %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
