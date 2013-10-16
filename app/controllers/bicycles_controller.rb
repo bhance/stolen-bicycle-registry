@@ -1,6 +1,15 @@
 class BicyclesController < ApplicationController
   before_filter :user_signed_in? 
 
+  def index
+    if params[:query]
+      @bicycles = Bicycle.search(params[:query]).paginate(page: params[:page], :per_page => 15).order('date DESC')
+    else
+      @bicycles = nil
+      # Bicycle.all.paginate(page: params[:page], :per_page => 15).order('date DESC')
+    end
+  end
+
   def new
     if signed_in?
       @bicycle = Bicycle.new
@@ -53,5 +62,4 @@ class BicyclesController < ApplicationController
       :user_id
     )
   end
-
 end
