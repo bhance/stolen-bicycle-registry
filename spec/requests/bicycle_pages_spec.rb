@@ -25,14 +25,23 @@ feature 'Bicycle Registration' do
     fill_in 'bicycle_description', with: bicycle.description
     click_button 'Register'
     uri = URI.parse(current_url)
-    "#{uri.path}".should == "/bicycles"
+    "#{uri.path}".should == "/bicycles/#{Bicycle.last.id}"
   end
 
-  scenario 'User edits one of their bicycles and is redirected to the listing' do
+  scenario 'User edits one of their bicycles' do
     @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
     visit edit_bicycle_path(@bicycle)
     fill_in 'bicycle_color', with: 'Mauve'
     click_button 'Register'
-    page.should have_content 'Mauve'
+    @bicycle.color.should be 'Mauve'
+  end
+
+  scenario 'User edits and is redirected to the listing' do
+    @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
+    visit edit_bicycle_path(@bicycle)
+    fill_in 'bicycle_color', with: 'Mauve'
+    click_button 'Register'
+    uri = URI.parse(current_url)
+    "#{uri.path}".should == "/bicycles/#{@bicycle.id}"
   end
 end

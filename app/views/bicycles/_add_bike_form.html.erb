@@ -1,4 +1,6 @@
-<%= form_for @bicycle, remote: true do |f| %>
+<%= form_for @bicycle do |f| %>
+<div class='row'> 
+  <div class='col-md-6'>
   <%= f.label 'Theft Date' %>
   <%= f.date_field :date, id: 'date_picker' %>
   <%= f.label 'Country' %>
@@ -32,4 +34,6 @@
   <%= f.label 'Photo' %>
   <%= f.file_field :photo %>
   <%= f.submit 'Register' %>
+  </div>
+</div>
 <% end %>
