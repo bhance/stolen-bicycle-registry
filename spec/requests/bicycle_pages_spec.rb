@@ -17,13 +17,12 @@ feature 'Bicycle Registration' do
     expect(page).to have_content 'blank'
   end
 
-  scenario 'User submits information' do
+  scenario 'User submits information', js: true do
     fill_in 'date_picker', with: "01/01/2010"
     fill_in 'City', with: bicycle.city
-    select(bicycle.region, from: 'bicycle_region')
+    select(bicycle.region, from: 'State')
     select(bicycle.country, from: 'bicycle_country')
     fill_in 'bicycle_description', with: bicycle.description
-    
     click_button 'Register'
     uri = URI.parse(current_url)
     "#{uri.path}".should == "/bicycles"
@@ -32,7 +31,6 @@ feature 'Bicycle Registration' do
   scenario 'User edits one of their bicycles and is redirected to the listing' do
     @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
     visit edit_bicycle_path(@bicycle)
-    save_and_open_page
     fill_in 'bicycle_color', with: 'Mauve'
     click_button 'Register'
     page.should have_content 'Mauve'

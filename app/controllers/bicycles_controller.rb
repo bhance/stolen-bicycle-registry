@@ -21,7 +21,7 @@ class BicyclesController < ApplicationController
   def create
     @bicycle = current_user.bicycles.new(bicycle_params)
     if @bicycle.save
-      render 'show'
+      render 'bicycles#show'
     else
       respond_to do |format|
         format.html { render 'new' }

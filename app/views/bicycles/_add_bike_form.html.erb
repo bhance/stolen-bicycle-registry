@@ -1,15 +1,14 @@
 <%= form_for @bicycle, remote: true do |f| %>
   <%= f.label 'Theft Date' %>
   <%= f.date_field :date, id: 'date_picker' %>
+  <%= f.label 'Country' %>
+  <%= f.select :country, ['Canada', 'United States'], selected: 'United States' %>
   <%= f.label 'City' %>
   <%= f.text_field :city, placeholder: 'City' %> 
-  <%= f.label 'Region' %>
-  <%= f.select :region, ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'AS', 'DC', 'FM', 'GU', 'MH', 'MP', 'PW', 'PR', 'VI', 'AA', 'AE', 'AP', '--'], selected: '--' %>
-  <%= f.label 'Country' %>
-  <%= f.select :country, ['Canada', 'United States', '--'], selected: '--' %>
+  <div id="states"><%= f.label :region, 'State' %><%= f.select :region, ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY','--'], selected: '--' %></div>
+  <div id="canada"><%= f.label :region, 'Province' %><%= f.select :region, ['AA', 'AE', 'AP', 'AS', 'DC', 'FM', 'GU', 'MH', 'MP', 'PR', 'PW', 'VI', '--'], selected: '--' %></div>
   <%= f.label 'Description' %>
-  <%= f.text_area :description, placeholder: 'Min 30 characters' %>
-
+  <%= f.text_area :description, placeholder: 'min 30 char.' %>
   <%= f.label 'Serial' %>
   <%= f.text_field :serial, placeholder: 'PP123495877' %>
   <%= f.label 'Do you have proof of ownership?' %>

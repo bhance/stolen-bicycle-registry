@@ -5,6 +5,7 @@ feature 'User pages' do
   before do
     @user = FactoryGirl.create(:american_user)
     @user2 = FactoryGirl.create(:canadian_user)
+    @user3 = FactoryGirl.build(:american_user)
     @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
   end
 
@@ -51,5 +52,33 @@ feature 'User pages' do
     visit user_path(@user)
     click_link 'Edit listing'
     page.should have_content 'Edit'
+  end
+
+  scenario 'visitor registers as a user before registering a stolen bike', js: true do
+    visit new_user_registration_path
+    fill_in 'First Name', with: @user3.first_name
+    fill_in 'Last Name', with: @user3.last_name
+    fill_in 'Email', with: @user3.email
+    select('United States', from: 'user_country')
+    fill_in 'City', with: @user3.city
+    select('OR', from: 'State')
+    fill_in 'Zip Code', with: @user3.postal_code
+    fill_in 'Phone', with: @user3.phone1
+    fill_in 'Password (min 8 char.)', with: @user3.password
+    fill_in 'Password Confirmation', with: @user3.password
+    click_button 'Sign up'
+    page.should have_content 'successfully'
+  end
+
+  scenario 'user selects country \'Canada\' and gets selector to specify a province' do
+    visit new_user_registration_path
+    select('Canada', from: 'user_country')
+    page.has_selector?('Province')
+  end
+
+  scenario 'user selects country \'United States\' and gets selector to specify a state' do
+    visit new_user_registration_path
+    select('United States', from: 'user_country')
+    page.has_selector?('States')
   end
 end

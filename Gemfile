@@ -25,6 +25,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'launchy'
+  gem 'poltergeist'
 end
 
 group :production do

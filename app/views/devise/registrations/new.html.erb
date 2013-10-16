@@ -3,16 +3,41 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div><%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name' %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div><%= f.text_field :last_name, placeholder: 'Last Name' %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <div><%= f.email_field :email, placeholder: 'Email'  %></div>
 
-  <div><%= f.submit "Sign up" %></div>
+  <div id="country"><%= f.label 'Country' %><%= f.select :country, ['Canada', 'United States'], selected: 'United States' %>
+  </div>
+
+  <div><%= f.text_field :city, placeholder: 'City' %></div>
+  
+  <div id="canada"><%= f.label :region, 'Province' %><%= f.select :region, ['AA', 'AE', 'AP', 'AS', 'DC', 'FM', 'GU', 'MH', 'MP', 'PR', 'PW', 'VI', '--'], selected: '--' %></div>
+
+  <div id="canada"><%= f.text_field :postal_code, placeholder: 'Postal Code' %></div>
+
+  <div id="states"><%= f.label :region, 'State' %><%= f.select :region, ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', '--'], selected: '--' %>
+  </div>
+
+   <div id="states"><%= f.text_field :postal_code, placeholder: 'Zip Code' %></div>
+
+  <div><%= f.text_field :phone1, placeholder: 'Phone' %></div>
+
+  <div><%= f.text_field :phone2, placeholder: 'Phone 2' %></div>
+
+  <div><%= f.password_field :password, placeholder: 'Password (min 8 char.)' %></div>
+
+  <div><%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %></div>
+  <br>
+  <div class="well public">
+    Check information to display publicly: 
+    <div><%= f.check_box :first_name_public %> <%= f.label :first_name %></div>
+    <div><%= f.check_box :last_name_public %> <%= f.label :last_name %></div>
+    <div><%= f.check_box :email_public %> <%= f.label :email %></div>
+  </div>
+  <div id="signup"><%= f.submit "Sign up" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

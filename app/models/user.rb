@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   validates_inclusion_of :region, :in => STATE_ABBREVIATIONS, :if => :in_us? 
   validates :postal_code, presence: true
   validate :right_postal_code
-  validates :email, presence: true
   validates :encrypted_password, presence: true
 
   validates :email, uniqueness: true
