@@ -1,4 +1,4 @@
-<%= form_for @bicycle, remote: true do |f| %>
+<%= form_for @bicycle do |f| %>
   <%= f.label 'Theft Date' %>
   <%= f.date_field :date, id: 'date_picker' %>
   <%= f.label 'City' %>

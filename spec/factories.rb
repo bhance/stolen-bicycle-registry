@@ -25,12 +25,12 @@ FactoryGirl.define do
 
   factory :bicycle do
 
-    sequence(:date) { |d| "#{d < 32 ? d : d/2}/3/2011" }
+    date '5/3/2011' 
     city 'Vancouver'
     region 'WA'
     description 'This is my bike. It was stolen on Wednesday, by the parking lot of Walmart at Gringo Station. There is a death to bike theives sticker on it. Please help!'
     country 'United States'
-    sequence(:serial) { |s| "ZB23R45#{s}" }
+    sequence(:serial) { |s| "ZC23R45#{s}" }
     verified_ownership false
     sequence(:police_report) { |p| "WA-12#{p}304#{p+1}" }
     reward 100
@@ -41,15 +41,10 @@ FactoryGirl.define do
     size 54
     size_type 'cm'
     postal_code '97212'
+  
+    factory :canadian, class: Bicycle do
+      country 'Canada'
+      region  'BC'
+    end
   end
-
-  factory :canadian, class: Bicycle do
-    country 'Canada'
-    region  'BC'
-  end
-
-  # factory :user_and_bicycle do
-  #   user = create(:american_user)
-  #   bicycle = create(:bicycle, user_id: user.id)
-  # end 
 end

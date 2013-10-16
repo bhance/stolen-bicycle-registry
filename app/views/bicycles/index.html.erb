@@ -1,83 +1,84 @@
 <% provide(:title, 'Search') %>
 
 <div class="center hero-unit">
-  <h3>Serial Search</h3>
-  <%= form_tag search_path, method: 'get' do %>
-    <%= label_tag(:query, 'Serial Number (full or partial):', placeholder: 'PR2345...') %>
-    <%= text_field(:query, :serial) %>
-    <%= submit_tag('Serial Search') %>
+  <h3>Basic Search</h3>
+  <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
+  <div class="form-group">
+    <%= text_field(:query, nil, placeholder: 'PR2345...') %>
+  </div>
+    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
   <% end %>
   <hr>
   <h3>Advanced Search</h3>
   <%= form_tag search_path, method: 'get' do %>
-    <div><p>Bicycle Details</p>
-      <%= label_tag :year, 'Year', placeholder: '2005' %>
-      <%= text_field :query, :year %>
+    <%= label_tag(:query, 'Serial Number (full or partial):', class: "sr-only") %>
+    <%= text_field(:query, :serial, placeholder: 'PR2345...') %>
+      <%#= label_tag :year, 'Year' %>
+      <%#= number_field :query, :year, placeholder: '2005' %>
 
-      <%= label_tag :brand, 'Brand', placeholder: 'Schwinn' %>
-      <%= text_field :query, :brand %>
+      <%= label_tag :brand, 'Brand', class: "sr-only" %>
+      <%= text_field :query, :brand, placeholder: 'Schwinn' %>
 
-      <%= label_tag :model, 'Model', placeholder: 'Sportera' %>
-      <%= text_field :query, :model %>
+      <%= label_tag :model, 'Model', class: "sr-only" %>
+      <%= text_field :query, :model, placeholder: 'Sportera' %>
 
-      <%= label_tag :color, 'Color', placeholder: 'Blue' %>
-      <%= text_field :query, :color %>
-    </div>
+      <%= label_tag :color, 'Color', class: "sr-only" %>
+      <%= text_field :query, :color, placeholder: 'Blue' %>
     <div><p>Theft Details</p>
-      <%= label_tag :postal_code, 'Postal Code', placeholder: 'DELETE?' %>
-      <%= text_field :query, :postal_code %>
+      <%= label_tag :postal_code, 'Postal Code', class: "sr-only" %>
+      <%= text_field :query, :postal_code, placeholder: '97212' %>
 
-      <%= label_tag :city, 'City', placeholder: '2005' %>
-      <%= text_field :query, :city %>
+      <%= label_tag :city, 'City', class: "sr-only" %>
+      <%= text_field :query, :city, placeholder: 'Vancouver' %>
 
-      <%= label_tag :region, 'Region/State', placeholder: '2005' %>
-      <%= text_field :query, :region %>
+      <%= label_tag :region, 'Region/State', class: "sr-only" %>
+      <%= text_field :query, :region, placeholder: 'WA or BC' %>
 
-      <%= label_tag :country, 'Country' %>
-      <%= select :query, :country, ['', 'United States', 'Canada'], selected: '' %>
+      <%= label_tag :country, 'Country', class: "sr-only" %>
+      <%= select :query, :country, [['USA', 'United States'], 'Canada', ['all', '']], selected: '' %>
     </div>
-    <%= submit_tag 'Search', class: "btn btn-small btn-info" %>
+    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
   <% end %>
 </div>
-
-<% if @bicycles.nil? %>
-  <p>Enter a search query</p>
-<% else %>
-  <p><strong><%= @bicycles.count %></strong> search results.</p>
-  <%= will_paginate %>
-  <table>
-    <tr>
-      <td colspan='5'>Bicycle Details</td>
-      <td colspan='5'>Theft Details</td>
-    </tr>
-    <tr>
-      <td>Photo</td>
-      <td>Serial</td>
-      <td>Year</td>
-      <td>Brand</td>
-      <td>Model</td>
-      <!-- colspan span break -->
-      <td>City</td>
-      <td>Region</td>
-      <td>Postal</td>
-      <td>Country</td>
-      <td>Stolen on</td>
-    </tr>
-    <% @bicycles.each do |bicycle| %>
+  <% if @bicycles.nil? %>
+    <p>No Results</p>
+  <% else %>
+    <p><strong><%= @bicycles.count %></strong> search results.</p>
+    <%= will_paginate %>
+    <table>
       <tr>
-        <td><%= bicycle.photo.nil? ? 'No' : 'Yes' %></td>
-        <td><%= bicycle.serial %></td>
-        <td><%= bicycle.year %></td>
-        <td><%= bicycle.brand %></td>
-        <td><%= bicycle.model %></td>
-        <!-- colspan span break -->
-        <td><%= bicycle.city %></td>
-        <td><%= bicycle.region %></td>
-        <td><%= bicycle.postal_code %></td>
-        <td><%= bicycle.country %></td>
-        <td><%= bicycle.date %></td>
+        <td colspan='5'>Bicycle Details</td>
+        <td colspan='5'>Theft Details</td>
       </tr>
-    <% end %>
-  </table>
-  <%= will_paginate %>
-<% end %>
+      <tr>
+        <td>Photo</td>
+        <td>Serial</td>
+        <td>Year</td>
+        <td>Brand</td>
+        <td>Model</td>
+        <!-- colspan span break -->
+        <td>City</td>
+        <td>Region</td>
+        <td>Postal</td>
+        <td>Country</td>
+        <td>Stolen on</td>
+      </tr>
+      <% @bicycles.each do |bicycle| %>
+        <tr>
+          <td><a href=<%= bicycle_path(bicycle) %> ><%= bicycle.photo.nil? ? 'No' : 'Yes' %>
+          </a></td>
+          <td><%= bicycle.serial %></td>
+          <td><%= bicycle.year %></td>
+          <td><%= bicycle.brand %></td>
+          <td><%= bicycle.model %></td>
+          <!-- colspan span break -->
+          <td><%= bicycle.city %></td>
+          <td><%= bicycle.region %></td>
+          <td><%= bicycle.postal_code %></td>
+          <td><%= bicycle.country %></td>
+          <td><%= bicycle.date %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= will_paginate %>
+  <% end %>

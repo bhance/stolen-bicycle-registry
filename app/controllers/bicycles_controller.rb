@@ -2,12 +2,8 @@ class BicyclesController < ApplicationController
   before_filter :user_signed_in? 
 
   def index
-    if params[:query]
-      @bicycles = Bicycle.search(params[:query]).paginate(page: params[:page], :per_page => 15).order('date DESC')
-    else
-      @bicycles = nil
-      # Bicycle.all.paginate(page: params[:page], :per_page => 15).order('date DESC')
-    end
+    @bicycles = Bicycle.bicycle_search(params[:query])
+    @bicycles = @bicycles.paginate(page: params[:page], :per_page => 15).order('date DESC') if @bicycles
   end
 
   def new
@@ -21,12 +17,9 @@ class BicyclesController < ApplicationController
   def create
     @bicycle = current_user.bicycles.new(bicycle_params)
     if @bicycle.save
-      render 'show'
+      redirect_to bicycle_path(@bicycle)
     else
-      respond_to do |format|
-        format.html { render 'new' }
-        format.js
-      end
+      render 'new'
     end
   end
 
@@ -36,6 +29,10 @@ class BicyclesController < ApplicationController
 
   def update
     redirect_to bicycle_path(params[:id])
+  end
+
+  def show
+    @bicycle = Bicycle.find(params[:id])
   end
 
   private

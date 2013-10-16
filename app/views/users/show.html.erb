@@ -2,7 +2,7 @@
 <ul><% @user.bicycles.each do |bicycle| %>
   <li><%= bicycle.date %>
   <li><%= bicycle.description %></li>
-  <li><%= image_tag bicycle.photo.url :thumbnail %></li>
+  <li><%= image_tag bicycle.photo.url :medium %></li>
   <li><%= link_to 'Edit listing', edit_bicycle_path(bicycle) %></li>
   <% end %>
 </ul>

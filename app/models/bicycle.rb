@@ -7,7 +7,7 @@ class Bicycle < ActiveRecord::Base
   validates :postal_code, allow_nil: true, numericality: true, length: { is: 5 }, if: :us?
   validates :postal_code, allow_nil: true, length: { is: 7 }, if: :canada?
   validates_inclusion_of(:size_type, :in => %w( cm in ))
-  validates_uniqueness_of :serial
+  validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
   validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   validates :country, presence: true
 
@@ -36,15 +36,29 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
-  def self.search(query)
-    query.delete_if { |k, v| v.blank? }
-    if query[:serial].present?
-      where('serial ILIKE ?', "%#{query[:serial]}%")
-    elsif query.present?
-      self.basic_search(query)
-    else
-      all
+
+  # def self.bicycle_search(query) 
+  # #   if query.class == ActionController::Parameters
+  # #     query.delete_if { |k, v| v.blank? }
+  # #   end
+  #   query.present? ? fuzzy_search(query) : nil
+  # end
+
+  def self.bicycle_search(query)
+    self.strip_empty_values(query)
+    query.present? ? fuzzy_search(query) : nil
+  end
+
+  def self.strip_empty_values(query)
+    if query.present? && query.class != String
+      query.delete_if { |k, v| v.blank? }
     end
   end
 
+    #   fuzzy_search(query)
+    # elsif query.present?
+    #   fuzzy_search(query)
+    # else
+    #   nil
+    # end
 end
