@@ -1,6 +1,7 @@
 StolenBicycleRegistry::Application.routes.draw do
-
+  match '/search', to: 'bicycles#index', via: 'get'
   devise_for :users
+  resources :users
   resources :bicycles, except: [:index]
 
   match '/home' => 'static_pages#home', via: 'get'

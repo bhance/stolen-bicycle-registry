@@ -14,7 +14,7 @@ FactoryGirl.define do
   factory :canadian_user, class: User do
     first_name "First_name"
     last_name "Last_name"
-    sequence(:email) { |n| "person_#{n}@example.com"}    
+    sequence(:email) { |n| "canadian_person_#{n}@example.com"}    
     country "Canada"
     city "City"
     region "Manitoba"
@@ -24,26 +24,32 @@ FactoryGirl.define do
   end
 
   factory :bicycle do
-    date                '03/15/2011'
-    city                'Vancouver'
-    region              'OR'
-    description         'This is my bike'
-    country             'United States'
-    serial              'ZB23R45'
-    verified_ownership  false
-    police_report       'OR-12304'
-    reward              300
-    year                2002 
-    brand               'Rivendell'
-    model               'Aquarius'
-    color               'Seafoam Green'
-    size                54
-    size_type           'cm'
-    zip                 '97212'
+
+    sequence(:date) { |d| "#{d < 32 ? d : d/2}/3/2011" }
+    city 'Vancouver'
+    region 'WA'
+    description 'This is my bike. It was stolen on Wednesday, by the parking lot of Walmart at Gringo Station. There is a death to bike theives sticker on it. Please help!'
+    country 'United States'
+    sequence(:serial) { |s| "ZB23R45#{s}" }
+    verified_ownership false
+    sequence(:police_report) { |p| "WA-12#{p}304#{p+1}" }
+    reward 100
+    year 2002 
+    brand 'Rivendell'
+    model 'Aquarius'
+    color 'Seafoam Green'
+    size 54
+    size_type 'cm'
+    postal_code '97212'
   end
 
   factory :canadian, class: Bicycle do
     country 'Canada'
     region  'BC'
-  end   
+  end
+
+  # factory :user_and_bicycle do
+  #   user = create(:american_user)
+  #   bicycle = create(:bicycle, user_id: user.id)
+  # end 
 end

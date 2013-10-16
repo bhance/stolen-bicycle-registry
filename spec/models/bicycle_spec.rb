@@ -15,7 +15,7 @@ state_abbreviations =  ['AL', 'AK', 'AZ', 'AR', 'CA',
                         'AE', 'AP']
 
 describe Bicycle do
-  # it { should belong_to :user }
+  it { should belong_to :user }
   it { should validate_presence_of :date }
   it { should validate_presence_of :country }
   it { should validate_presence_of :region }

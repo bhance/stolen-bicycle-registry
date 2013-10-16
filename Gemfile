@@ -10,6 +10,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'paperclip'
 gem 'devise'
 gem 'bootstrap-sass', :git => 'https://github.com/thomas-mcdonald/bootstrap-sass'
+gem 'textacular', "~> 3.0", require: 'textacular/rails'
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development do
   gem 'better_errors'
@@ -20,7 +23,6 @@ end
 group :test do
   gem 'spork-rails'
   gem 'capybara'
-  gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
 end
@@ -32,5 +34,6 @@ end
 group :test, :development do
   gem 'rspec-rails'
   gem 'pry'
+  gem 'factory_girl_rails'
 end
 

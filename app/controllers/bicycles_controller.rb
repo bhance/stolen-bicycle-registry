@@ -1,20 +1,41 @@
 class BicyclesController < ApplicationController
+  before_filter :user_signed_in? 
+
+  def index
+    if params[:query]
+      @bicycles = Bicycle.search(params[:query]).paginate(page: params[:page], :per_page => 15).order('date DESC')
+    else
+      @bicycles = nil
+      # Bicycle.all.paginate(page: params[:page], :per_page => 15).order('date DESC')
+    end
+  end
 
   def new
-    @bicycle = Bicycle.new
+    if signed_in?
+      @bicycle = Bicycle.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
-    @bicycle = Bicycle.new(bicycle_params)
+    @bicycle = current_user.bicycles.new(bicycle_params)
     if @bicycle.save
       render 'show'
     else
       respond_to do |format|
-        puts 'You made it to the sad path!'
         format.html { render 'new' }
         format.js
       end
     end
+  end
+
+  def edit
+    @bicycle = Bicycle.find(params[:id])
+  end
+
+  def update
+    redirect_to bicycle_path(params[:id])
   end
 
   private
@@ -37,8 +58,8 @@ class BicyclesController < ApplicationController
       :color,
       :size,
       :size_type,
-      :photo
+      :photo,
+      :user_id
     )
   end
-
 end
