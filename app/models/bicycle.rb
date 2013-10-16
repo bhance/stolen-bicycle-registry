@@ -1,7 +1,7 @@
 class Bicycle < ActiveRecord::Base
   before_save :right_postal_code
   validates_presence_of :date
-  validates :region, presence: true, inclusion: { in: %w( AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AS DC FM GU MH MP PW PR VI AA AE AP ) }
+  validates :region, presence: true, inclusion: { in: %w( AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AS DC FM GU MH MP PW PR VI AA AE AP BC) }
   validates_presence_of :city
   validates :description, presence: true, length: { minimum: 30, maximum: 2000 }
   validates :postal_code, allow_nil: true, numericality: true, length: { is: 5 }, if: :us?
@@ -35,15 +35,15 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
-  def self.serial_search(number)
-    if number.present? #in case search is pressed with blank query
-      where('serial ILIKE :number', number: "%#{number}%")
+  def self.search(query)
+    query.delete_if { |k, v| v.blank? }
+    if query[:serial].present?
+      where('serial ILIKE ?', "%#{query[:serial]}%")
+    elsif query.present?
+      self.basic_search(query)
     else
       all
     end
   end
 
-  def self.advanced_search(search_criteria)
-    Bicycle.basic_search(search_criteria)
-  end
 end

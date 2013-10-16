@@ -1,11 +1,10 @@
 class BicyclesController < ApplicationController
   def index
-    if params[:serial]
-      @bicycles = Bicycle.serial_search(params[:serial]).paginate(page: params[:page], :per_page => 15).order('date DESC')
-    elsif params[:advanced]
-      @bicycles = Bicycle.all #temporary
+    if params[:query]
+      @bicycles = Bicycle.search(params[:query]).paginate(page: params[:page], :per_page => 15).order('date DESC')
     else
-      @bicycles = Bicycle.all.paginate(page: params[:page], :per_page => 15).order('date DESC')
+      @bicycles = nil
+      # Bicycle.all.paginate(page: params[:page], :per_page => 15).order('date DESC')
     end
   end
 
