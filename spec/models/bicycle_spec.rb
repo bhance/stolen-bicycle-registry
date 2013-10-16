@@ -29,12 +29,6 @@ describe Bicycle do
               is_at_most(2000) }
   it { should validate_numericality_of :year }
 
-  describe 'When posting from Canada' do
-  end
-
-  describe 'When posting from the US' do
-  end
-
   describe "Bicycle search" do
     it "should return 'nil' given no search string" do
       FactoryGirl.create(:bicycle)
