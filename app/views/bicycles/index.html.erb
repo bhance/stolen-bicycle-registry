@@ -3,81 +3,83 @@
 <div class="center hero-unit">
   <h3>Basic Search</h3>
   <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
-  <div class="form-group">
-    <%= text_field(:query, nil, placeholder: 'PR2345...') %>
-  </div>
+    <%= text_field_tag :query, nil, placeholder: 'words only' %>
     <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
   <% end %>
+
   <hr>
+
   <h3>Advanced Search</h3>
   <%= form_tag search_path, method: 'get' do %>
-    <%= label_tag(:query, 'Serial Number (full or partial):', class: "sr-only") %>
-    <%= text_field(:query, :serial, placeholder: 'PR2345...') %>
-      <%#= label_tag :year, 'Year' %>
-      <%#= number_field :query, :year, placeholder: '2005' %>
 
-      <%= label_tag :brand, 'Brand', class: "sr-only" %>
+    <div><p>Bike Details</p>
+      <%= label_tag :query, 'Serial Number (full or partial):' %>
+      <%= text_field :query, :serial, placeholder: 'PR2345475' %>
+
+      <%= label_tag :query, 'Year' %>
+      <%= number_field :query, :year, placeholder: '2012' %>
+
+      <%= label_tag :brand, 'Brand' %>
       <%= text_field :query, :brand, placeholder: 'Schwinn' %>
 
-      <%= label_tag :model, 'Model', class: "sr-only" %>
+      <%= label_tag :model, 'Make' %>
       <%= text_field :query, :model, placeholder: 'Sportera' %>
 
-      <%= label_tag :color, 'Color', class: "sr-only" %>
+      <%= label_tag :color, 'Color' %>
       <%= text_field :query, :color, placeholder: 'Blue' %>
+    </div>
+
     <div><p>Theft Details</p>
-      <%= label_tag :postal_code, 'Postal Code', class: "sr-only" %>
+      <%= label_tag :postal_code, 'Postal Code' %>
       <%= text_field :query, :postal_code, placeholder: '97212' %>
 
-      <%= label_tag :city, 'City', class: "sr-only" %>
+      <%= label_tag :city, 'City' %>
       <%= text_field :query, :city, placeholder: 'Vancouver' %>
 
-      <%= label_tag :region, 'Region/State', class: "sr-only" %>
+      <%= label_tag :region, 'Region/State' %>
       <%= text_field :query, :region, placeholder: 'WA or BC' %>
 
-      <%= label_tag :country, 'Country', class: "sr-only" %>
+      <%= label_tag :country, 'Country' %>
       <%= select :query, :country, [['USA', 'United States'], 'Canada', ['all', '']], selected: '' %>
     </div>
     <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
   <% end %>
 </div>
-  <% if @bicycles.nil? %>
-    <p>No Results</p>
-  <% else %>
+
+  <% if @bicycles %>
     <p><strong><%= @bicycles.count %></strong> search results.</p>
     <%= will_paginate %>
     <table class='table table-hover'>
-      <tr>
+<!--       <tr>
         <td colspan='5'>Bicycle Details</td>
         <td colspan='5'>Theft Details</td>
-      </tr>
+      </tr> -->
       <tr>
         <td>Photo</td>
-        <td>Serial</td>
+        <td>Stolen</td>
         <td>Year</td>
-        <td>Brand</td>
+        <td>Color</td>
+        <td>Make</td>
         <td>Model</td>
-        <!-- colspan span break -->
         <td>City</td>
         <td>Region</td>
-        <td>Postal</td>
         <td>Country</td>
-        <td>Stolen on</td>
+        <td>Serial</td>
       </tr>
       <% @bicycles.each do |bicycle| %>
         <tr>
           <td><a href=<%= bicycle_path(bicycle) %> >
             <%= image_tag bicycle.photo.url :thumb %>
           </a></td>
-          <td><%= bicycle.serial %></td>
-          <td><%= bicycle.year %></td>
+          <td><%= bicycle.date %></td>
+          <td><%= bicycle.year %></td>   
+          <td><%= bicycle.color %></td>
           <td><%= bicycle.brand %></td>
           <td><%= bicycle.model %></td>
-          <!-- colspan span break -->
           <td><%= bicycle.city %></td>
           <td><%= bicycle.region %></td>
-          <td><%= bicycle.postal_code %></td>
           <td><%= bicycle.country %></td>
-          <td><%= bicycle.date %></td>
+          <td><%= bicycle.serial %></td>      
         </tr>
       <% end %>
     </table>

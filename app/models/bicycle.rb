@@ -36,14 +36,21 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
-
-  # def self.bicycle_search(query) 
-  # #   if query.class == ActionController::Parameters
-  # #     query.delete_if { |k, v| v.blank? }
-  # #   end
-  #   query.present? ? fuzzy_search(query) : nil
+  # def self.bicycle_search(query)
+  #   if query.present?
+  #     nil
+  #   elsif query.class == String
+  #     fuzzy_search(query)
+  #   elsif query.include?(:year) && query.length == 1
+  #     where(year: query[:year])
+  #   elsif query.include?(:year)
+  #     where(year: query[:year]).fuzzy_search(query)
+  #   else
+  #     query.delete_if { |k, v| v.blank? }
+  #     fuzzy_search(query)
+  #   end
   # end
-
+  
   def self.bicycle_search(query)
     self.strip_empty_values(query)
     query.present? ? fuzzy_search(query) : nil
@@ -55,10 +62,4 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
-    #   fuzzy_search(query)
-    # elsif query.present?
-    #   fuzzy_search(query)
-    # else
-    #   nil
-    # end
 end
