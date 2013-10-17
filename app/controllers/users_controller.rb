@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    super
   end
 
   def show

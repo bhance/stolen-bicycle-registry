@@ -116,22 +116,17 @@
 .btn-search {
   background-color: black;
   color: yellow;
-
 }
 
 .btn-register {
   background-color: gray;
-  color: orange;
-  
+  color: orange; 
 }
 
 .btn-login {
   background-color: gray;
   color: white;
-
-
 }
-
 
 .twitter-box {
   border-radius: 6px;
@@ -173,4 +168,12 @@
 
 footer {
   text-align: right;
+}
+
+.public {
+  width: 30%;
+}
+
+#canada {
+  display: none;
 }
