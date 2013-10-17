@@ -45,7 +45,7 @@
   <% else %>
     <p><strong><%= @bicycles.count %></strong> search results.</p>
     <%= will_paginate %>
-    <table>
+    <table class='table table-hover'>
       <tr>
         <td colspan='5'>Bicycle Details</td>
         <td colspan='5'>Theft Details</td>
@@ -65,7 +65,8 @@
       </tr>
       <% @bicycles.each do |bicycle| %>
         <tr>
-          <td><a href=<%= bicycle_path(bicycle) %> ><%= bicycle.photo.nil? ? 'No' : 'Yes' %>
+          <td><a href=<%= bicycle_path(bicycle) %> >
+            <%= image_tag bicycle.photo.url :thumb %>
           </a></td>
           <td><%= bicycle.serial %></td>
           <td><%= bicycle.year %></td>
@@ -80,5 +81,5 @@
         </tr>
       <% end %>
     </table>
-    <%= will_paginate %>
+    <%= will_paginate @bicycles %>
   <% end %>
