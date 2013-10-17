@@ -12,7 +12,7 @@ gem 'devise'
 gem 'bootstrap-sass', :git => 'https://github.com/thomas-mcdonald/bootstrap-sass'
 gem 'textacular', "~> 3.0", require: 'textacular/rails'
 gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
+gem 'will_paginate-bootstrap'
 
 group :development do
   gem 'better_errors'
