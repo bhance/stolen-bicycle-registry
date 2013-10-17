@@ -1,4 +1,4 @@
-== README
+### Stolen Bicycle Registry ###
 
 ## For SEARCH functionality ##
 
