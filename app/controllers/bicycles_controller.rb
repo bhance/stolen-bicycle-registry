@@ -1,9 +1,16 @@
 class BicyclesController < ApplicationController
   before_filter :user_signed_in? 
+  # before_action :user_signed_in?, except: or only: ??? [:new, :create, :edit, :show]
+  # suggested rails 4 ways? by Michal
 
   def index
-    @bicycles = Bicycle.bicycle_search(params[:query])
-    @bicycles = @bicycles.paginate(page: params[:page], :per_page => 15).order('date DESC') if @bicycles
+    if params[:query]
+      @bicycles = Bicycle.bicycle_search(params[:query])
+    end
+
+    if @bicycles
+      @bicycles = @bicycles.paginate(page: params[:page], :per_page => 15).order('date DESC')
+    end
   end
 
   def new
@@ -48,7 +55,7 @@ class BicyclesController < ApplicationController
       :city,
       :region,
       :country,
-      :zip,
+      :postal_code,
       :serial,
       :verified_ownership,
       :police_report,
@@ -61,7 +68,7 @@ class BicyclesController < ApplicationController
       :size,
       :size_type,
       :photo,
-      :user_id
+      :user_id,
     )
   end
 end
