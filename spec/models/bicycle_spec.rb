@@ -27,7 +27,7 @@ describe Bicycle do
   it { should ensure_length_of(:description).
               is_at_least(30).
               is_at_most(2000) }
-  it { should validate_numericality_of :year }
+  # it { should validate_numericality_of :year }
 
   it "should save user input year as a string" do
     bike1 = FactoryGirl.create(:bicycle)

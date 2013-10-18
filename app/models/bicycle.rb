@@ -9,6 +9,8 @@ class Bicycle < ActiveRecord::Base
   validates :postal_code, allow_nil: true, length: { is: 7 }, if: :canada?
   validates_inclusion_of(:size_type, :in => %w( cm in ))
   validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
+  validates_with StringYearValidator
+  # validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   validates :country, presence: true
 
   has_attached_file :photo,

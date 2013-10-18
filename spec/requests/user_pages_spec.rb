@@ -67,7 +67,8 @@ feature 'User pages' do
     fill_in 'Password (min 8 char.)', with: @user3.password
     fill_in 'Password Confirmation', with: @user3.password
     click_button 'Sign up'
-    page.should have_content 'successfully'
+    uri = URI.parse(current_url)
+    "#{uri.path}".should == users_path
   end
 
   scenario 'user selects country \'Canada\' and gets selector to specify a province' do

@@ -3,7 +3,6 @@
   <div class='col-md-6'>
   <%= f.label :date_picker, 'Theft Date' %>
   <%= f.date_field :date, id: 'bicycle_date_picker' %>
-  <%= f.label :country, 'Country' %>
   <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bicycle-country' } %>
   </div>
   <div id="regions-and-postal-codes">
