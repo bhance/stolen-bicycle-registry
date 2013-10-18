@@ -1,5 +1,6 @@
 class Bicycle < ActiveRecord::Base
-  before_save :right_postal_code
+  before_save :right_postal_code, :convert_year
+
   validates_presence_of :date
   validates :region, presence: true, inclusion: { in: PROVINCES + STATES }
   validates_presence_of :city
@@ -11,10 +12,10 @@ class Bicycle < ActiveRecord::Base
   validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   validates :country, presence: true
 
-  has_attached_file :photo, 
-                    :styles => { 
-                             :medium => "300x300>", 
-                             :thumb => "100x100>" }, 
+  has_attached_file :photo,
+                    :styles => {
+                            :medium => "300x300>",
+                            :thumb => "100x100>" },
                     :default_url => "bike_:style.png"
   belongs_to :user
 
@@ -36,26 +37,20 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
-  # def self.bicycle_search(query)
-  #   if query.present?
-  #     nil
-  #   elsif query.class == String
-  #     fuzzy_search(query)
-  #   elsif query.include?(:year) && query.length == 1
-  #     where(year: query[:year])
-  #   elsif query.include?(:year)
-  #     where(year: query[:year]).fuzzy_search(query)
-  #   else
-  #     query.delete_if { |k, v| v.blank? }
-  #     fuzzy_search(query)
-  #   end
-  # end
-  
+  def convert_year
+    year.to_s
+  end
+ 
   def self.bicycle_search(query)
     self.strip_empty_values(query)
-    query.present? ? fuzzy_search(query) : nil
+    if query.class != String && query[:recovered]
+      query.delete_if { |k, v| k.to_sym == :recovered }
+      query.present? ? fuzzy_search(query).where(hidden: false) : nil
+    else
+      query.present? ? fuzzy_search(query).where(hidden: false, recovered: false) : nil
+    end
   end
-
+  
   def self.strip_empty_values(query)
     if query.present? && query.class != String
       query.delete_if { |k, v| v.blank? }

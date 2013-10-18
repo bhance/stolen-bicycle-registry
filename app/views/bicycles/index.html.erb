@@ -5,6 +5,7 @@
   <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
     <%= text_field_tag :query, nil, placeholder: 'Enter a search term' %>
     <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
+
   <% end %>
 
   <hr>
@@ -45,18 +46,15 @@
     </div>
     <br>
     <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
+
   <% end %>
 </div>
 </div>
 
-  <% if @bicycles %>
-    <p><strong><%= @bicycles.count %></strong> search results.</p>
+  <% if @bicycles && !@bicycles.empty? %>
+    <p><%= pluralize(@bicycles.count, "search result") %>.</p>
     <%= will_paginate %>
     <table class='table table-hover'>
-<!--       <tr>
-        <td colspan='5'>Bicycle Details</td>
-        <td colspan='5'>Theft Details</td>
-      </tr> -->
       <tr>
         <td>Photo</td>
         <td>Stolen</td>
@@ -87,4 +85,7 @@
       <% end %>
     </table>
     <%= will_paginate @bicycles %>
+
+    <% elsif @bicycles %>
+    <p><%= pluralize(@bicycles.count, "search result") %>.</p>
   <% end %>

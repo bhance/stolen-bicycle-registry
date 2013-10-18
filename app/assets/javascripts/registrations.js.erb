@@ -32,7 +32,7 @@ $(function() {
 });
 
 $(function() {
-  $('.bicycle-country').change(function() {         
+  $('.bicycle-country').change(function() { 
     if ($(this).val() == 'Canada') {
       $('#regions-and-postal-codes').html('<%= label_tag :bicycle_region, "Province" %>' +
         '<select id="bicycle" name="bicycle">' +
@@ -60,6 +60,29 @@ $(function() {
     }
   });
 });
+
+function formCountryLocations() {
+  if ($(this).val() == 'Canada') {
+    $('#regions-and-postal-codes').html(
+      <%= label_tag :bicycle_region, 'Province' %>
+      <%= select_tag :bicycle, options_for_select(PROVINCES << '--') %>
+      <%= label_tag :bicycle_city %>
+      <%= text_field_tag :bicycle_city %>
+      <%= label_tag :bicycle_postal_code %>
+      <%= text_field_tag :bicycle_postal_code %>
+    );
+  } else { 
+    $('#regions-and-postal-codes').html(        
+      <%= label_tag :bicycle_region, 'State' %>
+      <%= select_tag :bicycle, options_for_select(STATES << '--') %>
+      <%= label_tag :bicycle_city, 'City' %>
+      <%= text_field_tag :bicycle_city %>
+      <%= label_tag :bicycle_postal_code, 'Zip Code' %>
+      <%= text_field_tag :bicycle_postal_code %>
+    ); 
+  }
+}
+
 
 function formUserLocations() {
   

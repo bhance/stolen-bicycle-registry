@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015193834) do
+ActiveRecord::Schema.define(version: 20131018164555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "bicycles", force: true do |t|
     t.date     "date"
@@ -26,7 +27,6 @@ ActiveRecord::Schema.define(version: 20131015193834) do
     t.string   "police_report"
     t.text     "description"
     t.integer  "reward"
-    t.integer  "year"
     t.string   "brand"
     t.string   "model"
     t.string   "color"
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 20131015193834) do
     t.datetime "photo_updated_at"
     t.string   "country"
     t.integer  "user_id"
+    t.string   "year"
+    t.boolean  "approved",           default: false
+    t.boolean  "hidden",             default: false
+    t.boolean  "recovered",          default: false
   end
 
   create_table "users", force: true do |t|
