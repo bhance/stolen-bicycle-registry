@@ -1,179 +1,38 @@
+<% environment.context_class.instance_eval { include ActionView::Helpers::FormTagHelper } %>
+<% environment.context_class.instance_eval { include ActionView::Helpers::FormOptionsHelper } %>
+
 $(function() {
   $('.user-country').change(function() {         
-    if ($(this).val() == 'Canada') {
-      $('#regions-and-postal-codes').html(  
-        '<label for="user_region">Province</label><select id="user_region" name="user[region]"><option value="AB">AB</option>' +
-          '<option value="BC">BC</option>' +
-          '<option value="MB">MB</option>' +
-          '<option value="NB">NB</option>' +
-          '<option value="NL">NL</option>' +
-          '<option value="NS">NS</option>' +
-          '<option value="NT">NT</option>' +
-          '<option value="NU">NU</option>' +
-          '<option value="ON">ON</option>' +
-          '<option value="PE">PE</option>' +
-          '<option value="QC">QC</option>' +
-          '<option value="SK">SK</option>' +
-          '<option value="YT">YT</option>' +
-          '<option selected="selected" value="--">--</option></select>'
-      );
-      $('#user-ca-postal').html(
-        '<input id="user_postal_code" name="user[postal_code]" placeholder="Postal Code" type="text" />'
-      );
-
-    } else { 
-      $('#user-ca-provinces').empty()
-      $('#user-ca-postal').empty()
-      $('#user-us-states').html(        
-        '<label for="user_region">State</label><select id="user_region" name="user[region]"><option value="AL">AL</option>' +
-        '<option value="AK">AK</option>' +
-        '<option value="AZ">AZ</option>' +
-        '<option value="AR">AR</option>' +
-        '<option value="CA">CA</option>' +
-        '<option value="CO">CO</option>' +
-        '<option value="CT">CT</option>' +
-        '<option value="DE">DE</option>' +
-        '<option value="FL">FL</option>' +
-        '<option value="GA">GA</option>' +
-        '<option value="HI">HI</option>' +
-        '<option value="ID">ID</option>' +
-        '<option value="IL">IL</option>' +
-        '<option value="IN">IN</option>' +
-        '<option value="IA">IA</option>' +
-        '<option value="KS">KS</option>' +
-        '<option value="KY">KY</option>' +
-        '<option value="LA">LA</option>' +
-        '<option value="ME">ME</option>' +
-        '<option value="MD">MD</option>' +
-        '<option value="MA">MA</option>' +
-        '<option value="MI">MI</option>' +
-        '<option value="MN">MN</option>' +
-        '<option value="MS">MS</option>' +
-        '<option value="MO">MO</option>' +
-        '<option value="MT">MT</option>' +
-        '<option value="NE">NE</option>' +
-        '<option value="NV">NV</option>' +
-        '<option value="NH">NH</option>' +
-        '<option value="NJ">NJ</option>' +
-        '<option value="NM">NM</option>' +
-        '<option value="NY">NY</option>' +
-        '<option value="NC">NC</option>' +
-        '<option value="ND">ND</option>' +
-        '<option value="OH">OH</option>' +
-        '<option value="OK">OK</option>' +
-        '<option value="OR">OR</option>' +
-        '<option value="PA">PA</option>' +
-        '<option value="RI">RI</option>' +
-        '<option value="SC">SC</option>' +
-        '<option value="SD">SD</option>' +
-        '<option value="TN">TN</option>' +
-        '<option value="TX">TX</option>' +
-        '<option value="UT">UT</option>' +
-        '<option value="VT">VT</option>' +
-        '<option value="VA">VA</option>' +
-        '<option value="WA">WA</option>' +
-        '<option value="WV">WV</option>' +
-        '<option value="WI">WI</option>' +
-        '<option value="WY">WY</option>' +
-        '<option selected="selected" value="--">--</option></select>'
-      ); 
-      $('#user-us-zip').html( 
-        '<input id="user_postal_code" name="user[postal_code]" placeholder="Zip Code" type="text" />'
-      );
-    }
+    formCountryLocations();
   });
 });
 
 $(function() {
-  $('.bike-country').change(function() {         
-    if ($(this).val() == 'Canada') {
-      $('#bike-us-states').empty()
-      $('#bike-us-zip').empty()
-      $('#bike-ca-provinces').html(  
-        '<label for="bicycle_region">Province</label><select id="bicycle_region" name="bicycle[region]"><option value="AB">AB</option>' +
-          '<option value="BC">BC</option>' +
-          '<option value="MB">MB</option>' +
-          '<option value="NB">NB</option>' +
-          '<option value="NL">NL</option>' +
-          '<option value="NS">NS</option>' +
-          '<option value="NT">NT</option>' +
-          '<option value="NU">NU</option>' +
-          '<option value="ON">ON</option>' +
-          '<option value="PE">PE</option>' +
-          '<option value="QC">QC</option>' +
-          '<option value="SK">SK</option>' +
-          '<option value="YT">YT</option>' +
-          '<option selected="selected" value="--">--</option></select>'
-      );
-      $('#bicycle-ca-postal').html(
-        '<input id="bicycle_postal_code" name="bicycle[postal_code]" placeholder="Postal Code" type="text" />'
-      );
-
-    } else { 
-      $('#bike-ca-provinces').empty()
-      $('#bike-ca-postal').empty()
-      $('#bike-us-states').html(        
-        '<label for="bicycle_region">State</label><select id="bicycle_region" name="bicycle[region]"><option value="AL">AL</option>' +
-        '<option value="AK">AK</option>' +
-        '<option value="AZ">AZ</option>' +
-        '<option value="AR">AR</option>' +
-        '<option value="CA">CA</option>' +
-        '<option value="CO">CO</option>' +
-        '<option value="CT">CT</option>' +
-        '<option value="DE">DE</option>' +
-        '<option value="FL">FL</option>' +
-        '<option value="GA">GA</option>' +
-        '<option value="HI">HI</option>' +
-        '<option value="ID">ID</option>' +
-        '<option value="IL">IL</option>' +
-        '<option value="IN">IN</option>' +
-        '<option value="IA">IA</option>' +
-        '<option value="KS">KS</option>' +
-        '<option value="KY">KY</option>' +
-        '<option value="LA">LA</option>' +
-        '<option value="ME">ME</option>' +
-        '<option value="MD">MD</option>' +
-        '<option value="MA">MA</option>' +
-        '<option value="MI">MI</option>' +
-        '<option value="MN">MN</option>' +
-        '<option value="MS">MS</option>' +
-        '<option value="MO">MO</option>' +
-        '<option value="MT">MT</option>' +
-        '<option value="NE">NE</option>' +
-        '<option value="NV">NV</option>' +
-        '<option value="NH">NH</option>' +
-        '<option value="NJ">NJ</option>' +
-        '<option value="NM">NM</option>' +
-        '<option value="NY">NY</option>' +
-        '<option value="NC">NC</option>' +
-        '<option value="ND">ND</option>' +
-        '<option value="OH">OH</option>' +
-        '<option value="OK">OK</option>' +
-        '<option value="OR">OR</option>' +
-        '<option value="PA">PA</option>' +
-        '<option value="RI">RI</option>' +
-        '<option value="SC">SC</option>' +
-        '<option value="SD">SD</option>' +
-        '<option value="TN">TN</option>' +
-        '<option value="TX">TX</option>' +
-        '<option value="UT">UT</option>' +
-        '<option value="VT">VT</option>' +
-        '<option value="VA">VA</option>' +
-        '<option value="WA">WA</option>' +
-        '<option value="WV">WV</option>' +
-        '<option value="WI">WI</option>' +
-        '<option value="WY">WY</option>' +
-        '<option selected="selected" value="--">--</option></select>'
-      ); 
-      $('#bike-us-zip').html( 
-        '<input id="bicycle_postal_code" name="bicycle[postal_code]" placeholder="Zip Code" type="text" />'
-      );
+  $('.bicycle-country').change(function() {         
+    formCountryLocations();
     }
   });
 });
 
+function formCountryLocations() {
+  if ($(this).val() == 'Canada') {
+    $('#regions-and-postal-codes').html(  
+      <%= label_tag :bicycle_region, 'Province' %>
+      <%= select_tag :bicycle, options_for_select(PROVINCES << '--') %>
+      <%= label_tag :bicycle_city %>
+      <%= text_field_tag :bicycle_city %>
+      <%= label_tag :bicycle_postal_code %>
+      <%= text_field_tag :bicycle_postal_code %>
+    );
+  } else { 
+    $('#regions-and-postal-codes').html(        
+      <%= label_tag :bicycle_region, 'State' %>
+      <%= select_tag :bicycle, options_for_select(STATES << '--') %>
+      <%= label_tag :bicycle_city, 'City' %>
+      <%= text_field_tag :bicycle_city %>
+      <%= label_tag :bicycle_postal_code, 'Zip Code' %>
+      <%= text_field_tag :bicycle_postal_code %>
+    ); 
+  }
+}
 
-
-  
-
-  

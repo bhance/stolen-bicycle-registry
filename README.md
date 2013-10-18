@@ -1,4 +1,4 @@
-### Stolen Bicycle Registry ###
+### Stolen Bicycle Registry ### 
 
 ## For SEARCH functionality ##
 

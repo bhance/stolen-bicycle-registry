@@ -2,31 +2,20 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
   <div><%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name' %></div>
-
   <div><%= f.text_field :last_name, placeholder: 'Last Name' %></div>
-
   <div><%= f.email_field :email, placeholder: 'Email'  %></div>
-
   <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], { selected: 'United States' }, { class: 'user-country' } %></div>
-
-  <div><%= f.text_field :city, placeholder: 'City' %></div>
-  
-  <div id='user-ca-provinces'></div>
-
-  <div id='user-ca-postal'></div>
-
-  <div id='user-us-states'></div>
-
-  <div id='user-us-zip'></div>
-
+  <div id="regions-and-postal-codes">
+    <% if @user.country == 'Canada' %>
+      <%= render 'shared/ca_regions_and_postals', f: f %>
+    <% else %> 
+      <%= render 'shared/us_regions_and_postals', f: f %>
+    <% end %>
+  </div>
   <div><%= f.text_field :phone1, placeholder: 'Phone' %></div>
-
   <div><%= f.text_field :phone2, placeholder: 'Phone 2' %></div>
-
   <div><%= f.password_field :password, placeholder: 'Password (min 8 char.)' %></div>
-
   <div><%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %></div>
   <br>
   <div class="well public">

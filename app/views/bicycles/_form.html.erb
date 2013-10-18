@@ -4,29 +4,13 @@
   <%= f.label :date_picker, 'Theft Date' %>
   <%= f.date_field :date, id: 'bicycle_date_picker' %>
   <%= f.label :country, 'Country' %>
-  <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bike-country' } %>
+  <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bicycle-country' } %>
   </div>
-  <%= f.label :city, 'City' %>
-  <%= f.text_field :city, placeholder: 'City' %>
   <div id="regions-and-postal-codes">
     <% if @bicycle.country == 'Canada' %>
-      <div id='bike-ca-provinces'>
-          <%= f.label :region, 'Province' %>
-          <%= f.select :region, PROVINCES, :include_blank => '--' %>
-      </div>
-      <div id='bike-ca-postal'>
-          <%= f.label :postal_code, 'Postal Code' %>
-          <%= f.input :postal_code %>
-      </div>
-    <% else %>
-      <div id='bike-us-states'>
-        <%= f.label :region, 'State' %>
-        <%= f.select :region, STATES, :include_blank => '--' %>
-      </div>
-      <div id='bike-us-zip'>
-        <%= f.label :postal_code, 'Zip Code' %>
-        <%= f.text_field :postal_code %>
-      </div>
+      <%= render 'shared/ca_regions_and_postals', f: f %>
+    <% else %> 
+      <%= render 'shared/us_regions_and_postals', f: f %>
     <% end %>
   </div>
   <%= f.label 'Description' %>
