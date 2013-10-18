@@ -34,7 +34,9 @@ feature 'Bicycle Registration' do
     # @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
     visit edit_bicycle_path(@bicycle)
     fill_in 'bicycle_color', with: 'Mauve'
+    page.save_screenshot('tmp/mauve.png')
     click_button 'Register'
+    page.save_screenshot('tmp/update.png')
     @bicycle.color.should eq 'Mauve'
   end
 

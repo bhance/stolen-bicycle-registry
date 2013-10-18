@@ -7,37 +7,26 @@
   <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bike-country' } %>
   </div>
   <%= f.label :city, 'City' %>
-  <%= f.text_field :city, placeholder: 'City' %> 
-  <div id='bike-ca-provinces'>
+  <%= f.text_field :city, placeholder: 'City' %>
+  <div id="regions-and-postal-codes">
     <% if @bicycle.country == 'Canada' %>
-      <%= f.label :region, 'Province' %>
-      <select id="user_region" name="user[region]">
-      <% PROVINCES.each do |abbr| %> 
-        <option <%= 'selected="selected"' if @bicycle.region == abbr %> value=<%= abbr %>><%= abbr %></option>
-      <% end %>
-      <option <%= 'selected="selected"' if @bicycle.region == nil %> value="--">--</option></select>
-    <% end %>
-  </div>
-  <div id='bike-ca-postal'>
-    <% if @bicycle.country == 'Canada' %>
-      <%= f.label :postal_code, 'Postal Code' %>
-      <%= f.input :postal_code %>
-    <% end %>
-  </div>
-  <div id='bike-us-states'>
-    <% if @bicycle.country != 'Canada' %>
-      <label for="user_region">State</label>
-      <select id="user_region" name="user[region]">
-      <% STATE_ABBREVIATIONS.each do |abbr| %> 
-        <option <%= 'selected="selected"' if @bicycle.region == abbr %> value=<%= abbr %>><%= abbr %></option>
-      <% end %>
-      <option <%= 'selected="selected"' if @bicycle.region == nil %> value="--">--</option></select>
-    <% end %>
-  </div>
-  <div id='bike-us-zip'>
-    <% if @bicycle.country != 'Canada' %>
-      <%= f.label :postal_code, 'Zip Code' %>
-      <%= f.text_field :postal_code %>
+      <div id='bike-ca-provinces'>
+          <%= f.label :region, 'Province' %>
+          <%= f.select :region, PROVINCES, :include_blank => '--' %>
+      </div>
+      <div id='bike-ca-postal'>
+          <%= f.label :postal_code, 'Postal Code' %>
+          <%= f.input :postal_code %>
+      </div>
+    <% else %>
+      <div id='bike-us-states'>
+        <%= f.label :region, 'State' %>
+        <%= f.select :region, STATES, :include_blank => '--' %>
+      </div>
+      <div id='bike-us-zip'>
+        <%= f.label :postal_code, 'Zip Code' %>
+        <%= f.text_field :postal_code %>
+      </div>
     <% end %>
   </div>
   <%= f.label 'Description' %>
