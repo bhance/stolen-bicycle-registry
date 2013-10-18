@@ -76,8 +76,8 @@ describe "Bicycle search" do
   end
 
   it "search results should include found listings when 'include found' is checked" do
-    bike2.update(recovered: true)
-    query = { city: 'Vancouver', recovered: true }
+    @bike2.update(recovered: true)
+    query = { city: 'Vancouver', 'recovered' => '1' }
     Bicycle.bicycle_search(query).length.should eq 2
   end
 end

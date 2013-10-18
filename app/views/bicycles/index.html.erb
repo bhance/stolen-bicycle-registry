@@ -3,7 +3,7 @@
 <div class="center hero-unit">
   <h3>Basic Search</h3>
   <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
-    <%= text_field_tag :query, nil, placeholder: 'words only' %>
+    <%= text_field_tag :query, nil, placeholder: 'search terms' %>
     <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'basic-search' %>
   <% end %>
 

@@ -9,7 +9,6 @@ class Bicycle < ActiveRecord::Base
   validates :postal_code, allow_nil: true, length: { is: 7 }, if: :canada?
   validates_inclusion_of(:size_type, :in => %w( cm in ))
   validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
-  validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   validates :country, presence: true
 
   has_attached_file :photo,
@@ -43,8 +42,8 @@ class Bicycle < ActiveRecord::Base
  
   def self.bicycle_search(query)
     self.strip_empty_values(query)
-    if query.class != String && query[:recovered]
-      query.delete_if { |k, v| k.to_sym == :recovered }
+    if query.class != String && query['recovered']
+      query.delete_if { |k, v| v == '1' }
       query.present? ? fuzzy_search(query).where(hidden: false) : nil
     else
       query.present? ? fuzzy_search(query).where(hidden: false, recovered: false) : nil
@@ -54,6 +53,7 @@ class Bicycle < ActiveRecord::Base
   def self.strip_empty_values(query)
     if query.present? && query.class != String
       query.delete_if { |k, v| v.blank? }
+      query.delete_if { |k, v| v == '0' }
     end
   end
 

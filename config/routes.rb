@@ -1,11 +1,12 @@
 StolenBicycleRegistry::Application.routes.draw do
   match '/search', to: 'bicycles#index', via: 'get'
   devise_scope :user do
-    match '/sign_in', to: 'devise/sessions#new', via: 'get'
-    match '/sign_out', to: 'devise/sessions#destroy', via: 'get'
+    match 'sign_in', to: 'devise/sessions#new', via: 'get'
+    match 'sign_out', to: 'devise/sessions#destroy', via: 'get'
+    match 'sign_up', to: 'devise/sessions#create', via: 'get'
   end
-  devise_for :users
-  resources :users
+
+  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
   resources :bicycles, except: [:index]
 
   match '/home' => 'static_pages#home', via: 'get'
