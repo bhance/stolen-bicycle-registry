@@ -69,7 +69,7 @@ class BicyclesController < ApplicationController
       :size,
       :size_type,
       :photo,
-      :user_id,
+      :user_id
     )
   end
 end

@@ -4,7 +4,7 @@
   <h3>Basic Search</h3>
   <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
     <%= text_field_tag :query, nil, placeholder: 'words only' %>
-    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
+    <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'basic-search' %>
   <% end %>
 
   <hr>
@@ -13,41 +13,45 @@
   <%= form_tag search_path, method: 'get' do %>
 
     <div><p>Bike Details</p>
-      <%= label_tag :query, 'Serial Number (full or partial):' %>
-      <%= text_field :query, :serial, placeholder: 'PR2345475' %>
+      <div><%= label_tag :query, 'Serial Number (full or partial):' %>
+      <%= text_field :query, :serial, placeholder: 'PR2345475' %></div>
 
-      <%= label_tag :query, 'Year' %>
-      <%= number_field :query, :year, placeholder: '2012' %>
+      <div><%= label_tag :query, 'Year' %>
+      <%= number_field :query, :year, placeholder: '2012' %></div>
 
-      <%= label_tag :brand, 'Brand' %>
-      <%= text_field :query, :brand, placeholder: 'Schwinn' %>
+      <div><%= label_tag :brand, 'Brand' %>
+      <%= text_field :query, :brand, placeholder: 'Schwinn' %></div>
 
-      <%= label_tag :model, 'Make' %>
-      <%= text_field :query, :model, placeholder: 'Sportera' %>
+      <div><%= label_tag :model, 'Make' %>
+      <%= text_field :query, :model, placeholder: 'Sportera' %></div>
 
-      <%= label_tag :color, 'Color' %>
-      <%= text_field :query, :color, placeholder: 'Blue' %>
+      <div><%= label_tag :color, 'Color' %>
+      <%= text_field :query, :color, placeholder: 'Blue' %></div>
     </div>
 
     <div><p>Theft Details</p>
-      <%= label_tag :postal_code, 'Postal Code' %>
-      <%= text_field :query, :postal_code, placeholder: '97212' %>
+      <div><%= label_tag :postal_code, 'Postal Code' %>
+      <%= text_field :query, :postal_code, placeholder: '97212' %></div>
 
-      <%= label_tag :city, 'City' %>
-      <%= text_field :query, :city, placeholder: 'Vancouver' %>
+      <div><%= label_tag :city, 'City' %>
+      <%= text_field :query, :city, placeholder: 'Vancouver' %></div>
 
-      <%= label_tag :region, 'Region/State' %>
-      <%= text_field :query, :region, placeholder: 'WA or BC' %>
+      <div><%= label_tag :region, 'Region/State' %>
+      <%= text_field :query, :region, placeholder: 'WA or BC' %></div>
 
-      <%= label_tag :country, 'Country' %>
-      <%= select :query, :country, [['USA', 'United States'], 'Canada', ['all', '']], selected: '' %>
+      <div><%= label_tag :country, 'Country' %>
+      <%= select :query, :country, [['USA', 'United States'], 'Canada', ['all', '']], selected: '' %></div>
+
+      <div><%= check_box('query', 'recovered') %>
+      <%= label(:recovered, "Include recovered bikes in results") %></div>
+
     </div>
-    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
+    <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'advanced-search' %>
   <% end %>
 </div>
 
   <% if @bicycles && !@bicycles.empty? %>
-    <p><strong><%= @bicycles.count %></strong> search results.</p>
+    <p><%= pluralize(@bicycles.count, "search result") %>.</p>
     <%= will_paginate %>
     <table class='table table-hover'>
       <tr>
@@ -82,5 +86,5 @@
     <%= will_paginate @bicycles %>
 
     <% elsif @bicycles %>
-    <p><strong><%= @bicycles.count %></strong> search results.</p>
+    <p><%= pluralize(@bicycles.count, "search result") %>.</p>
   <% end %>

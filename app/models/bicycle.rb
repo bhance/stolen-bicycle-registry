@@ -1,5 +1,6 @@
 class Bicycle < ActiveRecord::Base
-  before_save :right_postal_code
+  before_save :right_postal_code, :convert_year
+
   validates_presence_of :date
   validates :region, presence: true, inclusion: { in: PROVINCES + STATES }
   validates_presence_of :city
@@ -36,29 +37,20 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
+  def convert_year
+    year.to_s
+  end
+ 
   def self.bicycle_search(query)
-    strip_empty_values(query)
-
-    if query.empty?
-      nil
-    elsif query.class == String
-      fuzzy_search(query)
-    elsif query[:year] && query.length > 1
-
-      fuzzy_search(query).where(year: 2002)
-
-    elsif query[:year] && query.length == 1
-      where(year: query[:year])
+    self.strip_empty_values(query)
+    if query.class != String && query[:recovered]
+      query.delete_if { |k, v| k.to_sym == :recovered }
+      query.present? ? fuzzy_search(query).where(hidden: false) : nil
     else
-      fuzzy_search(query)
+      query.present? ? fuzzy_search(query).where(hidden: false, recovered: false) : nil
     end
   end
   
-  # def self.bicycle_search(query)
-  #   self.strip_empty_values(query)
-  #   query.present? ? fuzzy_search(query) : nil
-  # end
-
   def self.strip_empty_values(query)
     if query.present? && query.class != String
       query.delete_if { |k, v| v.blank? }
