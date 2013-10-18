@@ -45,3 +45,39 @@ feature 'Bicycle Registration' do
     "#{uri.path}".should == "/bicycles/#{@bicycle.id}"
   end
 end
+
+feature 'Bicycle Search' do
+  let(:bike1) { FactoryGirl.create(:bicycle) }
+  let(:bike2) { FactoryGirl.create(:bicycle) }
+
+  scenario 'a user clicks basic search without a value' do
+    visit search_path
+    click_button 'basic-search'
+    expect(page).to_not have_content 'search result'   
+  end
+
+  scenario 'a user clicks basic search with a search term' do
+    visit search_path
+    bike1
+    bike2
+    fill_in 'query', with: 'Vancouver'
+    click_button 'basic-search'
+    expect(page).to have_content '2 search results'  
+  end
+
+  scenario 'a user clicks advanced search without any fields filled' do
+    visit search_path
+    click_button 'advanced-search'
+    expect(page).to_not have_content 'search result'
+  end 
+  
+  scenario 'a user clicks advanced search with some, but not all fields filled' do
+    visit search_path
+    bike1
+    bike2
+    fill_in 'query_city', with: 'Vancouver'
+    fill_in 'query_color', with: 'Green'
+    click_button 'advanced-search'
+    expect(page).to have_content '2 search results'  
+  end  
+end

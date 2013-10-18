@@ -29,26 +29,61 @@ describe Bicycle do
               is_at_most(2000) }
   it { should validate_numericality_of :year }
 
-  describe "Bicycle search" do
-    it "should return 'nil' given no search string" do
-      FactoryGirl.create(:bicycle)
-      query = nil
-      Bicycle.bicycle_search(query).should eq nil
-    end
 
-    it "should return search results given a search string" do
-      FactoryGirl.create(:bicycle)
-      FactoryGirl.create(:bicycle, model: 'Vancouver')
-      query = 'Vancouver'
-      Bicycle.bicycle_search(query).length.should eq 2
-    end
+  it "should save user input year as a string" do
+    bike1 = FactoryGirl.create(:bicycle)
+    bike1.reload
+    bike1.year.class.name.should eq 'String'
+  end
+end
 
-    it "should return search results given an empty field" do
-      bike1 = FactoryGirl.create(:bicycle)
-      bike2 = FactoryGirl.create(:bicycle, model: 'Vancouver', color: 'Mauve')
-      query = { model: '', color: 'Mauve' }
-      Bicycle.bicycle_search(query).last.should eq bike2
-    end
+describe "Bicycle search" do
+  it "basic search should not return results given an empty search string" do
+    FactoryGirl.create(:bicycle)
+    query = ''
+    Bicycle.bicycle_search(query).should eq nil
+  end
+
+  it "basic search should return search results given a search string" do
+    FactoryGirl.create(:bicycle)
+    FactoryGirl.create(:bicycle, model: 'Vancouver')
+    query = 'Vancouver'
+    Bicycle.bicycle_search(query).length.should eq 2
+  end
+
+  it "advanced search should return nil when given all empty fields" do
+    bike1 = FactoryGirl.create(:bicycle)
+    bike2 = FactoryGirl.create(:bicycle, model: 'Vancouver', color: 'Mauve')
+    query = { model: '' }
+    Bicycle.bicycle_search(query).should eq nil
+  end
+
+  it "advanced search should return search results given an empty field" do
+    bike1 = FactoryGirl.create(:bicycle)
+    bike2 = FactoryGirl.create(:bicycle, model: 'Vancouver', color: 'Mauve')
+    query = { model: '', color: 'Mauve' }
+    Bicycle.bicycle_search(query).last.should eq bike2
+  end
+
+  it "search results should not include bike listings that are currently hidden by a user/admin" do
+    bike1 = FactoryGirl.create(:bicycle)
+    bike2 = FactoryGirl.create(:bicycle, hidden: true )
+    query = 'Vancouver'
+    Bicycle.bicycle_search(query).length.should eq 1
+  end
+
+  it "basic/advanced search results include only unrecovered listings by default" do
+    bike1 = FactoryGirl.create(:bicycle)
+    bike2 = FactoryGirl.create(:bicycle, recovered: true)
+    query = 'Vancouver'
+    Bicycle.bicycle_search(query).should eq [bike1]
+  end
+
+  it "search results should include found listings when 'include found' is checked" do
+    bike1 = FactoryGirl.create(:bicycle)
+    bike2 = FactoryGirl.create(:bicycle, recovered: true)
+    query = { city: 'Vancouver', recovered: true }
+    Bicycle.bicycle_search(query).length.should eq 2
   end
 end
 
