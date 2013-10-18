@@ -4,8 +4,10 @@
   <h3 class='lead'>Basic Search</h3>
   <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
     <%= text_field_tag :query, nil, placeholder: 'Enter a search term' %>
-    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
-
+    <div>
+      <br>
+     <p> <%= submit_tag 'Submit', class: 'btn btn-small btn-info' %></p>
+    </div>
   <% end %>
 
   <hr>
@@ -14,38 +16,30 @@
   <%= form_tag search_path, method: 'get', :class => "form-horizontal" do %>
 
   <div class="form-group">
-    <div>
-      <%= label_tag :query, 'Serial Number (full or partial):' %>
-      <%= text_field :query, :serial, placeholder: 'Serial #' %>
+    <div class="col-md-3 col-md-offset-3">
+       <p><%= text_field :query, :serial, placeholder: 'Serial #' %></p>
 
-      <%= label_tag :query, 'Year' %>
-      <%= number_field :query, :year, placeholder: 'Year' %>
+      <p><%= number_field :query, :year, placeholder: 'Year' %></p>
 
-      <%= label_tag :brand, 'Brand' %>
-      <%= text_field :query, :brand, placeholder: 'Make' %>
+      <p><%= text_field :query, :brand, placeholder: 'Make' %></p>
 
-      <%= label_tag :model, 'Make' %>
-      <%= text_field :query, :model, placeholder: 'Model' %>
+      <p><%= text_field :query, :model, placeholder: 'Model' %></p>
 
-      <%= label_tag :color, 'Color' %>
-      <%= text_field :query, :color, placeholder: 'Color' %>
+      <p><%= text_field :query, :color, placeholder: 'Color' %></p>
     </div>
 
-    <div>
-      <%= label_tag :postal_code, 'Postal Code' %>
-      <%= text_field :query, :postal_code, placeholder: 'Postal Code' %>
+    <div class="col-md-3">
+     <p><%= text_field :query, :postal_code, placeholder: 'Postal Code' %></p>
 
-      <%= label_tag :city, 'City' %>
-      <%= text_field :query, :city, placeholder: 'City' %>
+      <p><%= text_field :query, :city, placeholder: 'City' %></p>
 
-      <%= label_tag :region, 'Region/State' %>
-      <%= text_field :query, :region, placeholder: 'Region/State' %>
+      <p><%= text_field :query, :region, placeholder: 'Region/State' %></p>
 
-      <%= label_tag :country, 'Country' %>
-      <%= select :query, :country, [['USA', 'United States'], 'Canada', ], selected: 'United States' %>
+      <p><%= select :query, :country, [['USA', 'United States'], 'Canada', ], selected: 'United States' %></p>
+      <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
     </div>
     <br>
-    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
+
 
   <% end %>
 </div>
@@ -54,36 +48,38 @@
   <% if @bicycles && !@bicycles.empty? %>
     <p><%= pluralize(@bicycles.count, "search result") %>.</p>
     <%= will_paginate %>
-    <table class='table table-hover'>
-      <tr>
-        <td>Photo</td>
-        <td>Stolen</td>
-        <td>Year</td>
-        <td>Color</td>
-        <td>Make</td>
-        <td>Model</td>
-        <td>City</td>
-        <td>Region</td>
-        <td>Country</td>
-        <td>Serial</td>
-      </tr>
-      <% @bicycles.each do |bicycle| %>
+    <div class="table-responsive">
+      <table class='table table-hover'>
         <tr>
-          <td><a href=<%= bicycle_path(bicycle) %> >
-            <%= image_tag bicycle.photo.url :thumb %>
-          </a></td>
-          <td><%= bicycle.date %></td>
-          <td><%= bicycle.year %></td>   
-          <td><%= bicycle.color %></td>
-          <td><%= bicycle.brand %></td>
-          <td><%= bicycle.model %></td>
-          <td><%= bicycle.city %></td>
-          <td><%= bicycle.region %></td>
-          <td><%= bicycle.country %></td>
-          <td><%= bicycle.serial %></td>      
+          <td>Photo</td>
+          <td>Stolen</td>
+          <td>Year</td>
+          <td>Color</td>
+          <td>Make</td>
+          <td>Model</td>
+          <td>City</td>
+          <td>Region</td>
+          <td>Country</td>
+          <td>Serial</td>
         </tr>
-      <% end %>
-    </table>
+        <% @bicycles.each do |bicycle| %>
+          <tr>
+            <td><a href=<%= bicycle_path(bicycle) %> >
+              <%= image_tag bicycle.photo.url :thumb %>
+            </a></td>
+            <td><%= bicycle.date %></td>
+            <td><%= bicycle.year %></td>   
+            <td><%= bicycle.color %></td>
+            <td><%= bicycle.brand %></td>
+            <td><%= bicycle.model %></td>
+            <td><%= bicycle.city %></td>
+            <td><%= bicycle.region %></td>
+            <td><%= bicycle.country %></td>
+            <td><%= bicycle.serial %></td>      
+          </tr>
+        <% end %>
+      </table>
+    </div>
     <%= will_paginate @bicycles %>
 
     <% elsif @bicycles %>

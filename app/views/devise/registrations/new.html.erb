@@ -1,13 +1,13 @@
 <br>
 <br>
-<div class="container public well sign-in">
+<div class="container well sign-in">
   <h2>Sign up</h2>
   <hr>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <div><%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name' %></div>
   <div><%= f.text_field :last_name, placeholder: 'Last Name' %></div>
-  <div><%= f.email_field :email, placeholder: 'Email'  %></div>
+  <div><%= f.email_field :email, placeholder: 'Email'  %></div><br>
   <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], { selected: 'United States' }, { class: 'user-country' } %></div>
   <div id="regions-and-postal-codes">
     <% if @user.country == 'Canada' %>
@@ -21,23 +21,18 @@
   <div><%= f.password_field :password, placeholder: 'Password (min 8 char.)' %></div>
   <div><%= f.password_field :password_confirmation, placeholder: 'Password Confirmation' %></div>
   <br>
-  <div class="well public">
+</div>
+  <div class="well sign-in container">
     Check information to display publicly: 
     <div><%= f.check_box :first_name_public %> <%= f.label :first_name %></div>
     <div><%= f.check_box :last_name_public %> <%= f.label :last_name %></div>
     <div><%= f.check_box :email_public %> <%= f.label :email %></div>
   </div>
-    <div class="well public sign-in container">
-      Check information to display publicly: 
-      <div><%= f.check_box :first_name_public %> <%= f.label :first_name %></div>
-      <div><%= f.check_box :last_name_public %> <%= f.label :last_name %></div>
-      <div><%= f.check_box :email_public %> <%= f.label :email %></div>
-    </div>
-    <div class="sign-in"id="signup"><%= f.submit "Sign up", :class => 'btn btn-success' %>
-      <br>
-      <br>
-      <%= render "devise/shared/links" %>
-    </div>
+  <div class="sign-in" id="signup"><%= f.submit "Sign up", :class => 'btn btn-success' %>
+    <br>
+    <br>
+    <%= render "devise/shared/links" %>
+  </div>
   <% end %>
 
   

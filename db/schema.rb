@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20131018164555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "bicycles", force: true do |t|
     t.date     "date"

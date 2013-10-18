@@ -1,6 +1,7 @@
 <%= form_for @bicycle do |f| %>
-<div class='row'> 
-  <div class='col-md-6'>
+<div class='row well'>
+<h1 class="lead sign-in">Bike Info Form</h1> 
+  <div class='col-md-6 col-md-offset-3'>
   <%= f.label :date_picker, 'Theft Date' %>
   <%= f.date_field :date, id: 'bicycle_date_picker' %>
   <%= f.label :country, 'Country' %>
