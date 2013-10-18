@@ -8,6 +8,7 @@ StolenBicycleRegistry::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
   resources :bicycles, except: [:index]
+  resources :users
 
   match '/home' => 'static_pages#home', via: 'get'
   match '/about' => 'static_pages#about', via: 'get' 
