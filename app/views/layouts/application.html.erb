@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>StolenBicycleRegistry</title>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <title>Stolen Bicycle Registry</title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Lato:900' rel='stylesheet' type='text/css'>
   </head>  
   <body>
+    <%= render 'shared/navbar' %>
+
     <div class="container">
-      <h1>Stolen Bicycle Registry</h1>
     
-      <%= render 'shared/navbar' %>
       <%= render 'shared/main_links' %>
     
       <%= yield %>
@@ -50,7 +51,7 @@
       <hr>
 
       <footer>
-        <p>©
+        <p class="fixed-bottom">©
           <a href="mailto:bhance@gmail.com">Bryan Hance</a>
            / 
           <a href="#" target="_blank">our privacy policy</a>

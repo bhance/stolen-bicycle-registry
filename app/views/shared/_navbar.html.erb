@@ -1,37 +1,52 @@
-<nav class="navbar navbar-default" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="/home">Home</a>
-  </div>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="/home"><span class="glyphicon glyphicon-home"></span></a>
+</div>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
+<!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
+      <li class="active"><a href="/bicycles/new">Register a stolen bike</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><%= link_to "How It Works", about_path %></li>
-          <li><%= link_to "Philosophy", philosophy_path %></li>
-          <li><%= link_to "FAQ", faq_path %></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/philosophy">Philosophy</a></li>
+          <li><a href="/links">Links</a></li>
+          <li><a href="/prevention">Theft Prevention</a></li>
         </ul>
       </li>
-      <li class="active"><%= link_to "Prevention", prevention_path %></li>
-      <li class="active"><a href="http://blog.stolenbicycleregistry.com/" target="_blank">Blog</a></li>
-      <li class="active"><%= link_to "Links", links_path %></li>
     </ul>
-    
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+      <%= link_to ' Advanced Search', search_path %>
+    </form>
     <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <li><%= link_to "Log-out", destroy_user_session_path %></li>
-      <% else %>
-        <li><%= link_to "Log-in", user_session_path %></li>
-      <% end %>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Twitter <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="https://twitter.com/stolenbikesbrk" class="twitter-link" target="_blank">Berkeley</a></li>
+         <li><a href="https://twitter.com/stolenbikeschi" class="twitter-link" target="_blank">Chicago</a></li>
+         <li><a href="https://twitter.com/stolenbikesmarin" class="twitter-link" target="_blank">Marin County</a></li>
+         <li><a href="https://twitter.com/stolenbikesphl" class="twitter-link" target="_blank">Philadelphia</a></li>
+         <li><a href="https://twitter.com/stolenbikessan" class="twitter-link" target="_blank">San Diego</a></li>
+         <li><a href="https://twitter.com/stolenbikessfo" class="twitter-link" target="_blank">San Francisco</a></li>
+         <li><a href="https://twitter.com/stolenbikessea" class="twitter-link" target="_blank">Seattle</a></li>
+         <li><a href="https://twitter.com/stolenbikestuc" class="twitter-link" target="_blank">Tuscon</a></li>  
+        </ul>
+      </li>
+      <li><a href="/bicycles/new"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

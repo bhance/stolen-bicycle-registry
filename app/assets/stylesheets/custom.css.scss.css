@@ -133,6 +133,7 @@
   border-color: black;
   background-color: #5bc0de;
   padding: 2%;
+  margin-left: 20%;
 }
 
 .twitter-list {
@@ -161,10 +162,10 @@
 .img-responsive {
   display: inline;
 }
-
+/*
 .home-info {
   font-size: 110%;
-}
+}*/
 
 footer {
   text-align: right;
@@ -176,4 +177,49 @@ footer {
 
 #canada {
   display: none;
+}
+
+.header-banner {
+  text-align: center;
+}
+
+.banner-text {
+  font-size: 50px;
+  font-family: 'Lato', sans-serif;
+}
+.sign-in {
+  text-align: center;
+}
+
+body {
+  padding-top: 60px;
+}
+
+.home-info {
+  font-size: 20px;
+  text-align: center;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.bold {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+
+.aboutbox {
+  font-size: 30px;
+  color: white;
+}
+
+.use {
+background-color:#2ECC71;
+}
+
+.search {
+background-color: #F1C40F;
+}
+
+.follow  {
+background-color: #3498DB;
 }
