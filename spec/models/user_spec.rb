@@ -48,7 +48,7 @@ describe User do
   describe "American address verification" do      
     it 'ensures that the selected region is a valid U.S. state' do
       user = FactoryGirl.build(:american_user)
-      user.should ensure_inclusion_of(:region).in_array(STATE_ABBREVIATIONS) 
+      user.should ensure_inclusion_of(:region).in_array(STATES) 
     end
 
     it 'allows postal codes of U.S. zip code format' do

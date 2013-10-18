@@ -6,11 +6,11 @@ feature 'Bicycle Registration' do
 
   before do
     @user = FactoryGirl.create(:american_user)
+    @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
     visit new_bicycle_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Sign in'
-    @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
   end
 
   scenario 'User fails to enter any information' do
@@ -18,11 +18,12 @@ feature 'Bicycle Registration' do
     expect(page).to have_content 'blank'
   end
 
-  scenario 'User submits information', js: true do
-    fill_in 'date_picker', with: "01/01/2010"
+  scenario 'User submits information', :js => true do
+    fill_in 'Theft Date', with: "01/01/2010"
     fill_in 'City', with: @bicycle.city
     select('United States', from: 'Country')
     select(@bicycle.region, from: 'State')
+    fill_in 'Zip Code', with: '97214'
     fill_in 'bicycle_description', with: @bicycle.description
     click_button 'Register'
     uri = URI.parse(current_url)
@@ -30,15 +31,13 @@ feature 'Bicycle Registration' do
   end
 
   scenario 'User edits one of their bicycles', js: true do
-    # @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
     visit edit_bicycle_path(@bicycle)
     fill_in 'bicycle_color', with: 'Mauve'
     click_button 'Register'
-    @bicycle.color.should eq 'Mauve'
+    Bicycle.find(@bicycle.id).color.should eq 'Mauve'
   end
 
   scenario 'User edits and is redirected to the listing' do
-    # @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
     visit edit_bicycle_path(@bicycle)
     fill_in 'bicycle_color', with: 'Mauve'
     click_button 'Register'

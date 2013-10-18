@@ -46,14 +46,10 @@
   <% end %>
 </div>
 
-  <% if @bicycles %>
+  <% if @bicycles && !@bicycles.empty? %>
     <p><strong><%= @bicycles.count %></strong> search results.</p>
     <%= will_paginate %>
     <table class='table table-hover'>
-<!--       <tr>
-        <td colspan='5'>Bicycle Details</td>
-        <td colspan='5'>Theft Details</td>
-      </tr> -->
       <tr>
         <td>Photo</td>
         <td>Stolen</td>
@@ -84,4 +80,7 @@
       <% end %>
     </table>
     <%= will_paginate @bicycles %>
+
+    <% elsif @bicycles %>
+    <p><strong><%= @bicycles.count %></strong> search results.</p>
   <% end %>

@@ -1,7 +1,7 @@
 class Bicycle < ActiveRecord::Base
   before_save :right_postal_code
   validates_presence_of :date
-  validates :region, presence: true, inclusion: { in: %w( AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AB BC MB NB NL NS NT NU ON PE QC SK YT) }
+  validates :region, presence: true, inclusion: { in: PROVINCES + STATES }
   validates_presence_of :city
   validates :description, presence: true, length: { minimum: 30, maximum: 2000 }
   validates :postal_code, allow_nil: true, numericality: true, length: { is: 5 }, if: :us?
@@ -11,10 +11,10 @@ class Bicycle < ActiveRecord::Base
   validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   validates :country, presence: true
 
-  has_attached_file :photo, 
-                    :styles => { 
-                             :medium => "300x300>", 
-                             :thumb => "100x100>" }, 
+  has_attached_file :photo,
+                    :styles => {
+                            :medium => "300x300>",
+                            :thumb => "100x100>" },
                     :default_url => "bike_:style.png"
   belongs_to :user
 
@@ -36,25 +36,28 @@ class Bicycle < ActiveRecord::Base
     end
   end
 
-  # def self.bicycle_search(query)
-  #   if query.present?
-  #     nil
-  #   elsif query.class == String
-  #     fuzzy_search(query)
-  #   elsif query.include?(:year) && query.length == 1
-  #     where(year: query[:year])
-  #   elsif query.include?(:year)
-  #     where(year: query[:year]).fuzzy_search(query)
-  #   else
-  #     query.delete_if { |k, v| v.blank? }
-  #     fuzzy_search(query)
-  #   end
-  # end
-  
   def self.bicycle_search(query)
-    self.strip_empty_values(query)
-    query.present? ? fuzzy_search(query) : nil
+    strip_empty_values(query)
+
+    if query.empty?
+      nil
+    elsif query.class == String
+      fuzzy_search(query)
+    elsif query[:year] && query.length > 1
+
+      fuzzy_search(query).where(year: 2002)
+
+    elsif query[:year] && query.length == 1
+      where(year: query[:year])
+    else
+      fuzzy_search(query)
+    end
   end
+  
+  # def self.bicycle_search(query)
+  #   self.strip_empty_values(query)
+  #   query.present? ? fuzzy_search(query) : nil
+  # end
 
   def self.strip_empty_values(query)
     if query.present? && query.class != String
