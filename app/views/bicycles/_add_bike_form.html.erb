@@ -1,16 +1,16 @@
 <%= form_for @bicycle do |f| %>
 <div class='row'> 
   <div class='col-md-6'>
-  <%= f.label 'Theft Date' %>
-  <%= f.date_field :date, id: 'date_picker' %>
+  <%= f.label :date_picker, 'Theft Date' %>
+  <%= f.date_field :date, id: 'bicycle_date_picker' %>
   <%= f.label :country, 'Country' %>
   <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bike-country' } %>
   </div>
-  <%= f.label 'City' %>
+  <%= f.label :city, 'City' %>
   <%= f.text_field :city, placeholder: 'City' %> 
   <div id='bike-ca-provinces'>
     <% if @bicycle.country == 'Canada' %>
-      <label for="user_region">Province</label>
+      <%= f.label :region, 'Province' %>
       <select id="user_region" name="user[region]">
       <% PROVINCES.each do |abbr| %> 
         <option <%= 'selected="selected"' if @bicycle.region == abbr %> value=<%= abbr %>><%= abbr %></option>
@@ -20,7 +20,8 @@
   </div>
   <div id='bike-ca-postal'>
     <% if @bicycle.country == 'Canada' %>
-      <input id="user_postal_code" name="user[postal_code]" placeholder="Postal Code" type="text" />
+      <%= f.label :postal_code, 'Postal Code' %>
+      <%= f.input :postal_code %>
     <% end %>
   </div>
   <div id='bike-us-states'>
@@ -35,7 +36,8 @@
   </div>
   <div id='bike-us-zip'>
     <% if @bicycle.country != 'Canada' %>
-      <input id="user_postal_code" name="user[postal_code]" placeholder="Zip Code" type="text" />
+      <%= f.label :postal_code, 'Zip Code' %>
+      <%= f.text_field :postal_code %>
     <% end %>
   </div>
   <%= f.label 'Description' %>

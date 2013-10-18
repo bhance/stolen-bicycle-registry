@@ -18,11 +18,12 @@ feature 'Bicycle Registration' do
     expect(page).to have_content 'blank'
   end
 
-  scenario 'User submits information', js: true do
-    fill_in 'date_picker', with: "01/01/2010"
+  scenario 'User submits information', :js => true do
+    fill_in 'Theft Date', with: "01/01/2010"
     fill_in 'City', with: @bicycle.city
     select('United States', from: 'Country')
     select(@bicycle.region, from: 'State')
+    fill_in 'Zip Code', with: '97214'
     fill_in 'bicycle_description', with: @bicycle.description
     click_button 'Register'
     uri = URI.parse(current_url)
