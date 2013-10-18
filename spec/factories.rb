@@ -17,7 +17,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "canadian_person_#{n}@example.com"}    
     country "Canada"
     city "City"
-    region "Manitoba"
+    region "MB"
     postal_code "R0J 0A0"
     password "foosbars"
     password_confirmation "foosbars"

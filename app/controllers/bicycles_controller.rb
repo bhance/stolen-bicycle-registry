@@ -28,7 +28,12 @@ class BicyclesController < ApplicationController
   end
 
   def update
-    redirect_to bicycle_path(params[:id])
+    @bicycle = Bicycle.find(params[:id])
+    if @bicycle.update(bicycle_params)
+      redirect_to bicycle_path(params[:id])
+    else
+      render 'edit'
+    end
   end
 
   def show

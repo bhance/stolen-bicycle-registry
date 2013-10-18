@@ -10,9 +10,9 @@ state_abbreviations =  ['AL', 'AK', 'AZ', 'AR', 'CA',
                         'OK', 'OR', 'PA', 'RI', 'SC',
                         'SD', 'TN', 'TX', 'UT', 'VT', 
                         'VA', 'WA', 'WV', 'WI', 'WY', 
-                        'AS', 'DC', 'FM', 'GU', 'MH', 
-                        'MP', 'PW', 'PR', 'VI', 'AA', 
-                        'AE', 'AP']
+                        'AB', 'BC', 'MB', 'NB', 'NL', 
+                        'NS', 'NT', 'NU', 'ON', 'PE', 
+                        'QC', 'SK', 'YT']
 
 describe Bicycle do
   it { should belong_to :user }
@@ -30,24 +30,25 @@ describe Bicycle do
   it { should validate_numericality_of :year }
 
   describe "Bicycle search" do
+
+    before do
+      @bike1 = FactoryGirl.create(:bicycle)
+      @bike2 = FactoryGirl.create(:bicycle, model: 'Vancouver', color: 'Mauve')
+    end
+
     it "should return 'nil' given no search string" do
-      FactoryGirl.create(:bicycle)
       query = nil
       Bicycle.bicycle_search(query).should eq nil
     end
 
     it "should return search results given a search string" do
-      FactoryGirl.create(:bicycle)
-      FactoryGirl.create(:bicycle, model: 'Vancouver')
       query = 'Vancouver'
       Bicycle.bicycle_search(query).length.should eq 2
     end
 
     it "should return search results given an empty field" do
-      bike1 = FactoryGirl.create(:bicycle)
-      bike2 = FactoryGirl.create(:bicycle, model: 'Vancouver', color: 'Mauve')
       query = { model: '', color: 'Mauve' }
-      Bicycle.bicycle_search(query).last.should eq bike2
+      Bicycle.bicycle_search(query).last.should eq @bike2
     end
   end
 end

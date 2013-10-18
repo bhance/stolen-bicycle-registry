@@ -3,12 +3,41 @@
   <div class='col-md-6'>
   <%= f.label 'Theft Date' %>
   <%= f.date_field :date, id: 'date_picker' %>
-  <%= f.label 'Country' %>
-  <%= f.select :country, ['Canada', 'United States'], selected: 'United States' %>
+  <%= f.label :country, 'Country' %>
+  <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bike-country' } %>
+  </div>
   <%= f.label 'City' %>
   <%= f.text_field :city, placeholder: 'City' %> 
-  <div id="states"><%= f.label :region, 'State' %><%= f.select :region, ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY','--'], selected: '--' %></div>
-  <div id="canada"><%= f.label :region, 'Province' %><%= f.select :region, ['AA', 'AE', 'AP', 'AS', 'DC', 'FM', 'GU', 'MH', 'MP', 'PR', 'PW', 'VI', '--'], selected: '--' %></div>
+  <div id='bike-ca-provinces'>
+    <% if @bicycle.country == 'Canada' %>
+      <label for="user_region">Province</label>
+      <select id="user_region" name="user[region]">
+      <% PROVINCES.each do |abbr| %> 
+        <option <%= 'selected="selected"' if @bicycle.region == abbr %> value=<%= abbr %>><%= abbr %></option>
+      <% end %>
+      <option <%= 'selected="selected"' if @bicycle.region == nil %> value="--">--</option></select>
+    <% end %>
+  </div>
+  <div id='bike-ca-postal'>
+    <% if @bicycle.country == 'Canada' %>
+      <input id="user_postal_code" name="user[postal_code]" placeholder="Postal Code" type="text" />
+    <% end %>
+  </div>
+  <div id='bike-us-states'>
+    <% if @bicycle.country != 'Canada' %>
+      <label for="user_region">State</label>
+      <select id="user_region" name="user[region]">
+      <% STATE_ABBREVIATIONS.each do |abbr| %> 
+        <option <%= 'selected="selected"' if @bicycle.region == abbr %> value=<%= abbr %>><%= abbr %></option>
+      <% end %>
+      <option <%= 'selected="selected"' if @bicycle.region == nil %> value="--">--</option></select>
+    <% end %>
+  </div>
+  <div id='bike-us-zip'>
+    <% if @bicycle.country != 'Canada' %>
+      <input id="user_postal_code" name="user[postal_code]" placeholder="Zip Code" type="text" />
+    <% end %>
+  </div>
   <%= f.label 'Description' %>
   <%= f.text_area :description, placeholder: 'min 30 char.' %>
   <%= f.label 'Serial' %>
