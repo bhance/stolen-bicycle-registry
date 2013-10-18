@@ -1,0 +1,10 @@
+<div id='bicycle-us-states'>
+  <%= f.label :region, 'State' %>
+  <%= f.select :region, STATES, :include_blank => '--' %>
+</div>
+<%= f.label :city, 'City' %>
+<%= f.text_field :city, placeholder: 'City' %>
+<div id='bicycle-us-zip'>
+  <%= f.label :postal_code, 'Zip Code' %>
+  <%= f.text_field :postal_code %>
+</div>

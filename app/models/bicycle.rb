@@ -1,7 +1,7 @@
 class Bicycle < ActiveRecord::Base
   before_save :right_postal_code
   validates_presence_of :date
-  validates :region, presence: true, inclusion: { in: %w( AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AB BC MB NB NL NS NT NU ON PE QC SK YT) }
+  validates :region, presence: true, inclusion: { in: PROVINCES + STATES }
   validates_presence_of :city
   validates :description, presence: true, length: { minimum: 30, maximum: 2000 }
   validates :postal_code, allow_nil: true, numericality: true, length: { is: 5 }, if: :us?
