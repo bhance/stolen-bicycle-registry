@@ -3,9 +3,9 @@
 <div class="well sign-in center">
   <h3 class='lead'>Basic Search</h3>
   <%= form_tag search_path, method: 'get', class: 'form-inline' do %>
-    <%= text_field_tag :query, nil, placeholder: 'Enter a search term' %>
-    <%= submit_tag 'Search', class: 'btn btn-small btn-info' %>
 
+    <%= text_field_tag :query, nil, placeholder: 'search terms' %>
+    <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'basic-search' %>
   <% end %>
 
   <hr>

@@ -47,6 +47,11 @@
         </ul>
       </li>
       <li><a href="/bicycles/new"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+      <% if user_signed_in? %>
+        <li><%= link_to "Log-out", sign_out_path %></li>
+      <% else %>
+        <li><%= link_to "Log-in", sign_in_path %></li>
+      <% end %>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
