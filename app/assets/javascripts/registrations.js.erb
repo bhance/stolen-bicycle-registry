@@ -32,7 +32,7 @@ $(function() {
 });
 
 $(function() {
-  $('.bicycle-country').change(function() {         
+  $('.bicycle-country').change(function() { 
     if ($(this).val() == 'Canada') {
       $('#regions-and-postal-codes').html('<%= label_tag :bicycle_region, "Province" %>' +
         '<select id="bicycle_region" name="bicycle[region]">' +
