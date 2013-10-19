@@ -20,10 +20,6 @@ class ApplicationController < ActionController::Base
     session.delete(:previous_url)
   end
 
-  def after_sign_in_path_for(resource)
-    session[:previous_url] || root_path
-  end
-
 protected
 
   def configure_permitted_parameters
