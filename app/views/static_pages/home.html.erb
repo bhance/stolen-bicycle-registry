@@ -1,5 +1,4 @@
 <div class="container">
-  <div class="home-info">
     <div class="title sign-in">
       <p class="banner-text">Stolen Bicycle Registry</p>
     </div>
@@ -9,29 +8,35 @@
 
   <div class="row">
 
-    <div class="home-info lead well col-md-3 use">
-      <h3 class="lead aboutbox">Use</h3>
-      <div class="hometext">
-        <p>Maybe you just had your bike stolen.</p>
+    <div class='col-md-4 home-div'>
+      <div class="home-info lead well use" rel='<%= new_user_registration_path %>'>
+        <h3 class="lead aboutbox">Register!</h3>
+        <div class="hometext">
+          <p>Maybe you just had your bike stolen.</p>
 
-        <p>Maybe you're buying a used bike and want to run its serial number first.</p>
+          <p>Maybe you're buying a used bike and want to run its serial number first.</p>
 
-        <p>Maybe you work for a bike shop and want to know if that trade-in is hot.</p>
+          <p>Maybe you work for a bike shop and want to know if that trade-in is hot.</p>
+          <%= image_tag "bicycle.png", :class => "img-responsive twitterlogo", id: 'bicycle-icon', :alt => "Register!" %>
+        </div>
       </div>
     </div>
-    <div class="col-md-1">
+
+    <div class='col-md-4 home-div'>
+      <div class="home-info lead well search" rel='<%= search_path %>'>
+        
+        <h3 class="lead aboutbox">Search</h3>
+        <p>The Stolen Bicycle Registry allows users to search through a database, report stolen bicycles, and stay up-to-date on a stolen bike's status.</p>
+        <br>
+        <%= image_tag "magnifying_glass.png", :class => "img-responsive twitterlogo", id: 'search-icon', :alt => "Search!" %>
+      </div>
     </div>
-    <div class="home-info well col-md-3 search">
-      <h3 class="lead aboutbox">Search</h3>
-      <p class="lead">The Stolen Bicycle Registry allows users to search through a database, report stolen bicycles, and stay up-to-date on a stolen bike's status.</p>
-      <br>
+
+    <div class='col-md-4 home-div'>
+      <div class="home-info lead well follow" rel='<%= '#' %>'>
+        <h2 class="lead aboutbox">Follow</h2>
+        <p>Twitter is a great tool when it comes to locating stolen bikes.</p>
+        <%= image_tag "twitter-bird.png", :class => "img-responsive twitterlogo", id: 'tweet-icon', :alt => "Follow us on Twitter!" %>
+      </div>
     </div>
-    <div class="col-md-1">
-    </div>
-    <div class="home-info well col-md-3 follow">
-      <h2 class="lead aboutbox">Follow</h2>
-      <p class="lead">Twitter is a great tool when it comes to locating stolen bikes.</p>
-      <%= image_tag "twitter-bird.png", :class => "img-responsive twitterlogo", :alt => "Follow us on Twitter!" %>
-    </div>
-  </div>
 </div>

@@ -10,14 +10,7 @@
   </head>  
   <body>
     <%= render 'shared/navbar' %>
-
-    <div class="container">
-    
-      <%= render 'shared/main_links' %>
-    
-      <%= yield %>
-
-      <% if flash[:notice] %>
+    <% if flash[:notice] %>
         <div class="alert alert-info">
           <%= flash[:notice] %>
         </div>
@@ -28,6 +21,10 @@
           <%= flash[:alert] %>
         </div>
       <% end %>
+
+    <div class="container">
+    
+      <%= yield %>
 
       <% unless Rails.env.test? %>
         <div class="donate">

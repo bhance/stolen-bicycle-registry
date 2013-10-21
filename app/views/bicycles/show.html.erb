@@ -1,23 +1,79 @@
 <h1> Stolen Bike Listing: </h1>
-<%= @bicycle.user.email %>
 
-<%= image_tag @bicycle.photo.url :medium %> 
+<div class="form-group">
+  <div class="row">
+    <div class='col-md-4'>
+      <table class="table table-bordered">
+        <tr>
+          <td><%= image_tag @bicycle.photo.url :medium %>
+        </tr>
+        <tr>
+          <td><%= @bicycle.description %>
+        </tr>
+      </table>
+    </div>
 
-<%=  @bicycle.date %> 
-<%= @bicycle.city %>
-<%= @bicycle.region %>
-<%= @bicycle.country %>
-<%= @bicycle.description %>
-<%= @bicycle.postal_code %>
-<%= @bicycle.serial %>
-<%= @bicycle.verified_ownership %>
-<%= @bicycle.year %>
-<%= @bicycle.brand %>
-<%= @bicycle.model %>
-<%= @bicycle.color %>
-<%= @bicycle.size %><%= @bicycle.size_type %>
-
-
-
-
-
+    <div class='col-md-8'>
+      <table class="table table-bordered">
+        <tr>
+          <td colspan='2'><strong>Theft Information</strong></td>
+        </tr>
+        <tr>
+          <td>Theft Date:</td>
+          <td><%= @bicycle.date %></td>
+        </tr>
+        <tr>
+          <td>Location:</td>
+          <td>
+            <p><%= @bicycle.city %></p>
+            <p><%= @bicycle.region %></p>
+            <p><%= @bicycle.postal_code %></p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'><strong>Bicycle Information</strong></td>
+        </tr>
+        <tr>
+          <td>Year:</td>
+          <td><%= @bicycle.year %></td>
+        </tr>
+        <tr>
+          <td>Make:</td>
+          <td><%= @bicycle.model %></td>
+        </tr>
+        <tr>
+          <td>Model:</td>
+          <td><%= @bicycle.brand %></td>
+        </tr>
+        <tr>
+          <td>Serial Number:</td>
+          <td><%= @bicycle.serial %></td>
+        </tr>
+        <tr>
+          <td>Color:</td>
+          <td><%= @bicycle.color %></td>
+        </tr>
+        <tr>
+          <td>Size:</td>
+          <td><%= @bicycle.size %><%= @bicycle.size_type %></td>
+        </tr>
+        <tr>
+          <td colspan='2'><strong>Contact Information</strong></td>
+        </tr>
+          <td>Name:</td>
+          <td><%= @bicycle.user.first_name_public ? @bicycle.user.first_name : '<private first>' %> <%= @bicycle.user.last_name_public ? @bicycle.user.last_name : '<private last>' %></td>
+        <tr>
+          <td>Email:</td>
+          <td><%= @bicycle.user.email_public ? @bicycle.user.email : '<private>' %></td>
+        </tr>
+        <!-- <tr>
+          <td>Phone Number:</td>
+          <td><%= @bicycle.user.phone1 %>
+        <tr>
+          <td>Alt. Phone Number:</td>
+          <td><%= @bicycle.user.phone2 %>
+        </tr> -->
+      </table>
+    </div>
+  </div>
+</div>
