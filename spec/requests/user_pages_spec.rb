@@ -21,7 +21,6 @@ feature 'User pages' do
     fill_in 'Password', with: @user.password
     click_button 'Sign in'
     uri = URI.parse(current_url)
-    save_and_open_page
     "#{uri.path}".should == new_bicycle_path
   end
 
@@ -57,6 +56,7 @@ feature 'User pages' do
 
   scenario 'visitor registers as a user before registering a stolen bike', js: true do
     visit new_user_registration_path
+    save_and_open_page
     fill_in 'First Name', with: @user3.first_name
     fill_in 'Last Name', with: @user3.last_name
     fill_in 'Email', with: @user3.email
