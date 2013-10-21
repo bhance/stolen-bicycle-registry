@@ -11,6 +11,7 @@ class BicyclesController < ApplicationController
     if @bicycles
       @bicycles = @bicycles.paginate(page: params[:page], :per_page => 15).order('date DESC')
     end
+
     @bicycles
   end
 

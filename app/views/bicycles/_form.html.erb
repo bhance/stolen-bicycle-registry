@@ -2,9 +2,11 @@
 <div class='row well'>
 <h1 class="lead sign-in">Bike Info Form</h1> 
   <div class='col-md-6 col-md-offset-3'>
-  <%= f.label :date_picker, 'Theft Date' %>
-  <%= f.date_field :date, id: 'bicycle_date_picker' %>
-  <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bicycle-country' } %>
+    <%= f.label :date_picker, 'Theft Date' %>
+    <%= f.date_field :date, id: 'bicycle_date_picker' %>
+  </div>
+  <div>
+    <%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bicycle-country' } %>
   </div>
   <div id="regions-and-postal-codes">
     <% if @bicycle.country == 'Canada' %>
@@ -13,31 +15,30 @@
       <%= render 'shared/us_regions_and_postals', f: f %>
     <% end %>
   </div>
-  <%= f.label 'Description' %>
-  <%= f.text_area :description, placeholder: 'min 30 char.' %>
-  <%= f.label 'Serial' %>
-  <%= f.text_field :serial, placeholder: 'PP123495877' %>
-  <%= f.label 'Do you have proof of ownership?' %>
-  <%= f.select :verified_ownership, [['yes', true], ['no', false]] %>
-  <%= f.label 'Police report number' %>
-  <%= f.text_field :police_report, placeholder: '1235463754' %>
-  <%= f.label 'Reward' %>
-  <%= f.text_field :reward, placeholder: '$50' %>
-  <%= f.label 'Year' %>
-  <%= f.text_field :year, placeholder: '2007' %>
-  <%= f.label 'Brand' %>
-  <%= f.text_field :brand, placeholder: 'Schwinn' %>
-  <%= f.label 'Model' %>
-  <%= f.text_field :model, placeholder: 'Le Tour' %>
-  <%= f.label 'Color' %>
-  <%= f.text_field :color, placeholder: 'Blue/Gray mix' %>
-  <%= f.label 'Size' %>
-  <%= f.text_field :size, placeholder: '27' %>
-  <%= f.label 'Unit of Measurement' %>
-  <%= f.select :size_type, ['cm', 'in'] %>
-  <%= f.label 'Photo' %>
-  <%= f.file_field :photo %>
-  <%= f.submit 'Register' %>
-  </div>
+    <%= f.label 'Description' %>
+    <%= f.text_area :description, placeholder: 'min 30 char.' %>
+    <%= f.label 'Serial' %>
+    <%= f.text_field :serial, placeholder: 'PP123495877' %>
+    <%= f.label 'Do you have proof of ownership?' %>
+    <%= f.select :verified_ownership, [['yes', true], ['no', false]] %>
+    <%= f.label 'Police report number' %>
+    <%= f.text_field :police_report, placeholder: '1235463754' %>
+    <%= f.label 'Reward' %>
+    <%= f.text_field :reward, placeholder: '$50' %>
+    <%= f.label 'Year' %>
+    <%= f.text_field :year, placeholder: '2007' %>
+    <%= f.label 'Brand' %>
+    <%= f.text_field :brand, placeholder: 'Schwinn' %>
+    <%= f.label 'Model' %>
+    <%= f.text_field :model, placeholder: 'Le Tour' %>
+    <%= f.label 'Color' %>
+    <%= f.text_field :color, placeholder: 'Blue/Gray mix' %>
+    <%= f.label 'Size' %>
+    <%= f.text_field :size, placeholder: '27' %>
+    <%= f.label 'Unit of Measurement' %>
+    <%= f.select :size_type, ['cm', 'in'] %>
+    <%= f.label 'Photo' %>
+    <%= f.file_field :photo %>
+    <%= f.submit 'Register' %>
+  <% end %>
 </div>
-<% end %>

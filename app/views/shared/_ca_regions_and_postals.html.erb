@@ -1,10 +1,12 @@
 <div id='bicycle-ca-provinces'>
   <%= f.label :region, 'Province' %>
   <%= f.select :region, PROVINCES, :include_blank => '--' %>
-</div>
-<%= f.label :city, 'City' %>
-<%= f.text_field :city, placeholder: 'City' %>
+</div><br>
+<div>
+  <%= f.label :city, 'City' %>
+  <%= f.text_field :city, placeholder: 'City' %>
+</div><br>
 <div id='bicycle-ca-postal'>
   <%= f.label :postal_code, 'Postal/Zip Code' %>
   <%= f.input :postal_code %>
-</div>
+</div><br>
