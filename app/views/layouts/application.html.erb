@@ -10,10 +10,14 @@
   </head>  
   <body>
     <%= render 'shared/navbar' %>
+<<<<<<< HEAD
 
     <div class="container">
       
       <% if flash[:notice] %>
+=======
+    <% if flash[:notice] %>
+>>>>>>> c313d088b901bbd68dec645d952639f269043f1e
         <div class="alert alert-info">
           <%= flash[:notice] %>
         </div>
@@ -26,6 +30,10 @@
       <% end %>
     
       <%= render 'shared/main_links' %>
+    
+      <%= yield %>
+
+    <div class="container">
     
       <%= yield %>
 

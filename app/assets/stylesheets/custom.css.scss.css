@@ -1,3 +1,33 @@
+@media (min-width: 321px) {
+  #bicycle-icon {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -50px;
+    margin-bottom: 70px;
+  }
+
+  #search-icon {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -50px;
+    margin-bottom: 60px;
+  }
+
+  #tweet-icon {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -75px;
+    margin-bottom: 30px;
+  }
+
+  .home-info {
+    min-height: 400px;
+  }
+}
+
 .navbar-custom {
   background-color: #cfcfcf;
   border-color: #bebebe;
@@ -200,10 +230,11 @@ body {
 }
 
 .home-info {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   margin-left: 4px;
   margin-right: 4px;
+  cursor: pointer;
 }
 
 .bold {
@@ -227,3 +258,9 @@ background-color: #F1C40F;
 .follow  {
 background-color: #3498DB;
 }
+
+td {
+  padding: 2px;  
+  margin: 2px;
+}
+
