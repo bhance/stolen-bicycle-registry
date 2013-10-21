@@ -1,10 +1,12 @@
 <h1>Users show</h1>
+
 <ul><% @user.bicycles.each do |bicycle| %>
   <li><%= bicycle.date %>
   <li><%= bicycle.description %></li>
-  <li><%= image_tag bicycle.photo.url :medium %></li>
+  <li><%= image_tag bicycle.photo.url :thumb %></li>
   <li><%= link_to 'Edit listing', edit_bicycle_path(bicycle) %></li>
   <% end %>
 </ul>
+
 
 

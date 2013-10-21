@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     unless current_user == @user
       flash[:alert] = "Access denied"
-      redirect_back_or new_bicycle_path
+      redirect_back_or user_path
     end
   end
 

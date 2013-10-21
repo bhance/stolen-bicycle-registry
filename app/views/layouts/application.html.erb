@@ -12,11 +12,7 @@
     <%= render 'shared/navbar' %>
 
     <div class="container">
-    
-      <%= render 'shared/main_links' %>
-    
-      <%= yield %>
-
+      
       <% if flash[:notice] %>
         <div class="alert alert-info">
           <%= flash[:notice] %>
@@ -28,6 +24,10 @@
           <%= flash[:alert] %>
         </div>
       <% end %>
+    
+      <%= render 'shared/main_links' %>
+    
+      <%= yield %>
 
       <% unless Rails.env.test? %>
         <div class="donate">

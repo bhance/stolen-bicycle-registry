@@ -48,11 +48,17 @@
          <li><a href="https://twitter.com/stolenbikestuc" class="twitter-link" target="_blank">Tuscon</a></li>  
         </ul>
       </li>
-      <% if user_signed_in? %>
-        <li><%= link_to "Log-out", sign_out_path %></li>
-      <% else %>
-        <li><%= link_to "Log-in", sign_in_path %></li>
-      <% end %>
+      <li class="dropdown">
+        <% if user_signed_in? %>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user.email %> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "My Account", user_path(current_user) %></li>
+          <li><%= link_to "Log-out", sign_out_path %></li>
+        <% else %>
+          <li><%= link_to "Log-in", sign_in_path %></li>
+          <% end %>
+        </ul>
+      </li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

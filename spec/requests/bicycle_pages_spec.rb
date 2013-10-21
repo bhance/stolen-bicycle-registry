@@ -7,18 +7,20 @@ feature 'Bicycle Registration' do
   before do
     @user = FactoryGirl.create(:american_user)
     @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
-    visit new_bicycle_path
+    visit sign_in_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Sign in'
   end
 
   scenario 'User fails to enter any information' do
+    visit new_bicycle_path
     click_button 'Register'
     expect(page).to have_content 'blank'
   end
 
   scenario 'User submits information', :js => true do
+    visit new_bicycle_path
     fill_in 'Theft Date', with: "01/01/2010"
     select('United States', from: 'Country')
     select(@bicycle.region, from: 'State')
