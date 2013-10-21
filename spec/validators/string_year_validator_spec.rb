@@ -3,9 +3,14 @@ require 'spec_helper'
 describe 'StringYearValidator' do
 
   before do
-    @old_bike = FactoryGirl.build(:bicycle, year: '1000')
-    @good_bike = FactoryGirl.build(:bicycle, year: '1988')
-    @future_bike = FactoryGirl.build(:bicycle, year: '3000')
+    @old_bike = FactoryGirl.build(:bicycle, year: (Time.now.year.to_i - 200).to_s)
+    @good_bike = FactoryGirl.build(:bicycle, year: (Time.now.year.to_i + 1).to_s)
+    @future_bike = FactoryGirl.build(:bicycle, year: (Time.now.year.to_i + 200).to_s)
+    @blank_bike = FactoryGirl.build(:bicycle, year: '')
+  end
+
+  it 'should be valid if the year is blank' do
+    @blank_bike.should be_valid
   end
 
   it 'should not be valid if the year is too small' do
@@ -22,16 +27,22 @@ describe 'StringYearValidator' do
 
   it 'raises an error if the provided year is too small' do
     @old_bike.valid?
-    @old_bike.errors.full_messages.should include("The year must be within 100 years before today")
+    @old_bike.errors.full_messages.should include('The manufacturing date must be within the last 100 years')
   end
 
-  it 'raises an error if the provided tear is too large' do
+  it 'raises an error if the provided year is greater than one year in the future' do
     @future_bike.valid?
-    @future_bike.errors.full_messages.should include("The year must be within 100 years before today")
+    @future_bike.errors.full_messages.should include('The manufacturing date must be within the last 100 years')
   end
 
   it 'does not raise an error if the year is the right size' do
     @good_bike.valid?
-    @good_bike.errors.full_messages.should_not include("The year must be within 100 years before today")
+    @good_bike.errors.full_messages.should_not include('The manufacturing date must be within the last 100 years')
+  end
+
+  it 'does not raise an error if the year is blank' do
+    @blank_bike.valid?
+    @blank_bike.errors.full_messages.should_not include('The manufacturing date must be within the last 100 years')
   end
 end
+
