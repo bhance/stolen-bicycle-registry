@@ -53,7 +53,7 @@ class Bicycle < ActiveRecord::Base
   end
   
   def self.strip_empty_values(query)
-    if query.present? && query.class != String
+    if query.present? && query.class != String 
       query.delete_if { |k, v| v.blank? }
       query.delete_if { |k, v| v == '0' }
     end

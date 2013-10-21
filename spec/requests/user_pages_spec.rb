@@ -66,9 +66,10 @@ feature 'User pages' do
     fill_in 'Phone', with: @user3.phone1
     fill_in 'Password (min 8 char.)', with: @user3.password
     fill_in 'Password Confirmation', with: @user3.password
+    save_screenshot('tmp/before.png')
     click_button 'Sign up'
     uri = URI.parse(current_url)
-    "#{uri.path}".should == users_path
+    "#{uri.path}".should == new_bicycle_path
   end
 
   scenario 'user selects country \'Canada\' and gets selector to specify a province' do

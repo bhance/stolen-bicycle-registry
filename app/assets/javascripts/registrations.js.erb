@@ -11,21 +11,21 @@ $(function() {
           <% end %>
         '<option selected="selected" value="">--</option></select>' +
         '<%= label_tag :user_city %>' +
-        '<%= text_field_tag :user_city %>' +
-        '<%= label_tag :user_postal_code %>' +
-        '<%= text_field_tag :user_postal_code %>'
+        '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
+        '<%= label_tag :user_postal_code, "Zip Code" %>' +
+        '<%= text_field_tag :user_postal_code, "Postal Code", name: "user[postal_code]" %>'
       );
     } else { 
       $('#regions-and-postal-codes').html('<%= label_tag :user_region, "State" %>' +
-        '<select id="user_region" name="user_region">' +
+        '<select id="user_region" name="user[region]">' +
           <% STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">--</option></select>' +
         '<%= label_tag :user_city, "City" %>' +
-        '<%= text_field_tag :user_city %>' +
-        '<%= label_tag :user_postal_code, "Zip Code", name: "user[postal_code]" %>' +
-        '<%= text_field_tag :user_postal_code %>'
+        '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
+        '<%= label_tag :user_postal_code, "Zip Code" %>' +
+        '<%= text_field_tag :user_postal_code, "Zip Code", name: "user[postal_code]" %>'
       ); 
     }
   });
