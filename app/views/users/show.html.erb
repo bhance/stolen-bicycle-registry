@@ -1,10 +1,19 @@
-<h1>Users show</h1>
-<ul><% @user.bicycles.each do |bicycle| %>
-  <li><%= bicycle.date %>
-  <li><%= bicycle.description %></li>
-  <li><%= image_tag bicycle.photo.url :medium %></li>
-  <li><%= link_to 'Edit listing', edit_bicycle_path(bicycle) %></li>
+<h1 class="lead">My Account</h1>
+<p>Logged in as: <%= current_user.email %></p>
+<div><%= link_to 'Edit Account Info', edit_user_registration_path %></div>
+<div><%= link_to 'Register a New Bicycle', new_bicycle_path %></div>
+
+<p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently listed:</p>
+
+<% @user.bicycles.each do |bicycle| %>
+<div class='well'>
+  <p>Stolen on: <%= bicycle.date %></p>
+  <p><%= bicycle.brand %></p>
+  <p><%= bicycle.model %></p>
+  <p><%= image_tag bicycle.photo.url :thumb %></p>
+  <p><%= link_to 'Edit listing', edit_bicycle_path(bicycle) %></p>
+</div>
   <% end %>
-</ul>
+
 
 
