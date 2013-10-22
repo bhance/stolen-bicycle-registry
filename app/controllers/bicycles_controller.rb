@@ -1,4 +1,5 @@
 class BicyclesController < ApplicationController
+
   before_filter :user_signed_in? 
   # before_action :user_signed_in?, except: or only: ??? [:new, :create, :edit, :show] #fixme remove comments
   # suggested rails 4 ways? by Michal
