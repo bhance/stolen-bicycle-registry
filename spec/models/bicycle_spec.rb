@@ -63,7 +63,7 @@ describe Bicycle do
     it "search results should include found listings when 'include found' is
       checked" do
       @bike2.update(recovered: true)
-      query = { city: 'Vancouver', 'recovered' => '1' } #fixme use hash with indifferent access
+      query = HashWithIndifferentAccess.new({ city: 'Vancouver', recovered: '1' })
       Bicycle.flexible_search(query).should match_array [@bike1, @bike2]
     end
   end

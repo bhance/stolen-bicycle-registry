@@ -9,7 +9,6 @@ class Bicycle < ActiveRecord::Base
   
   belongs_to :user
 
-  #fixme validate user_id presence
   validates_presence_of :user_id
   validates_presence_of :date
   validates :region, presence: true, inclusion: { in: Geography::PROVINCES + Geography::STATES }
