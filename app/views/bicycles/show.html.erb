@@ -2,7 +2,10 @@
 
 <% if user_signed_in? && current_user == @bicycle.user %>
   <div class='row'>
-    <p id='edit-delete'><%= link_to 'Edit', edit_bicycle_path(@bicycle) %> | <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete' %></p>
+    <p id='edit-delete'>
+      <%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
+      <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete' %>
+    </p>
   </div>
 <% end %>
 
