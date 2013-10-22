@@ -1,5 +1,4 @@
 class Bicycle < ActiveRecord::Base
-
   include Geography
 
   has_attached_file :photo,

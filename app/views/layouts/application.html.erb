@@ -10,7 +10,6 @@
   </head>  
   <body>
     <%= render 'shared/navbar' %>
-
     <div class="container">
       <% if flash[:notice] %>
         <div class="alert alert-info">
@@ -31,7 +30,7 @@
       </div>
 
       <hr>
-      <%= render 'google_ad' %>
+      <%= render 'shared/google_ad' %>
       <hr>
 
       <footer>

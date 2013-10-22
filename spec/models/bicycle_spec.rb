@@ -8,7 +8,7 @@ describe Bicycle do
   it { should validate_presence_of :region }
   it { should validate_presence_of :city }
   it { should validate_presence_of :description }
-  it { should ensure_inclusion_of(:region).in_array(Geography::STATES) }
+  it { should ensure_inclusion_of(:region).in_array(Geography::STATES + Geography::PROVINCES) }
   it { should ensure_inclusion_of(:size_type).in_array(['cm', 'in']) }
   it { should validate_uniqueness_of :serial }
   it { should ensure_length_of(:description).is_at_least(30).

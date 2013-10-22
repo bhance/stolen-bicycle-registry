@@ -6,7 +6,9 @@
     <%= f.date_field :date, id: 'bicycle_date_picker' %>
   </div>
   <div>
-    <%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bicycle-country' } %>
+    <%= f.label :country, 'Country' %>
+    <%= f.select :country, ['Canada', 'United States'], 
+                 {selected: 'United States'}, { class: 'bicycle-country' } %>
   </div>
   <div id="regions-and-postal-codes">
     <% if @bicycle.in_canada? %>

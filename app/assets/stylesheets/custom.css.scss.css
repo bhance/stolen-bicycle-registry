@@ -196,10 +196,6 @@
 .img-responsive {
   display: inline;
 }
-/*
-.home-info {
-  font-size: 110%;
-}*/
 
 footer {
   text-align: right;
@@ -224,10 +220,6 @@ footer {
 .sign-in {
   text-align: center;
 }
-
-/*.paperclip {
-  text-align: center;
-}*/
 
 body {
   padding-top: 60px;
