@@ -27,39 +27,23 @@ describe User do
   it { should validate_uniqueness_of :email }
   it { should have_many :bicycles }
 
-  describe "Canadian address verification" do
-    it 'ensures that the selected region is a valid Canadian province' do
-      user = FactoryGirl.build(:canadian_user) 
-      user.should ensure_inclusion_of(:region).in_array(PROVINCES)
+  describe "Phone Number validation" do
+    let(:user) { FactoryGirl.build(:user) }
+
+    it 'allows 10 digit phone numbers with dashes' do
+      user.should allow_value("555-555-5555").for(:phone1)
     end
 
-    it 'allows postal codes of Canadian postal code format' do
-      user = FactoryGirl.build(:canadian_user) 
-      user.should allow_value("R0J 0A0").for(:postal_code) 
+    it 'allows 10 digit phone numbers without dashes' do
+      user.should allow_value("9999999999").for(:phone2)
     end
 
-    it 'doesn\'t allow postals codes that are not of Canadian postal code format' do
-      user = FactoryGirl.build(:canadian_user)
-      user.should_not allow_value("5555").for(:postal_code) 
-    end
-  end
-
-  describe "American address verification" do      
-    it 'ensures that the selected region is a valid U.S. state' do
-      user = FactoryGirl.build(:american_user)
-      user.should ensure_inclusion_of(:region).in_array(STATES) 
+    it 'does not allow phone numbers lacking 10 digits' do
+      user.should_not allow_value("55-555-5555").for(:phone1)
     end
 
-    it 'allows postal codes of U.S. zip code format' do
-      user = FactoryGirl.build(:american_user)
-      user.should allow_value("55555").for(:postal_code) 
-    end
-
-    it 'doesn\'t allow postals codes that are not of U.S. zip code format' do
-      user = FactoryGirl.build(:american_user)
-      user.should_not allow_value("5555").for(:postal_code) 
+    it 'does not allow phone numbers with non-numeric characters' do
+      user.should_not allow_value("999-9A9-9999").for(:phone1)
     end
   end
 end
-
-#fixme add tests for in_us? and in_canada?
