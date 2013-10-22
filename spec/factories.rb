@@ -2,15 +2,16 @@ FactoryGirl.define do
   factory :user do
     first_name "First_name"
     last_name "Last_name"
-    #fixme dry up other common attributers
+    password "foosbars"
+    password_confirmation "foosbars"
+
     factory :american_user do
       sequence(:email) { |n| "person_#{n}@example.com"}
       country "USA"
       city "City"
       region "OR"
       postal_code "55555"
-      password "foosbars"
-      password_confirmation "foosbars"
+      
     end
 
     factory :canadian_user do
@@ -19,14 +20,12 @@ FactoryGirl.define do
       city "City"
       region "MB"
       postal_code "R0J 0A0"
-      password "foosbars"
-      password_confirmation "foosbars"
     end
   end
   
 
   factory :bicycle do
-    #fixme add user
+    user { FactoryGirl.create(:american_user) }
     date '5/3/2011' 
     city 'Vancouver'
     region 'WA'
@@ -44,8 +43,8 @@ FactoryGirl.define do
     size_type 'cm'
     postal_code '97212'
   
-    factory :canadian, class: Bicycle do #fixme rename factory to canadian_bicycle
-      #fixme add canadian user
+    factory :canadian_bicycle, class: Bicycle do
+      canadian_user { FactoryGirl.create(:canadian_user) }
       country 'Canada'
       region  'BC'
     end

@@ -20,12 +20,9 @@ class Bicycle < ActiveRecord::Base
   validates_inclusion_of(:size_type, :in => %w( cm in ))
   validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
   validates_with StringYearValidator
-  # validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   validates :country, presence: true
 
   before_save :right_postal_code, :convert_year
-
-  #fixme add default scope to hide hidden and recovered
 
   def us? #fixme make consistent with user.rb and factor into geography module
     country == 'United States'
@@ -33,6 +30,10 @@ class Bicycle < ActiveRecord::Base
 
   def canada? #fixme me too
     country == 'Canada'
+  end
+
+  def self.flexible_search(query)
+    search_or_none(query, bicycle_scope(query))
   end
 
 private
@@ -48,30 +49,27 @@ private
   def convert_year
     year.to_s
   end
- 
-  def self.bicycle_search(query) #fixme rename to something more descriptive, maybe flexible_search #fixme make public!
-    self.strip_empty_values(query)
-    # search_scope = self.set_proper_scope(query)
-    # fuzzy_search(query).scope(scope)
-    if query.class != String && query['recovered']
-      query.delete_if { |k, v| v == '1' } #fixme extract to a well-named private method
-      query.present? ? fuzzy_search(query).where(hidden: false) : nil #fixme after adding default scope, remove it by using Bicycle.unscoped.whatever_you_want_to_do
+
+  def self.search_or_none(query, scope)
+    strip_values(query)
+    if query.present?
+      fuzzy_search(query).where(scope)
     else
-      query.present? ? fuzzy_search(query).where(hidden: false, recovered: false) : nil
+      Bicycle.none
     end
   end
 
-  # def set_proper_scope(query)
-  #   if query.class != String && query['recovered']
-  #     query['recovered'] = nil
-  #     { recovered: true }
-  #   end
-  # end
+  def self.bicycle_scope(query)
+    if (query.class != String && query['recovered'] == '1') 
+      { hidden: false } 
+    else
+      { hidden: false, recovered: false }
+    end
+  end
   
-  def self.strip_empty_values(query)
+  def self.strip_values(query)
     if query.present? && query.class != String 
-      query.delete_if { |k, v| v.blank? }
-      query.delete_if { |k, v| v == '0' }
+      query.delete_if { |k, v| v.blank? || v == '0' || v == '1' }
     end
   end
 end

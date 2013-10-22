@@ -33,7 +33,7 @@ describe Bicycle do
     bike1.year.should eq '2002'
   end
 
-  describe ".bicycle_search" do
+  describe ".flexible_search" do
     before do
       @bike1 = FactoryGirl.create(:bicycle)
       @bike2 = FactoryGirl.create(:bicycle, model: 'Vancouver', color: 'Mauve')
@@ -41,40 +41,43 @@ describe Bicycle do
 
     it "basic search should not return results given an empty search string" do
       query = ''
-      Bicycle.bicycle_search(query).should eq nil #fixme change to empty AR relation
+      Bicycle.flexible_search(query).should eq Bicycle.none
     end
 
     it "basic search should return search results given a search string" do
       query = 'Vancouver'
-      Bicycle.bicycle_search(query).length.should eq 2 #should eq [@bike1, @bike2] # maybe use array_eq or something
+      Bicycle.flexible_search(query).should match_array [@bike1, @bike2]
     end
 
     it "advanced search should return nil when given all empty fields" do
       query = { model: '' }
-      Bicycle.bicycle_search(query).should eq nil #fixme change to empty AR relation
+      Bicycle.flexible_search(query).should eq Bicycle.none
     end
 
     it "advanced search should return search results given an empty field" do
       query = { model: '', color: 'Mauve' }
-      Bicycle.bicycle_search(query).should eq [@bike2]
+      Bicycle.flexible_search(query).should eq [@bike2]
     end
 
-    it "search results should not include bike listings that are currently hidden by a user/admin" do
+    it "search results should not include bike listings that are currently
+        hidden by a user/admin" do
       @bike2.update(hidden: true )
       query = 'Vancouver'
-      Bicycle.bicycle_search(query).length.should eq 1 #fixme make deterministic
+      Bicycle.flexible_search(query).should eq [@bike1]
     end
 
-    it "basic/advanced search results include only unrecovered listings by default" do
+    it "basic/advanced search results include only unrecovered listings by
+      default" do
       @bike2.update(recovered: true)
       query = 'Vancouver'
-      Bicycle.bicycle_search(query).should eq [@bike1]
+      Bicycle.flexible_search(query).should eq [@bike1]
     end
 
-    it "search results should include found listings when 'include found' is checked" do
+    it "search results should include found listings when 'include found' is
+      checked" do
       @bike2.update(recovered: true)
       query = { city: 'Vancouver', 'recovered' => '1' } #fixme use hash with indifferent access
-      Bicycle.bicycle_search(query).length.should eq 2 #make more deterministic
+      Bicycle.flexible_search(query).should match_array [@bike1, @bike2] #make more deterministic
     end
   end
 end
