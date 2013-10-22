@@ -2,8 +2,8 @@
 <div class='row well'>
 <h1 class="lead sign-in">Bike Info Form</h1> 
   <div class='col-md-6 col-md-offset-3'>
-    <%= f.label :date_picker, 'Theft Date' %>
-    <%= f.date_field :date, id: 'bicycle_date_picker' %>
+    <%= f.label :date, 'Theft Date' %>
+    <%= f.text_field :date, id: 'datepicker' %>
   </div>
   <div>
     <%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], {selected: 'United States'}, { class: 'bicycle-country' } %>
@@ -15,7 +15,7 @@
       <%= render 'shared/us_regions_and_postals', f: f %>
     <% end %>
   </div>
-    <%= f.label 'Description' %>
+    <%= f.label :description, 'Description' %>
     <%= f.text_area :description, placeholder: 'min 30 char.' %>
     <%= f.label 'Serial' %>
     <%= f.text_field :serial, placeholder: 'PP123495877' %>

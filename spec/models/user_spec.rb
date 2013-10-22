@@ -60,6 +60,27 @@ describe User do
       user.should_not allow_value("5555").for(:postal_code) 
     end
   end
+
+  describe 'check_privacy_options' do
+    it "should set 'first_name_public' to true if the user checks the box on sign up" do
+      user = FactoryGirl.create(:american_user, first_name_public: '1')
+      user.reload
+      binding.pry
+      user.first_name_public.should be true
+    end
+
+    it "should set 'last_name_public' to true if the user checks the box on sign up" do
+      user = FactoryGirl.create(:american_user, last_name_public: '1')
+      user.reload
+      user.last_name_public.should be true
+    end
+
+    it "should set 'email_public' to true if the user checks the box on sign up" do
+      user = FactoryGirl.create(:american_user, email_public: '1')
+      user.reload
+      user.email_public.should be true
+    end
+  end
 end
 
 #fixme add tests for in_us? and in_canada?
