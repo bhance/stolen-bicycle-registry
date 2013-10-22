@@ -1,26 +1,25 @@
 FactoryGirl.define do
   factory :user do
-    first_name "First_name"
-    last_name "Last_name"
+    first_name "Joe"
+    last_name "Bike"
+    phone1 "555-555-5555"
+    phone2 "999-999-9999"
+    password "foosbars"
+    password_confirmation "foosbars"
     #fixme dry up other common attributers
     factory :american_user do
       sequence(:email) { |n| "person_#{n}@example.com"}
       country "USA"
-      city "City"
+      city "Portland"
       region "OR"
       postal_code "55555"
-      password "foosbars"
-      password_confirmation "foosbars"
     end
-
     factory :canadian_user do
       sequence(:email) { |n| "canadian_person_#{n}@example.com"}    
       country "Canada"
-      city "City"
-      region "MB"
+      city "Toronto"
+      region "ON"
       postal_code "R0J 0A0"
-      password "foosbars"
-      password_confirmation "foosbars"
     end
   end
   
