@@ -6,7 +6,7 @@ StolenBicycleRegistry::Application.routes.draw do
     match 'sign_up', to: 'devise/sessions#create', via: 'get'
   end
 
-  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
+  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" } #fixme refactor routes when you get those controllers refactored
   resources :bicycles
   resources :users, only: [:show] 
   
@@ -16,6 +16,7 @@ StolenBicycleRegistry::Application.routes.draw do
   match '/faq' => 'static_pages#faq', via: 'get'
   match '/prevention' => 'static_pages#prevention', via: 'get'
   match '/links' => 'static_pages#links', via: 'get'
+  match '/twitter' => 'static_pages#twitter', via: 'get'
   match '/rfid_tags' => 'static_pages#whitepaper', via: 'get'
 
   root 'static_pages#home'

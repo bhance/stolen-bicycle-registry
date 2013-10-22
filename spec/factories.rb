@@ -1,30 +1,32 @@
 FactoryGirl.define do
-  factory :american_user, class: User do
+  factory :user do
     first_name "First_name"
     last_name "Last_name"
-    sequence(:email) { |n| "person_#{n}@example.com"}
-    country "USA"
-    city "City"
-    region "OR"
-    postal_code "55555"
-    password "foosbars"
-    password_confirmation "foosbars"
-  end
+    #fixme dry up other common attributers
+    factory :american_user do
+      sequence(:email) { |n| "person_#{n}@example.com"}
+      country "USA"
+      city "City"
+      region "OR"
+      postal_code "55555"
+      password "foosbars"
+      password_confirmation "foosbars"
+    end
 
-  factory :canadian_user, class: User do
-    first_name "First_name"
-    last_name "Last_name"
-    sequence(:email) { |n| "canadian_person_#{n}@example.com"}    
-    country "Canada"
-    city "City"
-    region "MB"
-    postal_code "R0J 0A0"
-    password "foosbars"
-    password_confirmation "foosbars"
+    factory :canadian_user do
+      sequence(:email) { |n| "canadian_person_#{n}@example.com"}    
+      country "Canada"
+      city "City"
+      region "MB"
+      postal_code "R0J 0A0"
+      password "foosbars"
+      password_confirmation "foosbars"
+    end
   end
+  
 
   factory :bicycle do
-
+    #fixme add user
     date '5/3/2011' 
     city 'Vancouver'
     region 'WA'
@@ -42,7 +44,8 @@ FactoryGirl.define do
     size_type 'cm'
     postal_code '97212'
   
-    factory :canadian, class: Bicycle do
+    factory :canadian, class: Bicycle do #fixme rename factory to canadian_bicycle
+      #fixme add canadian user
       country 'Canada'
       region  'BC'
     end

@@ -10,3 +10,4 @@ protected
     root_path
   end
 end
+#fixme refactor devise stuff

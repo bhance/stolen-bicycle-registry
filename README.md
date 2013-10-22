@@ -14,3 +14,5 @@
 
 1. Visit [PhantomJS](http://phantomjs.org/download.html. and install it
 2. Or, in OSX, run this command: `brew install phantomjs`
+
+#fixme add info about wonderful contributors

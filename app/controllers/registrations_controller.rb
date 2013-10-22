@@ -10,3 +10,4 @@ protected
     new_bicycle_path
   end
 end
+#fixme refactor devise stuff

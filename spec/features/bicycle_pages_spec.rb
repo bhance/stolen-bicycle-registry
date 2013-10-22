@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 feature 'Bicycle Registration' do
-
-  # let(:bicycle) { FactoryGirl.create(:bicycle, user_id: @user)}
-
   before do
-    @user = FactoryGirl.create(:american_user)
+    @user = FactoryGirl.create(:american_user) #fixme delete me after factory refactor
     @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
+    # @user = bicycle.user
     visit sign_in_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
@@ -50,36 +48,40 @@ end
 
 feature 'Bicycle Search' do
   let(:bike1) { FactoryGirl.create(:bicycle) }
-  let(:bike2) { FactoryGirl.create(:bicycle) }
+  let(:bike2) { FactoryGirl.create(:bicycle) } #fixme move to a before within valid searches
 
-  scenario 'a user clicks basic search without a value' do
-    visit search_path
-    click_button 'basic-search'
-    expect(page).to_not have_content 'search result'   
+  context 'empty searches' do
+    scenario 'a user clicks basic search without a value' do
+      visit search_path
+      click_button 'basic-search'
+      expect(page).to_not have_content 'search result'   
+    end
+
+    scenario 'a user clicks advanced search without any fields filled' do
+      visit search_path
+      click_button 'advanced-search'
+      expect(page).to_not have_content 'search result'
+    end
   end
-
-  scenario 'a user clicks basic search with a search term' do
-    visit search_path
-    bike1
-    bike2
-    fill_in 'query', with: 'Vancouver'
-    click_button 'basic-search'
-    expect(page).to have_content '2 search results'  
-  end
-
-  scenario 'a user clicks advanced search without any fields filled' do
-    visit search_path
-    click_button 'advanced-search'
-    expect(page).to_not have_content 'search result'
-  end 
   
-  scenario 'a user clicks advanced search with some, but not all fields filled' do
-    visit search_path
-    bike1
-    bike2
-    fill_in 'query_city', with: 'Vancouver'
-    fill_in 'query_color', with: 'Green'
-    click_button 'advanced-search'
-    expect(page).to have_content '2 search results'  
-  end  
+  context 'valid searches' do
+    scenario 'a user clicks basic search with a search term' do
+      visit search_path
+      bike1
+      bike2
+      fill_in 'query', with: 'Vancouver'
+      click_button 'basic-search'
+      expect(page).to have_content '2 search results'  
+    end
+
+    scenario 'a user clicks advanced search with some, but not all fields filled' do
+      visit search_path
+      bike1
+      bike2
+      fill_in 'query_city', with: 'Vancouver'
+      fill_in 'query_color', with: 'Green'
+      click_button 'advanced-search'
+      expect(page).to have_content '2 search results'  
+    end
+  end
 end

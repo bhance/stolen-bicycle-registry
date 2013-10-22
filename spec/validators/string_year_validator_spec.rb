@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'StringYearValidator' do
 
-  before do
+  before do #fixme use let
     @old_bike = FactoryGirl.build(:bicycle, year: (Time.now.year.to_i - 200).to_s)
     @good_bike = FactoryGirl.build(:bicycle, year: (Time.now.year.to_i + 1).to_s)
     @future_bike = FactoryGirl.build(:bicycle, year: (Time.now.year.to_i + 200).to_s)
@@ -45,4 +45,3 @@ describe 'StringYearValidator' do
     @blank_bike.errors.full_messages.should_not include('The manufacturing date must be within the last 100 years')
   end
 end
-

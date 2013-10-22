@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'User pages' do
   
-  before do
+  before do #fixme don't do befores for things that aren't used everywhere. perhaps some lets instead?
     @user = FactoryGirl.create(:american_user)
     @user2 = FactoryGirl.create(:canadian_user)
     @user3 = FactoryGirl.build(:american_user)
@@ -39,8 +39,6 @@ feature 'User pages' do
     fill_in 'Password', with: @user.password
     click_button 'Sign in'
     visit user_path(@user2)
-    uri = URI.parse(current_url)
-    "#{uri.path}".should == new_bicycle_path
     page.should have_content 'Access denied'
   end
 
@@ -54,9 +52,8 @@ feature 'User pages' do
     page.should have_content 'Edit'
   end
 
-  scenario 'visitor registers as a user before registering a stolen bike', js: true do
+  scenario 'visitors can sign up', js: true do
     visit new_user_registration_path
-    save_and_open_page
     fill_in 'First Name', with: @user3.first_name
     fill_in 'Last Name', with: @user3.last_name
     fill_in 'Email', with: @user3.email
@@ -72,13 +69,13 @@ feature 'User pages' do
     "#{uri.path}".should == "/bicycles/new"
   end
 
-  scenario 'user selects country \'Canada\' and gets selector to specify a province' do
+  scenario 'user selects country \'Canada\' and gets selector to specify a province' do #fixme help i need js!
     visit new_user_registration_path
     select('Canada', from: 'user_country')
     page.has_selector?('Province')
   end
 
-  scenario 'user selects country \'United States\' and gets selector to specify a state' do
+  scenario 'user selects country \'United States\' and gets selector to specify a state' do #fixme help i need js!
     visit new_user_registration_path
     select('United States', from: 'user_country')
     page.has_selector?('States')

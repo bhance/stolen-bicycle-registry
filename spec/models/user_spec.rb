@@ -28,7 +28,6 @@ describe User do
   it { should have_many :bicycles }
 
   describe "Canadian address verification" do
-
     it 'ensures that the selected region is a valid Canadian province' do
       user = FactoryGirl.build(:canadian_user) 
       user.should ensure_inclusion_of(:region).in_array(PROVINCES)
@@ -63,3 +62,4 @@ describe User do
   end
 end
 
+#fixme add tests for in_us? and in_canada?

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  def index
+  def index #fixme remove unneeded methods and views
   end
 
   def new

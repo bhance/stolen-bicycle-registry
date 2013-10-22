@@ -37,4 +37,3 @@ group :test, :development do
   gem 'pry'
   gem 'factory_girl_rails'
 end
-
