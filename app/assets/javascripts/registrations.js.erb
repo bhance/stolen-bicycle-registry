@@ -9,7 +9,7 @@ $(function() {
           <% PROVINCES.each do |province| %>
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">--</option></select>' +
+        '<option selected="selected" value="">Province</option></select>' +
         '<%= label_tag :user_city %>' +
         '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
         '<%= label_tag :user_postal_code, "Zip Code" %>' +
@@ -21,7 +21,7 @@ $(function() {
           <% STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">--</option></select>' +
+        '<option selected="selected" value="">State</option></select>' +
         '<%= label_tag :user_city, "City" %>' +
         '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
         '<%= label_tag :user_postal_code, "Zip Code" %>' +
@@ -39,7 +39,7 @@ $(function() {
           <% PROVINCES.each do |province| %>
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">--</option></select>' +
+        '<option selected="selected" value="">Province</option></select>' +
         '<%= label_tag :bicycle_city %>' +
         '<%= text_field_tag :bicycle_city, nil, name: "bicycle[city]" %>' +
         '<%= label_tag :postal_code %>' +
@@ -51,7 +51,7 @@ $(function() {
           <% STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">--</option></select>' +
+        '<option selected="selected" value="">State</option></select>' +
         '<%= label_tag :bicycle_city, "City" %>' +
         '<%= text_field_tag :bicycle_city, nil, name: "bicycle[city]" %>' +
         '<%= label_tag :bicycle_postal_code, "Zip Code" %>' +

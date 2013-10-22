@@ -1,18 +1,14 @@
 class BicyclesController < ApplicationController
 
   before_filter :user_signed_in? 
-  # before_action :user_signed_in?, except: or only: ??? [:new, :create, :edit, :show] #fixme remove comments
-  # suggested rails 4 ways? by Michal
 
   def index
     if params[:query]
-      @bicycles = Bicycle.bicycle_search(params[:query])
-      if @bicycles
-        @bicycles = @bicycles.paginate(page: params[:page], :per_page => 15).order('date DESC') #fixme move to line 8 after updating search
-      end
+      @bicycles = Bicycle.flexible_search(params[:query]).
+                          paginate(page: params[:page],
+                                   per_page: 15).
+                          order('date DESC')
     end
-
-    @bicycles #fixme do we really need this?
   end
 
   def new
@@ -49,26 +45,22 @@ class BicyclesController < ApplicationController
     @bicycle = Bicycle.find(params[:id])
   end
 
+  def destroy
+    @bicycle = Bicycle.find(params[:id])
+    if current_user = @bicycle.user
+      @bicycle.destroy
+      redirect_to user_path(current_user)
+    else
+      redirect_to user_path(current_user), notice: 'Access denied!'
+    end
+  end
+
   private
 
   def bicycle_params
-    params.require(:bicycle).permit(:date, #fixme put a few of these on the same line - 100 char ruler
-                                    :city,
-                                    :region,
-                                    :country,
-                                    :postal_code,
-                                    :serial,
-                                    :verified_ownership,
-                                    :police_report,
-                                    :description,
-                                    :reward,
-                                    :year,
-                                    :brand,
-                                    :model,
-                                    :color,
-                                    :size,
-                                    :size_type,
-                                    :photo,
-                                    :user_id)
+    params.require(:bicycle).permit(:date, :city, :region, :country, :postal_code,
+                                    :serial, :verified_ownership, :police_report,
+                                    :description, :reward, :year, :brand, :model,                          
+                                    :color, :size, :size_type, :photo, :user_id)
   end
 end
