@@ -9,7 +9,7 @@ FactoryGirl.define do
     #fixme dry up other common attributers
     factory :american_user do
       sequence(:email) { |n| "person_#{n}@example.com"}
-      country "USA"
+      country "United States"
       city "Portland"
       region "OR"
       postal_code "55555"
