@@ -30,7 +30,7 @@ describe User do
   describe "Canadian address verification" do
     it 'ensures that the selected region is a valid Canadian province' do
       user = FactoryGirl.build(:canadian_user) 
-      user.should ensure_inclusion_of(:region).in_array(PROVINCES)
+      user.should ensure_inclusion_of(:region).in_array(Geography::PROVINCES)
     end
 
     it 'allows postal codes of Canadian postal code format' do
@@ -47,7 +47,7 @@ describe User do
   describe "American address verification" do      
     it 'ensures that the selected region is a valid U.S. state' do
       user = FactoryGirl.build(:american_user)
-      user.should ensure_inclusion_of(:region).in_array(STATES) 
+      user.should ensure_inclusion_of(:region).in_array(Geography::STATES) 
     end
 
     it 'allows postal codes of U.S. zip code format' do

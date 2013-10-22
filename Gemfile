@@ -13,6 +13,11 @@ gem 'textacular', "~> 3.0", require: 'textacular/rails'
 gem 'will_paginate', '3.0.4'
 gem 'will_paginate-bootstrap'
 
+group :production do
+  gem 'lograge'
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -26,10 +31,6 @@ group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'database_cleaner'
-end
-
-group :production do
-  gem 'lograge'
 end
 
 group :test, :development do
