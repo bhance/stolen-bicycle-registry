@@ -19,7 +19,7 @@ feature 'Bicycle Registration' do
 
   scenario 'User submits information', :js => true do
     visit new_bicycle_path
-    fill_in 'Theft Date', with: "01/01/2010"
+    fill_in 'datepicker', with: "01/01/2010"
     select('United States', from: 'Country')
     select(@bicycle.region, from: 'State')
     fill_in 'City', with: @bicycle.city
