@@ -1,13 +1,13 @@
 <div id='bicycle-ca-provinces'>
   <%= f.label :region, 'Province' %>
   <%= f.select :region, Geography::PROVINCES, :include_blank => '--' %>
-</div><br>
+</div>
 <div>
   <%= f.label :city, 'City' %>
   <%= f.text_field :city, placeholder: 'City' %>
-</div><br>
+</div>
 <div id='bicycle-ca-postal'>
   <%= f.label :postal_code, 'Postal/Zip Code' %>
   <%= f.input :postal_code %>
-</div><br>
+</div>
 <!-- #fixme br tags are evil -->
