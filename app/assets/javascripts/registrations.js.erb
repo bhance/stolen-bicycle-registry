@@ -6,7 +6,7 @@ $(function() {
     if ($(this).val() == 'Canada') {
       $('#regions-and-postal-codes').html('<%= label_tag :user_region, "Province" %>' +
         '<select id="user_region" name="user[region]">' +
-          <% PROVINCES.each do |province| %>
+          <% Geography::PROVINCES.each do |province| %>
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">Province</option></select>' +
@@ -18,7 +18,7 @@ $(function() {
     } else { 
       $('#regions-and-postal-codes').html('<%= label_tag :user_region, "State" %>' +
         '<select id="user_region" name="user[region]">' +
-          <% STATES.each do |state| %>
+          <% Geography::STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">State</option></select>' +
@@ -36,7 +36,7 @@ $(function() {
     if ($(this).val() == 'Canada') {
       $('#regions-and-postal-codes').html('<%= label_tag :bicycle_region, "Province" %>' +
         '<select id="bicycle_region" name="bicycle[region]">' +
-          <% PROVINCES.each do |province| %>
+          <% Geography::PROVINCES.each do |province| %>
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">Province</option></select>' +
@@ -48,7 +48,7 @@ $(function() {
     } else { 
       $('#regions-and-postal-codes').html('<%= label_tag :bicycle_region, "State" %>' +
         '<select id="bicycle_region" name="bicycle[region]">' +
-          <% STATES.each do |state| %>
+          <% Geography::STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">State</option></select>' +
