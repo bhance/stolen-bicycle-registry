@@ -1,4 +1,5 @@
 class Bicycle < ActiveRecord::Base
+
   include Geography
 
   has_attached_file :photo,
@@ -18,8 +19,19 @@ class Bicycle < ActiveRecord::Base
   validates_with StringYearValidator
   validates :country, presence: true
   validate :correct_postal_code, before_save 
-  
   before_save :convert_year
+
+  def us? #fixme make consistent with user.rb and factor into geography module
+    country == 'United States'
+  end
+
+  def canada? #fixme me too
+    country == 'Canada'
+  end
+
+  def self.flexible_search(query)
+    search_or_none(query, bicycle_scope(query))
+  end
 
 private
 
