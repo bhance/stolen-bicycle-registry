@@ -66,7 +66,7 @@ feature 'User pages' do
     fill_in 'Password Confirmation', with: @user3.password
     click_button 'Sign up'
     uri = URI.parse(current_url)
-    "#{uri.path}".should == "/bicycles/new"
+    "#{uri.path}".should == new_bicycle_path
   end
 
   scenario 'user selects country \'Canada\' and gets selector to specify a province' do #fixme help i need js!

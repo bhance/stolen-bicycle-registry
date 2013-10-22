@@ -48,6 +48,16 @@ class BicyclesController < ApplicationController
     @bicycle = Bicycle.find(params[:id])
   end
 
+  def destroy
+    @bicycle = Bicycle.find(params[:id])
+    if current_user = @bicycle.user
+      @bicycle.destroy
+      redirect_to user_path(current_user)
+    else
+      redirect_to user_path(current_user), notice: 'Access denied!'
+    end
+  end
+
   private
 
   def bicycle_params
