@@ -1,5 +1,19 @@
 <h1 class="lead"> Stolen Bike Listing: </h1>
-
+<%= @bicycle.user.email %>
+<%= image_tag @bicycle.photo.url :medium %> 
+<%= @bicycle.date %> 
+<%= @bicycle.city %>
+<%= @bicycle.region %>
+<%= @bicycle.country %>
+<%= @bicycle.description %>
+<%= @bicycle.postal_code %>
+<%= @bicycle.serial %>
+<%= @bicycle.verified_ownership %>
+<%= @bicycle.year %>
+<%= @bicycle.brand %>
+<%= @bicycle.model %>
+<%= @bicycle.color %>
+<%= @bicycle.size %><%= @bicycle.size_type %>
 <% if user_signed_in? && current_user == @bicycle.user %>
   <div class='row'>
     <p id='edit-delete'>
@@ -73,7 +87,11 @@
       </tr>
         <td>Name:</td>
         <td>
+<<<<<<< HEAD
           <%= @bicycle.user.first_name_public ? @bicycle.user.first_name : '<private first>' %> 
+=======
+          <%= @bicycle.user.first_name_public ? @bicycle.user.first_name : '<private first>' %>
+>>>>>>> ec4e8a5aaf356923b14a4e8e510bd0607cd905e1
           <%= @bicycle.user.last_name_public ? @bicycle.user.last_name : '<private last>' %>
         </td>
       <tr>
