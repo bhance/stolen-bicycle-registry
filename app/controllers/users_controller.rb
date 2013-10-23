@@ -7,5 +7,5 @@ class UsersController < ApplicationController
       redirect_back_or user_path
     end
   end
-
+  
 end

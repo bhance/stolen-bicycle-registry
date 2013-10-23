@@ -11,14 +11,11 @@ class Bicycle < ActiveRecord::Base
 
   #fixme validate user_id presence
   validates_presence_of :date
-  validates :region, presence: true, inclusion: { in: Geography::PROVINCES + Geography::STATES }
-  validates_presence_of :city
   validates :description, presence: true, length: { minimum: 30, maximum: 2000 }
   validates_inclusion_of(:size_type, :in => %w( cm in ))
   validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
   validates_with StringYearValidator
-  validates :country, presence: true
-  validate :correct_postal_code, before_save 
+  # validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   before_save :convert_year
 
   def us? #fixme make consistent with user.rb and factor into geography module

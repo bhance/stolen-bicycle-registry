@@ -53,9 +53,9 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user.email %> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><%= link_to "My Account", user_path(current_user) %></li>
-          <li><%= link_to "Log-out", sign_out_path %></li>
+          <li><%= link_to "Sign-out", sign_out_path %></li>
         <% else %>
-          <li><%= link_to "Log-in", sign_in_path %></li>
+          <li><%= link_to "Sign-in", sign_in_path %></li>
           <% end %>
         </ul>
       </li>
