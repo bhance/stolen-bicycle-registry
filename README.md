@@ -1,5 +1,4 @@
 # [Stolen Bicycle Registry](http://stolen-bicycle-registry.herokuapp.com)
-======
 
 Stolen Bicycle Registry is an online database that tracks stolen bicycles. This is an overhaul on the site first introduced in fall 2013.
 
