@@ -12,7 +12,8 @@ class Bicycle < ActiveRecord::Base
   #fixme validate user_id presence
   validates_presence_of :date
   validates :description, presence: true, length: { minimum: 30, maximum: 2000 }
-  validates_inclusion_of(:size_type, :in => %w( cm in ))
+
+  validates :size_type, :inclusion => { :in => %w( cm in ) }, allow_blank: true
   validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
   validates_with StringYearValidator
   # validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true

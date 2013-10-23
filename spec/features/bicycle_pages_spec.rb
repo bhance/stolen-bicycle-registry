@@ -19,12 +19,13 @@ feature 'Bicycle Registration' do
   scenario 'User submits information', :js => true do
     visit new_bicycle_path
     fill_in 'datepicker', with: "01/01/2010"
-    select('United States', from: 'Country')
-    select(@bicycle.region, from: 'State')
-    fill_in 'City', with: @bicycle.city
-    fill_in 'Zip Code', with: '97214'
+    select('United States', from: 'bicycle_country' )
+    select(@bicycle.region, from: 'bicycle_region')
+    fill_in 'bicycle_city', with: @bicycle.city
+    fill_in 'bicycle_postal_code', with: '97214'
     fill_in 'bicycle_description', with: @bicycle.description
     click_button 'Register'
+    save_screenshot('tmp/broken.png')
     uri = URI.parse(current_url)
     "#{uri.path}".should == "/bicycles/#{Bicycle.last.id}"
   end
