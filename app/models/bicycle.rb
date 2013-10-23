@@ -16,8 +16,7 @@ class Bicycle < ActiveRecord::Base
   validates :size_type, inclusion: { :in => %w( cm in ) }
   validates :serial, uniqueness: true, allow_nil: true, allow_blank: true
   validates_with StringYearValidator
-  validates :country, presence: true
-  validate :correct_postal_code, before_save 
+  # validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   before_save :convert_year
 
   def self.flexible_search(query)

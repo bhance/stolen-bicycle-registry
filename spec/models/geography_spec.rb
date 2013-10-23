@@ -1,8 +1,20 @@
 require 'spec_helper'
 
 shared_examples_for Geography do
-  let(:american_object) { described_class.new(:country => 'USA') }
+  let(:american_object) { described_class.new(:country => 'United States') }
   let(:canadian_object) { described_class.new(:country => 'Canada') }
+  let(:object) { described_class.new }
+
+  subject { object }
+  
+  it { should respond_to :country }
+  it { should respond_to :region }
+  it { should respond_to :city }
+  it { should respond_to :postal_code }
+
+  it { should validate_presence_of :country }
+  it { should validate_presence_of :region }
+  it { should validate_presence_of :city }
 
   context 'in_us?' do
     it 'tells if an object is from the United States' do
@@ -34,7 +46,37 @@ shared_examples_for Geography do
     end
   end
 
-  describe "correct_postal_code" do      
+  describe 'Postal Code Validator' do
+    it 'should add an error if the error condition is true' do
+      american_object.update(:postal_code => 'ABCDE')
+      american_object.valid?
+      american_object.errors[:postal_code].should include("must be five numbers")
+    end
+
+    it 'should add an error if the error condition is true' do
+      american_object.update(:postal_code => '1111')
+      american_object.valid?
+      american_object.errors[:postal_code].should include("must be five numbers")
+    end
+
+    it 'should not raise an error if the error condition is false' do
+      american_object.update(:postal_code => '97217')
+      american_object.valid?
+      american_object.errors[:postal_code].should_not include("must be five numbers")
+    end
+
+    it 'should add an error if the error condition is true' do
+      canadian_object.update(:postal_code => 'ABCDEF')
+      canadian_object.valid?
+      canadian_object.errors[:postal_code].should include("must be in this format 'A0A 0A0'")
+    end
+
+    it 'should not raise an error if the error condition is false' do
+      canadian_object.update(:postal_code => 'R0J 0A0')
+      canadian_object.valid?
+      canadian_object.errors[:postal_code].should_not include("must be in this format 'A0A 0A0'")
+    end
+
     it 'allows postal codes of U.S. zip code format' do
       american_object.should allow_value("55555").for(:postal_code) 
     end
