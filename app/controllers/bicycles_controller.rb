@@ -60,7 +60,7 @@ class BicyclesController < ApplicationController
   def bicycle_params
     params.require(:bicycle).permit(:date, :city, :region, :country, :postal_code,
                                     :serial, :verified_ownership, :police_report,
-                                    :description, :reward, :year, :brand, :model,                          
+                                    :description, :reward, :year, :brand, :model,
                                     :color, :size, :size_type, :photo, :user_id)
   end
 end

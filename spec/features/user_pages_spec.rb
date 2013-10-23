@@ -91,5 +91,28 @@ feature 'User pages' do
       visit new_user_registration_path
       page.should have_content('You are already signed in')
     end
+
+    scenario 'the region search button leads to the search page' do
+      visit root_path
+      click_button "See local listings for #{user.city}, #{user.region}, #{user.country}"
+      uri = URI.parse(current_url)
+      "#{uri.path}".should == search_path
+    end
+
+    scenario 'region search should have local lost bikes' do
+      far_bike = FactoryGirl.create(:bicycle, city: 'Tempe')
+      near_bike = FactoryGirl.create(:bicycle, city: user.city)
+      visit root_path
+      click_button "See local listings for #{user.city}, #{user.region}, #{user.country}"
+      page.should have_content user.city
+    end
+
+    scenario 'region search should not have other lost bikes' do
+      far_bike = FactoryGirl.create(:bicycle, city: 'Tempe')
+      near_bike = FactoryGirl.create(:bicycle, city: user.city)
+      visit root_path
+      click_button "See local listings for #{user.city}, #{user.region}, #{user.country}"
+      page.should_not have_content 'Tempe'
+    end
   end
 end
