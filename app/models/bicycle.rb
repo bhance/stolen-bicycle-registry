@@ -8,13 +8,13 @@ class Bicycle < ActiveRecord::Base
   
   belongs_to :user
 
-  validates_presence_of :user_id
-  validates_presence_of :date
+  validates :user_id, presence: true
+  validates :date, presence: true
   validates :region, presence: true, inclusion: { in: Geography::PROVINCES + Geography::STATES }
-  validates_presence_of :city
+  validates :city, presence: true
   validates :description, presence: true, length: { minimum: 30, maximum: 2000 }
-  validates_inclusion_of(:size_type, :in => %w( cm in ))
-  validates_uniqueness_of :serial, allow_nil: true, allow_blank: true
+  validates :size_type, inclusion: { :in => %w( cm in ) }
+  validates :serial, uniqueness: true, allow_nil: true, allow_blank: true
   validates_with StringYearValidator
   validates :country, presence: true
   validate :correct_postal_code, before_save 

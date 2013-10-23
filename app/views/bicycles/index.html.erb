@@ -22,7 +22,7 @@
     </div>
   <% end %>
 </div>
-<% if @bicycles && !@bicycles.empty? %>
+<% unless @bicycles.empty? %>
   <p><%= pluralize(@bicycles.count, "search result") %>.</p>
   <%= will_paginate %>
   <div class="table-responsive">
@@ -58,6 +58,6 @@
     </table>
   </div>
   <%= will_paginate @bicycles %>
-<% elsif @bicycles %>
+<% else %>
   <p><%= pluralize(@bicycles.count, "search result") %>.</p>
 <% end %>
