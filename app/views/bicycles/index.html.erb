@@ -20,11 +20,20 @@
       <div class="col-md-3">
         <p><%= text_field :query, :postal_code, placeholder: 'Postal Code' %></p>
 
-        <p><%= text_field :query, :city, placeholder: 'City' %></p>
+        <p>
+          <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
+                          placeholder: 'City' %>
+        </p>
 
-        <p><%= text_field :query, :region, placeholder: 'Region/State' %></p>
+        <p>
+          <%= text_field :query, :region, value: user_signed_in? ? current_user.region : '',
+                         placeholder: 'Region/State' %>
+        </p>
 
-        <p><%= select :query, :country, [['USA', 'United States'], 'Canada'], :include_blank => 'Country' %></p>
+        <p>
+          <%= select :query, :country, [['USA', 'United States'], 'Canada'],
+                     { selected: user_signed_in? ? current_user.country : 'USA' } %>
+        </p>
         <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'advanced-search' %>
       </div>
     </div>

@@ -4,7 +4,7 @@
   <div class='row'>
     <p id='edit-delete'>
       <%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
-      <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete' %>
+      <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %>
     </p>
   </div>
 <% end %>
@@ -36,7 +36,7 @@
       <tr>
         <td>Location:</td>
         <td>
-          <%= @bicycle.city %>  
+          <%= @bicycle.city %>,  
           <%= @bicycle.region %>
           <%= @bicycle.postal_code %>
         </td>
@@ -66,7 +66,10 @@
       </tr>
       <tr>
         <td>Size:</td>
-        <td><%= @bicycle.size %><%= @bicycle.size_type %></td>
+        <td>
+          <%= @bicycle.size %> 
+          <%= @bicycle.size_type %>
+        </td>
       </tr>
       <tr>
         <td colspan='2' class='btn-info'><strong>Contact Information</strong></td>
