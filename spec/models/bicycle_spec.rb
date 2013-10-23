@@ -1,27 +1,14 @@
 require 'spec_helper'
 
-state_abbreviations =  ['AL', 'AK', 'AZ', 'AR', 'CA', 
-                        'CO', 'CT', 'DE', 'FL', 'GA', 
-                        'HI', 'ID', 'IL', 'IN', 'IA', 
-                        'KS', 'KY', 'LA', 'ME', 'MD', 
-                        'MA', 'MI', 'MN', 'MS', 'MO', 
-                        'MT', 'NE', 'NV', 'NH', 'NJ', 
-                        'NM', 'NY', 'NC', 'ND', 'OH', 
-                        'OK', 'OR', 'PA', 'RI', 'SC',
-                        'SD', 'TN', 'TX', 'UT', 'VT', 
-                        'VA', 'WA', 'WV', 'WI', 'WY', 
-                        'AB', 'BC', 'MB', 'NB', 'NL', 
-                        'NS', 'NT', 'NU', 'ON', 'PE', 
-                        'QC', 'SK', 'YT'] #use contant
-
 describe Bicycle do
+  it { should validate_presence_of :user_id }
   it { should belong_to :user }
   it { should validate_presence_of :date }
   it { should validate_presence_of :country }
   it { should validate_presence_of :region }
   it { should validate_presence_of :city }
   it { should validate_presence_of :description }
-  it { should ensure_inclusion_of(:region).in_array(state_abbreviations) }
+  it { should ensure_inclusion_of(:region).in_array(Geography::STATES + Geography::PROVINCES) }
   it { should ensure_inclusion_of(:size_type).in_array(['cm', 'in']) }
   it { should validate_uniqueness_of :serial }
   it { should ensure_length_of(:description).is_at_least(30).
@@ -76,8 +63,9 @@ describe Bicycle do
     it "search results should include found listings when 'include found' is
       checked" do
       @bike2.update(recovered: true)
-      query = { city: 'Vancouver', 'recovered' => '1' } #fixme use hash with indifferent access
-      Bicycle.flexible_search(query).should match_array [@bike1, @bike2] #make more deterministic
+      query = HashWithIndifferentAccess.new({ city: 'Vancouver',
+                                              recovered: '1' })
+      Bicycle.flexible_search(query).should match_array [@bike1, @bike2]
     end
   end
 end

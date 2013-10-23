@@ -1,5 +1,6 @@
 class BicyclesController < ApplicationController
   before_action :user_signed_in?
+  skip_before_action :require_login, only: [:index]
 
   def index
     if params[:query]

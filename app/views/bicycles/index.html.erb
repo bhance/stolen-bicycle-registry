@@ -1,83 +1,63 @@
 <% provide(:title, 'Search') %>
-<br>
 <div class="well sign-in center">
-
   <h3 class='lead'>Advanced Search</h3>
   <%= form_tag search_path, method: 'get', :class => "form-horizontal" do %>
     <div class="form-group">
       <div class="col-md-3 col-md-offset-3">
         <p><%= text_field :query, :serial, placeholder: 'Serial #' %></p>
-
         <p><%= number_field :query, :year, placeholder: 'Year' %></p>
-
         <p><%= text_field :query, :brand, placeholder: 'Make' %></p>
-
         <p><%= text_field :query, :model, placeholder: 'Model' %></p>
-
         <p><%= text_field :query, :color, placeholder: 'Color' %></p>
       </div>
-
       <div class="col-md-3">
         <p><%= text_field :query, :postal_code, placeholder: 'Postal Code' %></p>
-
-        <p>
-          <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
-                          placeholder: 'City' %>
-        </p>
-
-        <p>
-          <%= text_field :query, :region, value: user_signed_in? ? current_user.region : '',
-                         placeholder: 'Region/State' %>
-        </p>
-
-        <p>
-          <%= select :query, :country, [['USA', 'United States'], 'Canada'],
-                     { selected: user_signed_in? ? current_user.country : 'USA' } %>
-        </p>
-        <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'advanced-search' %>
+        <p><%= text_field :query, :city, placeholder: 'City' %></p>
+        <p><%= text_field :query, :region, placeholder: 'Region/State' %></p>
+        <p><%= select :query, :country, [['USA', 'United States'], 'Canada'],
+                      :include_blank => 'Country' %></p>
+        <%= submit_tag 'Search', class: 'btn btn-small btn-info',
+                       id: 'advanced-search' %>
       </div>
     </div>
   <% end %>
-
 </div>
-
-  <% if @bicycles && !@bicycles.empty? %>
-    <p><%= pluralize(@bicycles.count, "search result") %>.</p>
-    <%= will_paginate %>
-    <div class="table-responsive">
-      <table class='table table-hover'>
+<% if @bicycles && !@bicycles.empty? %>
+  <p><%= pluralize(@bicycles.count, "search result") %>.</p>
+  <%= will_paginate %>
+  <div class="table-responsive">
+    <table class='table table-hover'>
+      <tr>
+        <td>Photo</td>
+        <td>Stolen</td>
+        <td>Year</td>
+        <td>Color</td>
+        <td>Make</td>
+        <td>Model</td>
+        <td>City</td>
+        <td>Region</td>
+        <td>Country</td>
+        <td>Serial</td>
+      </tr>
+      <% @bicycles.each do |bicycle| %>
         <tr>
-          <td>Photo</td>
-          <td>Stolen</td>
-          <td>Year</td>
-          <td>Color</td>
-          <td>Make</td>
-          <td>Model</td>
-          <td>City</td>
-          <td>Region</td>
-          <td>Country</td>
-          <td>Serial</td>
+          <td><a href=<%= bicycle_path(bicycle) %> >
+            <%= image_tag bicycle.photo.url :thumb %>
+          </a></td>
+          <td><%= bicycle.date %></td>
+          <td><%= bicycle.year %></td>   
+          <td><%= bicycle.color %></td>
+          <td><%= bicycle.brand %></td>
+          <td><%= bicycle.model %></td>
+          <td><%= bicycle.city %></td>
+          <td><%= bicycle.region %></td>
+          <td><%= bicycle.country %></td>
+          <td><%= bicycle.serial %></td>      
         </tr>
-        <% @bicycles.each do |bicycle| %>
-          <tr>
-            <td><a href=<%= bicycle_path(bicycle) %> >
-              <%= image_tag bicycle.photo.url :thumb %>
-            </a></td>
-            <td><%= bicycle.date %></td>
-            <td><%= bicycle.year %></td>   
-            <td><%= bicycle.color %></td>
-            <td><%= bicycle.brand %></td>
-            <td><%= bicycle.model %></td>
-            <td><%= bicycle.city %></td>
-            <td><%= bicycle.region %></td>
-            <td><%= bicycle.country %></td>
-            <td><%= bicycle.serial %></td>      
-          </tr>
-        <% end %>
-      </table>
-    </div>
-    <%= will_paginate @bicycles %>
-
-    <% elsif @bicycles %>
-    <p><%= pluralize(@bicycles.count, "search result") %>.</p>
-  <% end %>
+      <% end %>
+    </table>
+  </div>
+  <%= will_paginate @bicycles %>
+<% elsif @bicycles %>
+  <p><%= pluralize(@bicycles.count, "search result") %>.</p>
+<% end %>
