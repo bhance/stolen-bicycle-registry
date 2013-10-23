@@ -172,8 +172,13 @@
   margin: 0px;
 }
 
-.twitter-links {
+.twitter-links-page a{
+  color:inherit;
+  font-size: 20px;
+}
 
+.twitter-links a{
+  text-decoration: none;
 }
 
 .navbar-twitter-links {
@@ -269,4 +274,16 @@ background-color: #3498DB;
 
 #edit-delete {
   margin-left: 15px;  
+}
+
+.fixed-bottom a{
+  color:inherit;
+}
+
+.blackbird {
+  padding-top: 1%;
+}
+
+.twitter-header {
+  color: black;
 }
