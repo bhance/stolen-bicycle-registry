@@ -22,42 +22,42 @@
     </div>
   <% end %>
 </div>
-<% unless @bicycles.empty? %>
+<% if @bicycles %>
   <p><%= pluralize(@bicycles.count, "search result") %>.</p>
-  <%= will_paginate %>
-  <div class="table-responsive">
-    <table class='table table-hover'>
-      <tr>
-        <td>Photo</td>
-        <td>Stolen</td>
-        <td>Year</td>
-        <td>Color</td>
-        <td>Make</td>
-        <td>Model</td>
-        <td>City</td>
-        <td>Region</td>
-        <td>Country</td>
-        <td>Serial</td>
-      </tr>
-      <% @bicycles.each do |bicycle| %>
+  <% if @bicycles.present? %>
+    <%= will_paginate %>
+    <div class="table-responsive">
+      <table class='table table-hover'>
         <tr>
-          <td><a href=<%= bicycle_path(bicycle) %> >
-            <%= image_tag bicycle.photo.url :thumb %>
-          </a></td>
-          <td><%= bicycle.date %></td>
-          <td><%= bicycle.year %></td>   
-          <td><%= bicycle.color %></td>
-          <td><%= bicycle.brand %></td>
-          <td><%= bicycle.model %></td>
-          <td><%= bicycle.city %></td>
-          <td><%= bicycle.region %></td>
-          <td><%= bicycle.country %></td>
-          <td><%= bicycle.serial %></td>      
+          <td>Photo</td>
+          <td>Stolen</td>
+          <td>Year</td>
+          <td>Color</td>
+          <td>Make</td>
+          <td>Model</td>
+          <td>City</td>
+          <td>Region</td>
+          <td>Country</td>
+          <td>Serial</td>
         </tr>
-      <% end %>
-    </table>
-  </div>
-  <%= will_paginate @bicycles %>
-<% else %>
-  <p><%= pluralize(@bicycles.count, "search result") %>.</p>
+        <% @bicycles.each do |bicycle| %>
+          <tr>
+            <td><a href=<%= bicycle_path(bicycle) %> >
+              <%= image_tag bicycle.photo.url :thumb %>
+            </a></td>
+            <td><%= bicycle.date %></td>
+            <td><%= bicycle.year %></td>   
+            <td><%= bicycle.color %></td>
+            <td><%= bicycle.brand %></td>
+            <td><%= bicycle.model %></td>
+            <td><%= bicycle.city %></td>
+            <td><%= bicycle.region %></td>
+            <td><%= bicycle.country %></td>
+            <td><%= bicycle.serial %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <%= will_paginate @bicycles %>
+  <% end %>
 <% end %>
