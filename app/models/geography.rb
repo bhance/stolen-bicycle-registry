@@ -14,8 +14,8 @@ module Geography
     base.validates :country, presence: true
     base.validates :city, presence: true
     base.validates :region, presence: true
-    base.validates :region, :inclusion => { :in => Geography::STATES, :if => :in_us? }
-    base.validates :region, :inclusion => { :in => Geography::PROVINCES, :if => :in_canada? } 
+    base.validates :region, inclusion: { in: Geography::STATES, if: :in_us? }
+    base.validates :region, inclusion: { in: Geography::PROVINCES, if: :in_canada? } 
     base.validates :postal_code, :postal_code => true
   end
 
