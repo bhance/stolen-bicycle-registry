@@ -8,6 +8,8 @@
 <% @user.bicycles.each do |bicycle| %>
 <div class='well'>
   <p>Stolen on: <%= bicycle.date %></p>
+
+
   <p><%= bicycle.brand %></p>
   <p><%= bicycle.model %></p>
   <p><a href=<%= bicycle_path(bicycle) %> ><%= image_tag bicycle.photo.url :thumb %></a></p>
