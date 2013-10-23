@@ -10,8 +10,8 @@ $(function() {
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">Province</option></select>' +
-        '<%= label_tag :user_city %>' +
-        '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
+        // '<%= label_tag :user_city %>' +
+        // '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
         '<%= label_tag :user_postal_code, "Zip Code" %>' +
         '<%= text_field_tag :user_postal_code, "Postal Code", name: "user[postal_code]" %>'
       );
@@ -40,8 +40,8 @@ $(function() {
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
         '<option selected="selected" value="">Province</option></select>' +
-        '<%= label_tag :bicycle_city %>' +
-        '<%= text_field_tag :bicycle_city, nil, name: "bicycle[city]" %>' +
+        // '<%= label_tag :bicycle_city %>' +
+        // '<%= text_field_tag :bicycle_city, nil, name: "bicycle[city]" %>' +
         '<%= label_tag :postal_code %>' +
         '<%= text_field_tag :postal_code, nil, name: "bicycle[postal_code]" %>'
       );
