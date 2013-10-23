@@ -17,7 +17,12 @@
   <%= f.password_field :password_confirmation %></div>
 
   
-  <div><%= f.label :country, 'Country' %><%= f.select :country, ['Canada', 'United States'], { selected: 'United States' }, { class: 'user-country' } %></div>
+  <div>
+    <%= f.label :country, 'Country' %>
+    <%= f.select :country, ['Canada', 'United States'],
+                 { selected: 'United States' }, 
+                 { class: 'user-country' } %>
+  </div>
   <div id="regions-and-postal-codes">
     <% if @user.country == 'Canada' %>
       <%= render 'shared/ca_regions_and_postals', f: f %>
@@ -28,8 +33,15 @@
   <div><%= f.text_field :phone1, placeholder: 'Phone' %></div>
   <div><%= f.text_field :phone2, placeholder: 'Phone 2' %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
   <%= f.password_field :current_password %></div>
+
+  <div class="well sign-in container">
+    Check information to display publicly: 
+    <div><%= f.check_box :first_name_public %> <%= f.label :first_name %></div>
+    <div><%= f.check_box :last_name_public %> <%= f.label :last_name %></div>
+    <div><%= f.check_box :email_public %> <%= f.label :email %></div>
+  </div>
 
 
   <div><%= f.submit "Update" %></div>

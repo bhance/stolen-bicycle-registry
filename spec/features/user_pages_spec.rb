@@ -48,7 +48,7 @@ feature 'User pages' do
     fill_in 'Password', with: @user.password
     click_button 'Sign in'
     visit user_path(@user)
-    click_link 'Edit listing'
+    click_link 'Edit'
     page.should have_content 'Edit'
   end
 

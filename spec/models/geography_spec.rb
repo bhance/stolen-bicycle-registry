@@ -102,6 +102,3 @@ end
 describe Bicycle do
   it_behaves_like Geography
 end
-
-
-
