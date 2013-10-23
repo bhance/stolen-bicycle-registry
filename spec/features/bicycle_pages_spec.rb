@@ -2,9 +2,8 @@ require 'spec_helper'
 
 feature 'Bicycle Registration' do
   before do
-    @user = FactoryGirl.create(:american_user) #fixme delete me after factory refactor
-    @bicycle = FactoryGirl.create(:bicycle, user_id: @user.id)
-    # @user = bicycle.user
+    @bicycle = FactoryGirl.create(:bicycle)
+    @user = @bicycle.user
     visit sign_in_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
@@ -19,7 +18,7 @@ feature 'Bicycle Registration' do
 
   scenario 'User submits information', :js => true do
     visit new_bicycle_path
-    fill_in 'Theft Date', with: "01/01/2010"
+    fill_in 'datepicker', with: "01/01/2010"
     select('United States', from: 'Country')
     select(@bicycle.region, from: 'State')
     fill_in 'City', with: @bicycle.city
@@ -48,23 +47,27 @@ end
 
 feature 'Bicycle Search' do
   let(:bike1) { FactoryGirl.create(:bicycle) }
-  let(:bike2) { FactoryGirl.create(:bicycle) } #fixme move to a before within valid searches
+  let(:bike2) { FactoryGirl.create(:bicycle)}
 
   context 'empty searches' do
     scenario 'a user clicks basic search without a value' do
       visit search_path
       click_button 'basic-search'
-      expect(page).to_not have_content 'search result'   
+      expect(page).to have_content '0 search results'   
     end
 
     scenario 'a user clicks advanced search without any fields filled' do
       visit search_path
       click_button 'advanced-search'
-      expect(page).to_not have_content 'search result'
+      expect(page).to have_content '0 search results'
     end
   end
   
   context 'valid searches' do
+    before do
+      
+    end
+
     scenario 'a user clicks basic search with a search term' do
       visit search_path
       bike1

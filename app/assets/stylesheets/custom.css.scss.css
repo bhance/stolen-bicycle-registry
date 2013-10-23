@@ -263,8 +263,10 @@ background-color: #F1C40F;
 background-color: #3498DB;
 }
 
-td {
-  padding: 2px;  
-  margin: 2px;
+.table tbody > tr > td {
+  padding: 4px;  
 }
 
+#edit-delete {
+  margin-left: 15px;  
+}
