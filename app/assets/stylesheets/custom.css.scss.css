@@ -1,3 +1,7 @@
+.center {
+  text-align: center;
+}
+
 .form-center {
   min-width: 250px;
   max-width: 50%;
@@ -129,7 +133,7 @@
 
 .btn-register {
   background-color: gray;
-  color: orange; 
+  color: orange;
 }
 
 .btn-login {
@@ -170,13 +174,13 @@
 }
 
 .donate {
-  width:100%; 
+  width:100%;
   text-align:center;
   margin-top:5%;
 }
 
 .google-ad {
-  
+
   max-width: 100%;
   height: auto;
   text-align: center;
@@ -230,7 +234,7 @@ background-color: #3498DB;
 }
 
 .table tbody > tr > td {
-  padding: 4px;  
+  padding: 4px;
 }
 
 .remember-me {
@@ -239,7 +243,7 @@ background-color: #3498DB;
 }
 
 #edit-delete {
-  margin-left: 15px;  
+  margin-left: 15px;
 }
 
 .fixed-bottom a {
