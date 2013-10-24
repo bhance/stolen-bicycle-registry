@@ -1,7 +1,7 @@
-<h1 class="lead"> Stolen Bike Listing: </h1>
+<h1 class="lead title"> Stolen Bike Listing: </h1>
 <%= @bicycle.user.email %>
-<%= image_tag @bicycle.photo.url :medium %> 
-<%= @bicycle.date %> 
+<%= image_tag @bicycle.photo.url :medium %>
+<%= @bicycle.date %>
 <%= @bicycle.city %>
 <%= @bicycle.region %>
 <%= @bicycle.country %>
@@ -50,7 +50,7 @@
       <tr>
         <td>Location:</td>
         <td>
-          <%= @bicycle.city %>,  
+          <%= @bicycle.city %>,
           <%= @bicycle.region %>
           <%= @bicycle.postal_code %>
         </td>
@@ -81,7 +81,7 @@
       <tr>
         <td>Size:</td>
         <td>
-          <%= @bicycle.size %> 
+          <%= @bicycle.size %>
           <%= @bicycle.size_type %>
         </td>
       </tr>

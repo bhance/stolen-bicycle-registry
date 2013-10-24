@@ -1,6 +1,6 @@
 <div class='well'>
   <div class='form-center'>
-    <h1>Bike Info Form</h1>
+    <h1 class= 'lead title' >Bike Info Form</h1>
     <hr>
     <%= form_for @bicycle do |f| %>
     <div class="input-group">
@@ -20,7 +20,7 @@
     <div id="regions-and-postal-codes">
       <% if @bicycle.in_canada? %>
         <%= render 'shared/ca_regions_and_postals', f: f %>
-      <% else %> 
+      <% else %>
         <%= render 'shared/us_regions_and_postals', f: f %>
       <% end %>
     </div>

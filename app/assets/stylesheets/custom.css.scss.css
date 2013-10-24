@@ -320,3 +320,17 @@ select {
     font-size: .8em;
   }
 }
+
+.list-title {
+  font-size: 30px;
+  color: #3498DB;
+}
+ .title {
+  font-size: 40px;
+}
+li {
+  list-style: none;
+}
+.hometext {
+
+}

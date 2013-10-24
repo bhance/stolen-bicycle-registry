@@ -1,10 +1,10 @@
 <div class="well">
   <div class='form-center'>
-    <h1>Sign up</h1>
+    <h1 class= "lead title" >Sign up</h1>
     <hr>
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
-      
+
       <div class="input-group">
         <span class="input-group-addon label-info">First Name</span>
         <%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name', class: "form-control" %>
@@ -19,7 +19,7 @@
         <span class="input-group-addon label-info">Email</span>
         <%= f.email_field :email, placeholder: 'Email', class: "form-control" %>
       </div>
-      
+
       <div>
         <%= f.select :country, ['Canada', 'United States'],
                    { :include_blank => 'Select Country' }, { class: 'user-country' } %>
@@ -33,7 +33,7 @@
       <div id="regions-and-postal-codes">
         <% if @user.country == 'Canada' %>
           <%= render 'shared/ca_regions_and_postals', f: f %>
-        <% else %> 
+        <% else %>
           <%= render 'shared/us_regions_and_postals', f: f %>
         <% end %>
       </div>
