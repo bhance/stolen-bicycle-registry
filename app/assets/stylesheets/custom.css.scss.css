@@ -289,7 +289,7 @@ select {
   }
 
   .home-info {
-    min-height: 400px;
+    min-height: 470px;
   }
 
 }
@@ -333,4 +333,9 @@ li {
 }
 .hometext {
 
+}
+.advanced-search {
+
+
+  font-size: 12px;
 }
