@@ -1,19 +1,4 @@
 <h1 class="lead title"> Stolen Bike Listing: </h1>
-<%= @bicycle.user.email %>
-<%= image_tag @bicycle.photo.url :medium %>
-<%= @bicycle.date %>
-<%= @bicycle.city %>
-<%= @bicycle.region %>
-<%= @bicycle.country %>
-<%= @bicycle.description %>
-<%= @bicycle.postal_code %>
-<%= @bicycle.serial %>
-<%= @bicycle.verified_ownership %>
-<%= @bicycle.year %>
-<%= @bicycle.brand %>
-<%= @bicycle.model %>
-<%= @bicycle.color %>
-<%= @bicycle.size %><%= @bicycle.size_type %>
 <% if user_signed_in? && current_user == @bicycle.user %>
   <div class='row'>
     <p id='edit-delete'>
@@ -36,7 +21,27 @@
         <td><%= @bicycle.description %></td>
       </tr>
       <tr>
-        <td align="center"><h3>Have you seen me? Email us now if you have any info on my whereabouts.<h3><a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg"> FOUND IT!</button></td>
+        <td>
+          <p>
+            Tweet this listing!
+          </p>
+          <a href="https://twitter.com/share"
+              class="twitter-share-button"
+              data-text="Help find this bike:"
+              data-via="StolenBikeReg">
+              Tweet
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <h3 class="lead">
+            Have you seen me? Email us now if you have any info on my whereabouts.
+          </h3>
+          <a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg">
+           FOUND IT!
+          </button>
+        </td>
       </tr>
     </table>
   </div>
