@@ -34,16 +34,16 @@ protected
     end
   end
 
-  def after_inactive_sign_up_path_for(user)
-    previous_url = session[:previous_url]
-    session.delete(:previous_url)
-    previous_url || new_bicycle_path
-  end
+  # def after_inactive_sign_up_path_for(user)
+  #   previous_url = session[:previous_url]
+  #   session.delete(:previous_url)
+  #   user_path(user) || new_bicycle_path
+  # end
 
   def after_sign_up_path_for(user)
     previous_url = session[:previous_url]
     session.delete(:previous_url)
-    previous_url || new_bicycle_path
+    user_path(user) || new_bicycle_path
   end
 
   def after_sign_in_path_for(user)

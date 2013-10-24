@@ -24,7 +24,8 @@
         </p>
 
         <p>
-          <%= select :query, :country, ['United States', 'Canada'], :include_blank => 'Country', selected: user_signed_in? ? current_user.country : 'Country' %>
+          <%= select :query, :country, ['United States', 'Canada'], :include_blank => 'Select Country', 
+          selected: user_signed_in? ? current_user.country : 'Select Country' %>
         </p>
         <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'advanced-search' %>
       </div>
