@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature 'Bicycle Registration' do
   before do
+    visit root_path
     @bicycle = FactoryGirl.create(:bicycle)
     @user = @bicycle.user
     visit sign_in_path
@@ -19,10 +20,10 @@ feature 'Bicycle Registration' do
   scenario 'User submits information', :js => true do
     visit new_bicycle_path
     fill_in 'datepicker', with: "01/01/2010"
-    select('United States', from: 'Country')
-    select(@bicycle.region, from: 'State')
-    fill_in 'City', with: @bicycle.city
-    fill_in 'Zip Code', with: '97214'
+    select('United States', from: 'bicycle_country' )
+    select(@bicycle.region, from: 'bicycle_region')
+    fill_in 'bicycle_city', with: @bicycle.city
+    fill_in 'bicycle_postal_code', with: '97214'
     fill_in 'bicycle_description', with: @bicycle.description
     click_button 'Register'
     uri = URI.parse(current_url)
@@ -53,7 +54,7 @@ feature 'Bicycle Search' do
     scenario 'a user clicks basic search without a value' do
       visit search_path
       click_button 'basic-search'
-      expect(page).to have_content '0 search results'   
+      expect(page).to have_content '0 search results'
     end
 
     scenario 'a user clicks advanced search without any fields filled' do
@@ -62,10 +63,10 @@ feature 'Bicycle Search' do
       expect(page).to have_content '0 search results'
     end
   end
-  
+
   context 'valid searches' do
     before do
-      
+
     end
 
     scenario 'a user clicks basic search with a search term' do
@@ -74,7 +75,7 @@ feature 'Bicycle Search' do
       bike2
       fill_in 'query', with: 'Vancouver'
       click_button 'basic-search'
-      expect(page).to have_content '2 search results'  
+      expect(page).to have_content '2 search results'
     end
 
     scenario 'a user clicks advanced search with some, but not all fields filled' do
@@ -84,7 +85,7 @@ feature 'Bicycle Search' do
       fill_in 'query_city', with: 'Vancouver'
       fill_in 'query_color', with: 'Green'
       click_button 'advanced-search'
-      expect(page).to have_content '2 search results'  
+      expect(page).to have_content '2 search results'
     end
   end
 end

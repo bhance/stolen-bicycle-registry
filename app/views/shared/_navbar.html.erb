@@ -1,5 +1,4 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-<!-- Brand and toggle get grouped for better mobile display -->
 <div class="navbar-header">
   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
     <span class="sr-only">Toggle navigation</span>
@@ -10,56 +9,53 @@
   <a class="navbar-brand" href="/home"><span class="glyphicon glyphicon-home"></span></a>
 </div>
 
-<!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/bicycles/new">Register a stolen bike</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="/about">About</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/philosophy">Philosophy</a></li>
-          <li><a href="/links">Links</a></li>
-          <li><a href="/prevention">Theft Prevention</a></li>
-        </ul>
-      </li>
-      <li ><a href="/search">Advanced Search</a></li>
-    </ul>
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="/bicycles/new">Register a stolen bike</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/philosophy">Philosophy</a></li>
+        <li><a href="/links">Links</a></li>
+        <li><a href="/prevention">Theft Prevention</a></li>
+      </ul>
+    </li>
+    <li ><a href="/search">Advanced Search</a></li>
+  </ul>
 
-    <%= form_tag search_path, method: 'get', :class => 'navbar-form navbar-left' do %>
-      <div class="form-group">
-        <%= text_field_tag :query, nil, placeholder: 'Enter a search term', :class => 'form-control' %>
-      </div>
-      <%= submit_tag 'Submit', class: 'btn btn-default', id: 'basic-search' %>
-    <% end %>
-
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Twitter <b class="caret"></b></a>
-        <ul class="dropdown-menu navbar-twitter-links">
-          <li ><a href="/twitter">All</a></li>
-          <li><a href="https://twitter.com/stolenbikesbrk" target="_blank">Berkeley</a></li>
-         <li><a href="https://twitter.com/stolenbikeschi" target="_blank">Chicago</a></li>
-         <li><a href="https://twitter.com/stolenbikemarin" target="_blank">Marin County</a></li>
-         <li><a href="https://twitter.com/stolenbikesphl" target="_blank">Philadelphia</a></li>
-         <li><a href="https://twitter.com/stolenbikessan" target="_blank">San Diego</a></li>
-         <li><a href="https://twitter.com/stolenbikessfo" target="_blank">San Francisco</a></li>
-         <li><a href="https://twitter.com/stolenbikessea" target="_blank">Seattle</a></li>
-         <li><a href="https://twitter.com/stolenbikestuc" target="_blank">Tuscon</a></li>  
-        </ul>
-      </li>
-      <li class="dropdown">
-        <% if user_signed_in? %>
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user.email %> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "My Account", user_path(current_user) %></li>
-          <li><%= link_to "Log-out", sign_out_path %></li>
-        <% else %>
-          <li><%= link_to "Log-in", sign_in_path %></li>
-          <% end %>
-        </ul>
-      </li>
-    </ul>
-  </div><!-- /.navbar-collapse -->
+  <%= form_tag search_path, method: 'get', :class => 'navbar-form navbar-left' do %>
+    <div class="form-group">
+      <%= text_field_tag :query, nil, placeholder: 'Enter a search term', :class => 'form-control' %>
+    </div>
+    <%= submit_tag 'Submit', class: 'btn btn-default', id: 'basic-search' %>
+  <% end %>
+  <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Twitter <b class="caret"></b></a>
+      <ul class="dropdown-menu navbar-twitter-links">
+        <li><a href="https://twitter.com/stolenbikesbrk" target="_blank">Berkeley</a></li>
+        <li><a href="https://twitter.com/stolenbikeschi" target="_blank">Chicago</a></li>
+        <li><a href="https://twitter.com/stolenbikesmarin" target="_blank">Marin County</a></li>
+        <li><a href="https://twitter.com/stolenbikesphl" target="_blank">Philadelphia</a></li>
+        <li><a href="https://twitter.com/stolenbikessan" target="_blank">San Diego</a></li>
+        <li><a href="https://twitter.com/stolenbikessfo" target="_blank">San Francisco</a></li>
+        <li><a href="https://twitter.com/stolenbikessea" target="_blank">Seattle</a></li>
+        <li><a href="https://twitter.com/stolenbikestuc" target="_blank">Tuscon</a></li>  
+      </ul>
+    </li>
+    <li class="dropdown">
+      <% if user_signed_in? %>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user.email %> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "My Account", user_path(current_user) %></li>
+        <li><%= link_to "Log-out", sign_out_path %></li>
+      <% else %>
+        <li><%= link_to "Log-in", sign_in_path %></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+</div>
 </nav>

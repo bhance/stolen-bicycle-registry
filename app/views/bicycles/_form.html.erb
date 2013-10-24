@@ -1,48 +1,86 @@
-<%= form_for @bicycle do |f| %>
-<div class='row well'>
-<h1 class="lead sign-in">Bike Info Form</h1> 
-  <div class='col-md-6 col-md-offset-3'>
-    <%= f.label :date, 'Theft Date' %>
-    <%= f.text_field :date, id: 'datepicker' %>
-  </div>
-  <div>
-    <%= f.label :country, 'Country' %>
-    <%= f.select :country,
-                 ['Canada', 'United States'],
-                 { selected: 'United States' },
-                 { class: 'bicycle-country' } %>
-  </div>
-  <div id="regions-and-postal-codes">
-    <% if @bicycle.in_canada? %>
-      <%= render 'shared/ca_regions_and_postals', f: f %>
-    <% else %> 
-      <%= render 'shared/us_regions_and_postals', f: f %>
-    <% end %>
-  </div>
-    <%= f.label :description, 'Description' %>
-    <%= f.text_area :description, placeholder: 'min 30 char.' %>
-    <%= f.label 'Serial' %>
-    <%= f.text_field :serial, placeholder: 'PP123495877' %>
-    <%= f.label 'Do you have proof of ownership?' %>
-    <%= f.select :verified_ownership, [['yes', true], ['no', false]] %>
-    <%= f.label 'Police report number' %>
-    <%= f.text_field :police_report, placeholder: '1235463754' %>
-    <%= f.label 'Reward' %>
-    <%= f.text_field :reward, placeholder: '$50' %>
-    <%= f.label 'Year' %>
-    <%= f.text_field :year, placeholder: '2007' %>
-    <%= f.label 'Brand' %>
-    <%= f.text_field :brand, placeholder: 'Schwinn' %>
-    <%= f.label 'Model' %>
-    <%= f.text_field :model, placeholder: 'Le Tour' %>
-    <%= f.label 'Color' %>
-    <%= f.text_field :color, placeholder: 'Blue/Gray mix' %>
-    <%= f.label 'Size' %>
-    <%= f.text_field :size, placeholder: '27' %>
-    <%= f.label 'Unit of Measurement' %>
-    <%= f.select :size_type, ['cm', 'in'] %>
-    <%= f.label 'Photo' %>
-    <%= f.file_field :photo %>
-    <%= f.submit 'Register' %>
+<div class='well'>
+  <div class='form-center'>
+    <h1>Bike Info Form</h1>
+    <hr>
+    <%= form_for @bicycle do |f| %>
+    <div class="input-group">
+      <span class="input-group-addon label-info">Theft Date</span>
+      <%= f.text_field :date, id: 'datepicker', class: "form-control" %>
+    </div>
+    <div>
+      <%= f.select :country,
+                   ['Canada', 'United States'],
+                   { selected: @bicycle.country },
+                   { class: 'bicycle-country' } %>
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon label-info">City</span>
+      <%= f.text_field :city, value: @bicycle.city, class: "form-control" %>
+    </div>
+    <div id="regions-and-postal-codes">
+      <% if @bicycle.in_canada? %>
+        <%= render 'shared/ca_regions_and_postals', f: f %>
+      <% else %> 
+        <%= render 'shared/us_regions_and_postals', f: f %>
+      <% end %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Description</span>
+      <%= f.text_area :description, placeholder: 'Minimum 30 char.', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Serial</span>
+      <%= f.text_field :serial, placeholder: 'PP123495877', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Police Report#</span>
+      <%= f.text_field :police_report, placeholder: '1235463754', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Year #</span>
+      <%= f.text_field :year, placeholder: '2007', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Brand</span>
+      <%= f.text_field :brand, placeholder: 'Schwinn', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Model</span>
+      <%= f.text_field :model, placeholder: 'Le Tour', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Color</span>
+      <%= f.text_field :color, placeholder: 'Blue/Gray mix', class: "form-control" %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Size</span>
+      <%= f.text_field :size, placeholder: '27', class: "form-control" %>
+    </div>
+
+    <div>
+      <%= f.select :size_type, ['cm', 'in'], :include_blank => 'Size | (cm or in)'  %>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon label-info">Photo</span>
+      <%= f.file_field :photo %>
+    </div>
+
+    <div>
+      <%= f.select :verified_ownership, [['YES', true], ['NO', false]], include_blank: 'Do you have proof of ownership?' %>
+    </div>
+
+    <div>
+      <%= f.submit 'Register', class: 'btn btn-success' %>
+    </div>
+
   <% end %>
 </div>

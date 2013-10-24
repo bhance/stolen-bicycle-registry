@@ -1,12 +1,7 @@
 <div id='bicycle-us-states'>
-  <%= f.label :region, 'State' %>
-  <%= f.select :region, Geography::STATES, :include_blank => '--' %>
+  <%= f.select :region, Geography::STATES, :include_blank => 'Select State'%>
 </div>
-<div>
-  <%= f.label :city, 'City' %>
-  <%= f.text_field :city, placeholder: 'City' %>
-</div>
-<div id='bicycle-us-zip'>
-  <%= f.label :postal_code, 'Postal/Zip Code' %>
-  <%= f.text_field :postal_code, placeholder: 'Zip/Postal Code' %>
+<div class="input-group" id='bicycle-us-zip'>
+  <span class="input-group-addon label-info">Zip Code</span>
+  <%= f.text_field :postal_code, placeholder: 'Zip Code', class: "form-control" %>
 </div>

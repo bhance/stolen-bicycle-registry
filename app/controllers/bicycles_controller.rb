@@ -1,5 +1,6 @@
 class BicyclesController < ApplicationController
   before_action :user_signed_in?
+  skip_before_action :require_login, only: [:index]
 
   def index
     if params[:query]
@@ -14,7 +15,7 @@ class BicyclesController < ApplicationController
     if signed_in?
       @bicycle = Bicycle.new(region: current_user.region, city: current_user.city, country: current_user.country)
     else
-      redirect_to new_user_session_path
+      redirect_to sign_in_path
     end
   end
 

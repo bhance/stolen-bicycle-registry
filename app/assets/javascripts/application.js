@@ -15,4 +15,3 @@
 //= require jquery.ui.datepicker
 //= require bootstrap
 //= require_tree .
-

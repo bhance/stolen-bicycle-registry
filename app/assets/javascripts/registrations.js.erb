@@ -4,29 +4,29 @@
 $(function() {
   $('.user-country').change(function() {         
     if ($(this).val() == 'Canada') {
-      $('#regions-and-postal-codes').html('<%= label_tag :user_region, "Province" %>' +
+      $('#regions-and-postal-codes').html(
         '<select id="user_region" name="user[region]">' +
           <% Geography::PROVINCES.each do |province| %>
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">Province</option></select>' +
-        '<%= label_tag :user_city %>' +
-        '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
-        '<%= label_tag :user_postal_code, "Zip Code" %>' +
-        '<%= text_field_tag :user_postal_code, "Postal Code", name: "user[postal_code]" %>'
+        '<option selected="selected" value="">Select Province</option></select>' +
+        '<div class="input-group" id="bicycle-ca-postal">' +
+          '<%= label_tag :user_postal_code, "Postal Code", class: "input-group-addon label-info" %>' +
+          '<%= text_field_tag :user_postal_code, '', placeholder: "Postal Code", name: "user[postal_code]", class: "form-control" %>' +
+        '</div>'
       );
     } else { 
-      $('#regions-and-postal-codes').html('<%= label_tag :user_region, "State" %>' +
+      $('#regions-and-postal-codes').html(
         '<select id="user_region" name="user[region]">' +
           <% Geography::STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">State</option></select>' +
-        '<%= label_tag :user_city, "City" %>' +
-        '<%= text_field_tag :user_city, "City", name: "user[city]" %>' +
-        '<%= label_tag :user_postal_code, "Zip Code" %>' +
-        '<%= text_field_tag :user_postal_code, "Zip Code", name: "user[postal_code]" %>'
-      ); 
+        '<option selected="selected" value="">Select State</option></select>' +
+        '<div class="input-group" id="bicycle-us-zip">' +
+          '<%= label_tag :user_postal_code, "Zip Code", class: "input-group-addon label-info" %>' +
+          '<%= text_field_tag :user_postal_code, '', placeholder: "Zip Code", name: "user[postal_code]", class: "form-control" %>' +
+        '</div>'        
+      );
     }
   });
 });
@@ -34,28 +34,28 @@ $(function() {
 $(function() {
   $('.bicycle-country').change(function() { 
     if ($(this).val() == 'Canada') {
-      $('#regions-and-postal-codes').html('<%= label_tag :bicycle_region, "Province" %>' +
+      $('#regions-and-postal-codes').html(
         '<select id="bicycle_region" name="bicycle[region]">' +
           <% Geography::PROVINCES.each do |province| %>
             "<option value='" + '<%= province %>' + "'>" + '<%= province %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">Province</option></select>' +
-        '<%= label_tag :bicycle_city %>' +
-        '<%= text_field_tag :bicycle_city, nil, name: "bicycle[city]" %>' +
-        '<%= label_tag :postal_code %>' +
-        '<%= text_field_tag :postal_code, nil, name: "bicycle[postal_code]" %>'
+        '<option selected="selected" value="">Select Province</option></select>' +
+        '<div class="input-group" id="bicycle-ca-postal">' +
+          '<%= label_tag :bicycle_postal_code, "Postal Code", class: "input-group-addon label-info" %>' +
+          '<%= text_field_tag :bicycle_postal_code, '', placeholder: "Postal Code", name: "bicycle[postal_code]", class: "form-control" %>' +
+        '</div>'
       );
     } else { 
-      $('#regions-and-postal-codes').html('<%= label_tag :bicycle_region, "State" %>' +
+      $('#regions-and-postal-codes').html(
         '<select id="bicycle_region" name="bicycle[region]">' +
           <% Geography::STATES.each do |state| %>
             "<option value='" + '<%= state %>' + "'>" + '<%= state %>' + "</option>" +
           <% end %>
-        '<option selected="selected" value="">State</option></select>' +
-        '<%= label_tag :bicycle_city, "City" %>' +
-        '<%= text_field_tag :bicycle_city, nil, name: "bicycle[city]" %>' +
-        '<%= label_tag :bicycle_postal_code, "Zip Code" %>' +
-        '<%= text_field_tag :bicycle_postal_code, nil, name: "bicycle[postal_code]" %>'
+        '<option selected="selected" value="">Select State</option></select>' +
+        '<div class="input-group" id="bicycle-us-zip">' +
+          '<%= label_tag :bicycle_postal_code, "Zip Code", class: "input-group-addon label-info" %>' +
+          '<%= text_field_tag :bicycle_postal_code, '', placeholder: "Zip Code", name: "bicycle[postal_code]", class: "form-control" %>' +
+        '</div>'
       ); 
     }
   });
