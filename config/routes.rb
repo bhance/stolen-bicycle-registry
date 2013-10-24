@@ -6,7 +6,8 @@ StolenBicycleRegistry::Application.routes.draw do
     match 'sign_up', to: 'devise/sessions#create', via: 'get'
   end
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => :registrations }
+
   resources :bicycles
   resources :users, only: [:show]
 
@@ -21,4 +22,3 @@ StolenBicycleRegistry::Application.routes.draw do
 
   root 'static_pages#home'
 end
-

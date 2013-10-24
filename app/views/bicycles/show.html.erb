@@ -1,16 +1,23 @@
-<h1 class="lead title"> Stolen Bike Listing: </h1>
-<% if user_signed_in? && current_user == @bicycle.user %>
-  <div class='row'>
-    <p id='edit-delete'>
-      <%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
-      <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %>
-    </p>
-  </div>
-<% end %>
-
+<h1 class="lead"> Stolen Bike Listing: </h1>
+<div class='row'>
+  <% if user_signed_in? && current_user == @bicycle.user %>
+      <p id='edit-delete'>
+        <%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
+        <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %> |
+        <%= link_to 'My Account', user_path(@bicycle.user) %>
+      </p>
+  <% end %>
+</div>
 <div class="row">
   <div class='col-md-4'>
     <table class="table table-bordered">
+
+      <% if @bicycle.hidden %>
+        <tr>
+          <td colspan='2', class='btn-danger center'>Listing is currently hidden.</td>
+        </tr>
+      <% end %>
+
       <tr>
         <td><%= image_tag @bicycle.photo.url :medium %></td>
       </tr>

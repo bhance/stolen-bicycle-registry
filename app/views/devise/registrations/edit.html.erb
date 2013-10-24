@@ -10,18 +10,18 @@
       <% end %>
 
       <div class="input-group">
+        <span class="input-group-addon label-info">First Name</span>
+        <%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name', class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon label-info">Last Name</span>
+        <%= f.text_field :last_name, placeholder: 'Last Name', class: "form-control" %>
+      </div>
+
+      <div class="input-group">
         <span class="input-group-addon label-info">Email</span>
         <%= f.email_field :email, :autofocus => true, class: "form-control" %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">Password</span>
-        <%= f.password_field :password, placeholder: 'Leave blank for no change', class: "form-control" %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">Password</span>
-        <%= f.password_field :password_confirmation, placeholder: 'Confirm password', :autocomplete => "off", class: "form-control" %>
       </div>
 
       <div>

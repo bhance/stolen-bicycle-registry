@@ -263,6 +263,10 @@ select {
   height: 32px;
 }
 
+.bike-listing {
+  margin-left: 1%;
+}
+
 @media (min-width: 321px) {
   #bicycle-icon {
     position: absolute;

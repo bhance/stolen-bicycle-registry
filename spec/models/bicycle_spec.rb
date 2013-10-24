@@ -21,6 +21,7 @@ describe Bicycle do
   it { should respond_to :approved }
   it { should respond_to :hidden }
   it { should respond_to :recovered }
+  it { should respond_to :recovered_date }
 
   it { should belong_to :user }
   it { should validate_presence_of :date }

@@ -43,7 +43,7 @@ describe User do
 
   describe "Canadian address verification" do
     it 'ensures that the selected region is a valid Canadian province' do
-      user = FactoryGirl.build(:canadian_user) 
+      user = FactoryGirl.build(:canadian_user)
       user.should ensure_inclusion_of(:region).in_array(Geography::PROVINCES)
     end
   end
