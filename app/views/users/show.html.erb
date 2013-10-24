@@ -9,15 +9,14 @@
 <div class='well'>
   <p>Stolen on: <%= bicycle.date %></p>
 
-
   <p><%= bicycle.brand %></p>
   <p><%= bicycle.model %></p>
   <p><a href=<%= bicycle_path(bicycle) %> ><%= image_tag bicycle.photo.url :thumb %></a></p>
   <p>
     <%= link_to 'View', bicycle_path(bicycle) %> |
-    <%= link_to 'Edit', edit_bicycle_path(bicycle) %> | 
+    <%= link_to 'Edit', edit_bicycle_path(bicycle) %> |
     <%= link_to 'Delete', bicycle_path(bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %>
-    
+
   </p>
 </div>
 <% end %>
