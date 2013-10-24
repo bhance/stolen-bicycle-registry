@@ -35,7 +35,7 @@ class BicyclesController < ApplicationController
   def update
     @bicycle = Bicycle.find(params[:id])
     if @bicycle.update(bicycle_params)
-      redirect_to bicycle_path(params[:id])
+      redirect_to bicycle_path(@bicycle)
     else
       render 'edit'
     end
@@ -60,7 +60,8 @@ class BicyclesController < ApplicationController
   def bicycle_params
     params.require(:bicycle).permit(:date, :city, :region, :country, :postal_code,
                                     :serial, :verified_ownership, :police_report,
-                                    :description, :reward, :year, :brand, :model,                          
-                                    :color, :size, :size_type, :photo, :user_id)
+                                    :description, :reward, :year, :brand, :model,
+                                    :color, :size, :size_type, :photo, :user_id,
+                                    :recovered, :hidden)
   end
 end

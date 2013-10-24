@@ -2,10 +2,10 @@ class Bicycle < ActiveRecord::Base
   include Geography
 
   has_attached_file :photo,
-                    styles: { medium: "300x300>",
+                    styles: { medium: "250x250>",
                               thumb: "100x100>" },
                     default_url: "bike_:style.png"
-  
+
   belongs_to :user
 
   validates :user_id, presence: true
@@ -39,15 +39,15 @@ private
   end
 
   def self.bicycle_scope(query)
-    if (query.class != String && query['recovered'] == '1') 
-      { hidden: false } 
+    if (query.class != String && query['recovered'] == '1')
+      { hidden: false }
     else
       { hidden: false, recovered: false }
     end
   end
-  
+
   def self.strip_values(query)
-    if query.present? && query.class != String 
+    if query.present? && query.class != String
       query.delete_if { |k, v| v.blank? || v == '0' || v == '1' }
     end
   end

@@ -13,13 +13,13 @@ feature 'User pages' do
     "#{uri.path}".should == sign_in_path
   end
 
-  scenario 'after being redirected and logging in, they are redirected back' do
+  scenario 'after being redirected to the sign in page, they are redirected back' do
     visit new_bicycle_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Sign in'
     uri = URI.parse(current_url)
-    "#{uri.path}".should == new_bicycle_path
+    "#{uri.path}".should == user_path(User.find_by(email: user.email))
   end
 
   scenario 'the user can visit a bicycle listing by clicking on it' do
@@ -30,6 +30,30 @@ feature 'User pages' do
     visit user_path(user)
     click_link 'Edit'
     page.should have_content 'Edit'
+  end
+
+  scenario "should allow a user to mark a bicycle recovered" do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    check 'recovered'
+    click_button 'Update Status'
+    visit user_path(bicycle.user)
+    recovered_check_box = find('#recovered')
+    recovered_check_box.should be_checked
+  end
+
+  scenario "should allow a user to mark a listing as hidden" do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    check 'hidden'
+    click_button 'Update Status'
+    visit user_path(bicycle.user)
+    hidden_check_box = find('#hidden')
+    hidden_check_box.should be_checked
   end
 
   scenario 'visitors can sign up', js: true do
@@ -46,7 +70,7 @@ feature 'User pages' do
     fill_in 'Confirm password', with: american_user.password
     click_button 'Sign up'
     uri = URI.parse(current_url)
-    "#{uri.path}".should == new_bicycle_path
+    "#{uri.path}".should == user_path(User.find_by(email: american_user.email))
   end
 
   scenario 'user selects country \'Canada\' and gets selector to specify a province', js: true do
@@ -77,13 +101,6 @@ feature 'User pages' do
     scenario 'the user cannot see someone else\'s bicycles' do
       visit user_path(canadian_user)
       page.should have_content 'Access denied'
-    end
-
-    scenario 'the user is redirected back when they visit the registration page' do
-      visit root_path
-      visit new_user_registration_path
-      uri = URI.parse(current_url)
-      "#{uri.path}".should == root_path
     end
 
     scenario 'the user receives an error message when they visit the registration page' do
