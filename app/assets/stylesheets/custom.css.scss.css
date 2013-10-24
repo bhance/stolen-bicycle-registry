@@ -1,3 +1,7 @@
+.center {
+  text-align: center;
+}
+
 .form-center {
   min-width: 250px;
   max-width: 50%;
@@ -156,8 +160,13 @@
   margin: 0px;
 }
 
-.twitter-links {
+.twitter-links-page a {
+  color:inherit;
+  font-size: 20px;
+}
 
+.twitter-links a{
+  text-decoration: none;
 }
 
 .navbar-twitter-links {
@@ -237,6 +246,10 @@ background-color: #3498DB;
   margin-left: 15px;
 }
 
+.fixed-bottom a {
+  color: inherit;
+}
+
 body {
   padding-top: 60px;
 }
@@ -280,7 +293,7 @@ select {
   }
 
   .home-info {
-    min-height: 400px;
+    min-height: 470px;
   }
 
 }
@@ -310,5 +323,23 @@ select {
   .input-group-addon {
     font-size: .8em;
   }
+}
 
+.list-title {
+  font-size: 30px;
+  color: #3498DB;
+}
+ .title {
+  font-size: 40px;
+}
+li {
+  list-style: none;
+}
+.hometext {
+
+}
+.advanced-search {
+
+
+  font-size: 12px;
 }

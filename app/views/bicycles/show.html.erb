@@ -26,13 +26,16 @@
       <% end %>
 
       <tr>
-        <td><%= image_tag @bicycle.photo.url :medium, :class => 'img-responsive' %></td>
+        <td><%= image_tag @bicycle.photo.url :medium %></td>
       </tr>
       <tr>
         <td class='btn-info'>Description</td>
       </tr>
       <tr>
         <td><%= @bicycle.description %></td>
+      </tr>
+      <tr>
+        <td align="center"><h3>Have you seen me? Email us now if you have any info on my whereabouts.<h3><a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg"> FOUND IT!</button></td>
       </tr>
     </table>
   </div>
@@ -87,15 +90,41 @@
       <tr>
         <td colspan='2' class='btn-info'><strong>Contact Information</strong></td>
       </tr>
-        <td>Name:</td>
+      <tr>
+        <td>First Name:</td>
         <td>
-          <%= @bicycle.user.first_name_public ? @bicycle.user.first_name : '<private first>' %>
-          <%= @bicycle.user.last_name_public ? @bicycle.user.last_name : '<private last>' %>
+          <% if @bicycle.user.first_name_public %>
+            <%= @bicycle.user.first_name %>
+          <% else %>
+            <p class="text-muted">private</p>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>Last Name:</td>
+        <td>
+          <% if @bicycle.user.last_name_public %>
+            <%= @bicycle.user.last_name %>
+          <% else %>
+            <p class="text-muted">private</p>
+          <% end %>
         </td>
       <tr>
         <td>Email:</td>
-        <td><%= @bicycle.user.email_public ? @bicycle.user.email : '<private>' %></td>
+        <td>
+          <% if @bicycle.user.email_public %>
+            <%= @bicycle.user.email %>
+          <% else %>
+            <p class="text-muted">Email not publicly available.</p>
+            <p class="text-muted">Contact <a href="mailto:bhance@gmail.com">S.B.R. admin</a> with questions regarding this listing<p>
+          <% end %>
+        </td>
       </tr>
+      <% if @bicycle.not_approved? %>
+        <tr>
+          <td colspan='2' class='btn-warning'><strong>Listing created at: <%= @bicycle.created_at %>, PENDING ADMIN APPROVAL.</strong></td>
+        </tr>
+      <% end %>
     </table>
   </div>
 </div>

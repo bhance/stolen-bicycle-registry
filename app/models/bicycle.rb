@@ -23,6 +23,10 @@ class Bicycle < ActiveRecord::Base
     search_or_none(query, bicycle_scope(query))
   end
 
+  def not_approved?
+    !self.approved?
+  end
+  
 private
 
   def convert_year

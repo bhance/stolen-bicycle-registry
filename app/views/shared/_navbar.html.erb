@@ -11,15 +11,18 @@
 
 <div class="collapse navbar-collapse navbar-ex1-collapse">
   <ul class="nav navbar-nav">
-    <li class="active"><a href="/bicycles/new">Register a stolen bike</a></li>
+    <li><%= link_to 'Register a bike', new_bicycle_path %></li>
     <li class="dropdown">
+
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="/about">About</a></li>
-        <li><a href="/faq">FAQ</a></li>
-        <li><a href="/philosophy">Philosophy</a></li>
-        <li><a href="/links">Links</a></li>
-        <li><a href="/prevention">Theft Prevention</a></li>
+        <li><%= link_to 'Twitter', twitter_path %></li>
+        <li role="presentation" class="divider"></li>
+        <li><%= link_to 'About', about_path %></li>
+        <li><%= link_to 'FAQ', faq_path %></li>
+        <li><%= link_to 'Philosophy', philosophy_path %></li>
+        <li><%= link_to 'Links', links_path %></li>
+        <li><%= link_to 'Theft Prevention', prevention_path %></li>
       </ul>
     </li>
     <li ><a href="/search">Advanced Search</a></li>
@@ -33,26 +36,13 @@
   <% end %>
   <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Twitter <b class="caret"></b></a>
-      <ul class="dropdown-menu navbar-twitter-links">
-        <li><a href="https://twitter.com/stolenbikesbrk" target="_blank">Berkeley</a></li>
-        <li><a href="https://twitter.com/stolenbikeschi" target="_blank">Chicago</a></li>
-        <li><a href="https://twitter.com/stolenbikesmarin" target="_blank">Marin County</a></li>
-        <li><a href="https://twitter.com/stolenbikesphl" target="_blank">Philadelphia</a></li>
-        <li><a href="https://twitter.com/stolenbikessan" target="_blank">San Diego</a></li>
-        <li><a href="https://twitter.com/stolenbikessfo" target="_blank">San Francisco</a></li>
-        <li><a href="https://twitter.com/stolenbikessea" target="_blank">Seattle</a></li>
-        <li><a href="https://twitter.com/stolenbikestuc" target="_blank">Tuscon</a></li>  
-      </ul>
-    </li>
-    <li class="dropdown">
       <% if user_signed_in? %>
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user.email %> <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><%= link_to "My Account", user_path(current_user) %></li>
-        <li><%= link_to "Log-out", sign_out_path %></li>
+        <li><%= link_to "Sign-out", sign_out_path %></li>
       <% else %>
-        <li><%= link_to "Log-in", sign_in_path %></li>
+        <li><%= link_to "Sign-in", sign_in_path %></li>
         <% end %>
       </ul>
     </li>
