@@ -36,7 +36,7 @@ describe Bicycle do
     bike1.year.should eq '2002'
   end
 
-  describe "not_approved" do
+  describe "not_approved?" do
     it "tells if a bicycle has not yet been approved by admin" do
       bike1 = FactoryGirl.create(:bicycle)
       bike1.not_approved?.should be true
