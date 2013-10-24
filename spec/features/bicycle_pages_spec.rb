@@ -26,7 +26,6 @@ feature 'Bicycle Registration' do
     fill_in 'bicycle_postal_code', with: '97214'
     fill_in 'bicycle_description', with: @bicycle.description
     click_button 'Register'
-    save_screenshot('tmp/broken.png')
     uri = URI.parse(current_url)
     "#{uri.path}".should == "/bicycles/#{Bicycle.last.id}"
   end
