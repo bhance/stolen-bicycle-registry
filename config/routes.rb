@@ -6,12 +6,12 @@ StolenBicycleRegistry::Application.routes.draw do
     match 'sign_up', to: 'devise/sessions#create', via: 'get'
   end
 
-  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" } #fixme refactor routes when you get those controllers refactored
+  devise_for :users
   resources :bicycles
-  resources :users, only: [:show] 
-  
+  resources :users, only: [:show]
+
   match '/home' => 'static_pages#home', via: 'get'
-  match '/about' => 'static_pages#about', via: 'get' 
+  match '/about' => 'static_pages#about', via: 'get'
   match '/philosophy' => 'static_pages#philosophy', via: 'get'
   match '/faq' => 'static_pages#faq', via: 'get'
   match '/prevention' => 'static_pages#prevention', via: 'get'

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Bicycle do
 
+  it { should validate_presence_of :user_id }
   it { should respond_to :date }
   it { should respond_to :serial }
   it { should respond_to :verified_ownership }
@@ -78,8 +79,9 @@ describe Bicycle do
     it "search results should include found listings when 'include found' is
       checked" do
       @bike2.update(recovered: true)
-      query = { city: 'Vancouver', 'recovered' => '1' } #fixme use hash with indifferent access
-      Bicycle.flexible_search(query).should match_array [@bike1, @bike2] #make more deterministic
+      query = HashWithIndifferentAccess.new({ city: 'Vancouver',
+                                              recovered: '1' })
+      Bicycle.flexible_search(query).should match_array [@bike1, @bike2]
     end
   end
 end

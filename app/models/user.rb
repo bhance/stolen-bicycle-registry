@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   include Geography
   
   devise :database_authenticatable, :registerable,
