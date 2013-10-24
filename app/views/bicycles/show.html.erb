@@ -13,12 +13,6 @@
   <div class='col-md-4'>
     <table class="table table-bordered">
 
-      <% unless @bicycle.approved %>
-        <tr>
-          <td colspan='2', class='btn-warning center'>Pending Administrative Approval</td>
-        </tr>
-      <% end %>
-
       <% if @bicycle.hidden %>
         <tr>
           <td colspan='2', class='btn-danger center'>Listing is currently hidden.</td>
