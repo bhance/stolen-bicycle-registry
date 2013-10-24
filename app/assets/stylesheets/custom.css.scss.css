@@ -242,9 +242,9 @@ background-color: #3498DB;
   font-size: 125%;
 }
 
-#edit-delete {
+/*#edit-delete {
   margin-left: 15px;
-}
+}*/
 
 .fixed-bottom a {
   color: inherit;
@@ -343,3 +343,4 @@ li {
 
   font-size: 12px;
 }
+
