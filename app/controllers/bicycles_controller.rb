@@ -13,7 +13,8 @@ class BicyclesController < ApplicationController
 
   def new
     if signed_in?
-      @bicycle = Bicycle.new(region: current_user.region, city: current_user.city, country: current_user.country)
+      @bicycle = Bicycle.new(region: current_user.region, city: current_user.city,
+                                                   country: current_user.country)
     else
       redirect_to sign_in_path
     end
