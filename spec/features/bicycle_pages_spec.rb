@@ -96,20 +96,4 @@ feature 'Bicycle Search' do
       page.should have_content '11 search results'
     end
   end
-
-  context 'paginated searches' do
-    scenario 'a sign-in user is prompted to browse local listings from the home page' do
-      visit root_path
-      @bicycle = FactoryGirl.create(:bicycle)
-      @user = @bicycle.user
-      visit sign_in_path
-      fill_in 'Email', with: @user.email
-      fill_in 'Password', with: @user.password
-      click_button 'Sign in'
-      visit home_path
-      save_and_open_page
-      click_on('region-search')
-      page.should have_content 'search results'
-    end
-  end
 end

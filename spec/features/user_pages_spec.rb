@@ -111,24 +111,24 @@ feature 'User pages' do
 
     scenario 'the region search button leads to the search page' do
       visit root_path
-      click_button "See local listings for #{user.city}, #{user.region}, #{user.country}"
+      click_button "See local listings for #{user.city}, #{user.region}"
       uri = URI.parse(current_url)
       "#{uri.path}".should == search_path
     end
 
     scenario 'region search should have local lost bikes' do
       far_bike = FactoryGirl.create(:bicycle, city: 'Tempe')
-      near_bike = FactoryGirl.create(:bicycle, city: user.city)
+      near_bike = FactoryGirl.create(:bicycle, city: user.city, region: user.region)
       visit root_path
-      click_button "See local listings for #{user.city}, #{user.region}, #{user.country}"
+      click_button "See local listings for #{user.city}, #{user.region}"
       page.should have_content user.city
     end
 
     scenario 'region search should not have other lost bikes' do
       far_bike = FactoryGirl.create(:bicycle, city: 'Tempe')
-      near_bike = FactoryGirl.create(:bicycle, city: user.city)
+      near_bike = FactoryGirl.create(:bicycle, city: user.city, region: user.region)
       visit root_path
-      click_button "See local listings for #{user.city}, #{user.region}, #{user.country}"
+      click_button "See local listings for #{user.city}, #{user.region}"
       page.should_not have_content 'Tempe'
     end
   end
