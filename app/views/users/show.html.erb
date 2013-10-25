@@ -1,15 +1,23 @@
 <div class="container">
   <h1 class="lead">My Account</h1>
-
-  <div>
-    <%= link_to 'Edit Account Info', edit_user_registration_path, :class => 'btn btn-info' %>
+  <hr>
+  <div class="lead">
+    <div><strong>Name</strong>: <%= @user.first_name %> <%= @user.last_name %></div>
+    <div><strong>Location</strong>: <%= @user.city %> <%= @user.region %>, <%= @user.postal_code %></div>
+    <div><strong>Email</strong>: <%= @user.email %></div>
+    <div><strong>Phone</strong>: <%= @user.phone1 %></div>
+    <div><strong>Alt. Phone</strong>: <%= @user.phone2 %></div>
   </div>
 
-  <div>
-    <%= link_to 'Register a New Bicycle', new_bicycle_path, :class => 'btn btn-success' %>
+   <div class="row">
+    <div class='col-md-2'>
+      <%= link_to 'Edit Account Info', edit_user_registration_path, :class => 'btn btn-info' %>
+    </div>
+    <div class='col-md-2'>
+      <%= link_to 'Register a New Bicycle', new_bicycle_path, :class => 'btn btn-primary' %>
+    </div>
   </div>
-
-  <p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently listed:</p>
+    <p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently listed:</p>
   <div class="row">
     <% @user.bicycles.order('date DESC').each do |bicycle| %>
     <div class='well col-md-3 bike-listing'>
