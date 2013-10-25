@@ -1,42 +1,9 @@
-<% provide(:title, 'Search') %>
-<div class="well center">
-  <h3 class='lead title'>Advanced Search</h3>
-  <%= form_tag search_path, method: 'get', :class => "form-horizontal" do %>
-    <div class="form-group">
-      <div class="col-md-3 col-md-offset-3">
-        <p><%= text_field :query, :serial, placeholder: 'Serial #' %></p>
-        <p><%= number_field :query, :year, placeholder: 'Year' %></p>
-        <p><%= text_field :query, :brand, placeholder: 'Make' %></p>
-        <p><%= text_field :query, :model, placeholder: 'Model' %></p>
-        <p><%= text_field :query, :color, placeholder: 'Color' %></p>
-      </div>
-      <div class="col-md-3">
-        <p><%= text_field :query, :postal_code, placeholder: 'Postal Code' %></p>
-
-        <p>
-          <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
-                          placeholder: 'City' %>
-        </p>
-
-        <p>
-          <%= text_field :query, :region, value: user_signed_in? ? current_user.region : '',
-                         placeholder: 'Region/State' %>
-        </p>
-
-        <p>
-          <%= select :query, :country, ['United States', 'Canada'],
-                     :include_blank => 'Select Country',
-                     selected: user_signed_in? ? current_user.country : 'Select Country' %>
-        </p>
-        <%= submit_tag 'Search', class: 'btn btn-small btn-info', id: 'advanced-search' %>
-      </div>
-    </div>
-  <% end %>
-</div>
 <% if @bicycles %>
-  <p><%= pluralize(@bicycles.count, "search result") %>.</p>
+  <h3 class="highlight center"><%= pluralize(@bicycles.count, "search result") %>.</h3>
   <% if @bicycles.present? %>
-    <%= will_paginate %>
+    <div class="center">
+      <%= will_paginate @bicycles, renderer: BootstrapPagination::Rails %>
+    </div>
     <div class="table-responsive">
       <table class='table table-hover'>
         <tr>
@@ -69,6 +36,77 @@
         <% end %>
       </table>
     </div>
-    <%= will_paginate @bicycles %>
+    <div class="center">
+      <%= will_paginate @bicycles, renderer: BootstrapPagination::Rails %>
+    </div>
   <% end %>
 <% end %>
+
+<div class="well">
+  <%= form_tag search_path, :method => 'get', :class => "form-horizontal" do %>
+    <div class="form-group">
+      <h1 class='lead center'>Bicycle Search</h1>
+      <div class="col-md-4 col-md-offset-2">
+        <div class="input-group">
+          <span class="input-group-addon label-info">Serial #</span>
+          <%= text_field :query, :serial, placeholder: 'Serial #', class: "form-control" %>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon label-info">Year</span>
+          <%= number_field :query, :year, placeholder: 'Year', class: "form-control" %>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon label-info">Brand</span>
+          <%= text_field :query, :brand, placeholder: 'Make', class: "form-control" %>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon label-info">Model</span>
+          <%= text_field :query, :model, placeholder: 'Model', class: "form-control" %>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon label-info">Color</span>
+          <%= text_field :query, :color, placeholder: 'Color', class: "form-control" %>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon label-info">Postal Code</span>
+          <%= text_field :query, :postal_code, placeholder: 'Postal Code', class: "form-control" %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon label-info">City</span>
+          <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
+                          placeholder: 'City', class: "form-control" %>
+        </div>
+
+        <div>
+          <% if user_signed_in? && current_user.country == 'Canada' %>
+            <%= select :query, :region, Geography::PROVINCES, :include_blank => 'Select Province', selected: current_user.region %>
+          <% elsif user_signed_in? && current_user.country == 'United States' %>
+            <%= select :query, :region, Geography::STATES, :include_blank => 'Select Province', selected: current_user.region %>
+          <% else %>
+            <%= select :query, :region, Geography::STATES + ['-Canada-'] + Geography::PROVINCES, :include_blank => 'Select Province', :include_blank => 'Select Region' %>
+          <% end %>
+        </div>
+
+        <div>
+          <%= select :query, :country, ['United States', 'Canada'], :include_blank => 'Select Country', 
+          selected: user_signed_in? ? current_user.country : 'Select Country' %>
+        </div>
+
+        <div="list-group">
+          <span class="list-group-item">
+          <%= check_box('query', 'recovered') %>
+          <%= label(:recovered, "Include recovered bikes in results") %>
+          </span>
+        </div>
+      </div>
+    <div class="center">
+      <%= submit_tag 'Search', class: 'btn btn-small btn-success', id: 'advanced-search' %>
+    </div>
+    </div>
+  <% end %>
+</div>
+
