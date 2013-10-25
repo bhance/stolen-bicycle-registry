@@ -29,7 +29,7 @@ feature 'User pages' do
     click_button 'Sign in'
     visit user_path(user)
     click_link 'Edit'
-    page.should have_content 'Edit'
+    page.should have_content 'Bike Form'
   end
 
   scenario "should allow a user to mark a bicycle recovered" do
