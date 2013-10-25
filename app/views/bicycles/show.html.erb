@@ -1,14 +1,18 @@
 <h1 class="lead"> Stolen Bike Listing: </h1>
-<div class='row'>
+<div class='row container'>
+  <a href="https://twitter.com/share"
+     class="twitter-share-button"
+     data-text="Help find this bike:"
+     data-via="StolenBikeReg">
+  </a>
   <% if user_signed_in? && current_user == @bicycle.user %>
-      <p id='edit-delete'>
+      <p>
         <%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
         <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %> |
         <%= link_to 'My Account', user_path(@bicycle.user) %>
       </p>
   <% end %>
 </div>
-
 <div class="row">
   <div class='col-md-4'>
     <table class="table table-bordered">
@@ -29,7 +33,14 @@
         <td><%= @bicycle.description %></td>
       </tr>
       <tr>
-        <td align="center"><h3>Have you seen me? Email us now if you have any info on my whereabouts.<h3><a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg"> FOUND IT!</button></td>
+        <td align="center">
+          <h3 class="lead">
+            Have you seen me? Email us now if you have any info on my whereabouts.
+          </h3>
+          <a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg">
+           FOUND IT!
+          </a>
+        </td>
       </tr>
     </table>
   </div>
@@ -49,6 +60,7 @@
           <%= @bicycle.city %>,
           <%= @bicycle.region %>
           <%= @bicycle.postal_code %>
+          <%= @bicycle.country %>
         </td>
       </tr>
       <tr>
