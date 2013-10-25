@@ -56,6 +56,28 @@ feature 'User pages' do
     hidden_check_box.should be_checked
   end
 
+  scenario "should allow user to update status asynchronously", js:true do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    check 'hidden'
+    click_button 'Update Status'
+    uri = URI.parse(current_url)
+    "#{uri.path}".should == user_path(bicycle.user)
+  end
+
+  scenario "should bring up an alert saying that the user's bicycle has been updated", js: true do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    check 'hidden'
+    click_button 'Update Status'
+    hidden_check_box = find('#hidden')
+    page.should have_content 'Bicycle status updated'
+  end
+
   scenario 'visitors can sign up', js: true do
     visit new_user_registration_path
     fill_in 'First Name', with: american_user.first_name
