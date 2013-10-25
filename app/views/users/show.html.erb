@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
   <h1 class="lead">My Account</h1>
   <hr>
   <div class="lead">
@@ -9,15 +12,17 @@
     <div><strong>Alt. Phone</strong>: <%= @user.phone2 %></div>
   </div>
 
-   <div class="row">
+  <div class="row">
     <div class='col-md-2'>
       <%= link_to 'Edit Account Info', edit_user_registration_path, :class => 'btn btn-info' %>
     </div>
     <div class='col-md-2'>
-      <%= link_to 'Register a New Bicycle', new_bicycle_path, :class => 'btn btn-primary' %>
+      <%= link_to 'Register a New Bicycle', new_bicycle_path, :class => 'btn btn-primary great-success' %>
     </div>
   </div>
+  <div class="bike-count">
     <p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently listed:</p>
+  </div>
   <div class="row">
     <% @user.bicycles.order('date DESC').each do |bicycle| %>
     <div class='well col-md-3 bike-listing'>
@@ -29,7 +34,7 @@
         <%= link_to 'Edit', edit_bicycle_path(bicycle) %> |
         <%= link_to 'Delete', bicycle_path(bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %>
       </p>
-      <%= form_for(bicycle) do |f| %>
+      <%= form_for bicycle, remote: true do |f| %>
         <div>
           <%= f.check_box :recovered, id: 'recovered' %>
           <%= f.label :recovered, 'Bicycle Recovered' %>
@@ -39,7 +44,8 @@
           <%= f.label :hidden, 'Listing Hidden' %>
         </div>
         <div>
-          <%= f.submit 'Update Status', class: 'btn btn-warning btn-xs' %>
+          <%= f.submit 'Update Status', class: 'btn btn-warning btn-xs',
+                                        id: 'status-update' %>
         </div>
       <% end %>
     </div>

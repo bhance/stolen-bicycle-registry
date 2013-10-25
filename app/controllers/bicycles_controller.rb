@@ -13,7 +13,8 @@ class BicyclesController < ApplicationController
 
   def new
     if signed_in?
-      @bicycle = Bicycle.new(region: current_user.region, city: current_user.city, country: current_user.country)
+      @bicycle = Bicycle.new(region: current_user.region, city: current_user.city,
+                                                   country: current_user.country)
     else
       redirect_to sign_in_path
     end
@@ -34,10 +35,18 @@ class BicyclesController < ApplicationController
 
   def update
     @bicycle = Bicycle.find(params[:id])
-    if @bicycle.update(bicycle_params)
-      redirect_to bicycle_path(@bicycle)
-    else
-      render 'edit'
+    respond_to do |format|
+      format.html do
+        if @bicycle.update(bicycle_params)
+          redirect_to bicycle_path(@bicycle)
+        else
+          render 'edit'
+        end
+      end
+      format.js do
+        @bicycle.update(bicycle_params)
+        render nothing: true
+      end
     end
   end
 

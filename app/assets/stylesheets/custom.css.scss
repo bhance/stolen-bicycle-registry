@@ -375,18 +375,33 @@ select {
   font-size: 30px;
   color: #3498DB;
 }
+
  .title {
   font-size: 40px;
 }
+
 li {
   list-style: none;
 }
+
 .hometext {
-
 }
-.advanced-search {
 
+.advanced-search {
 
   font-size: 12px;
 }
 
+.great-success {
+  background-color: #2ECC71;
+  border-color: #2ECC71;
+}
+
+.great-success:hover {
+  background-color: #32CD32;
+  border-color: #32CD32;
+}
+
+.bike-count {
+  padding-top: 2%;
+}
