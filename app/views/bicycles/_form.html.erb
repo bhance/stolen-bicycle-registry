@@ -3,19 +3,21 @@
     <h1 class= 'lead title'>Bike Form</h1>
     <hr>
     <%= form_for @bicycle do |f| %>
+    <h5>* = required</h5>
     <div class="input-group">
-      <span class="input-group-addon label-info">Theft Date</span>
+      <span class="input-group-addon label-info">Theft Date *</span>
       <%= f.text_field :date, id: 'datepicker', class: "form-control" %>
     </div>
     <div>
       <%= f.select :country,
-                   ['Canada', 'United States'],
+                   ['Select Country *', 'Canada', 'United States'],
                    { selected: @bicycle.country },
                    { class: 'bicycle-country' } %>
     </div>
     <div class="input-group">
-      <span class="input-group-addon label-info">City</span>
-      <%= f.text_field :city, value: @bicycle.city, class: "form-control" %>
+      <span class="input-group-addon label-info">City *</span>
+      <%= f.text_field :city, value: @bicycle.city, class: "form-control", autocomplete: "off",
+                       'data-provide'=>'typeahead', 'data-source' => AutoComplete::CITIES %>
     </div>
     <div id="regions-and-postal-codes">
       <% if @bicycle.in_canada? %>
@@ -26,7 +28,7 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Description</span>
+      <span class="input-group-addon label-info">Description *<div>(30 chars)</div></span>
       <%= f.text_area :description, placeholder: 'Minimum 30 char.', class: "form-control" %>
     </div>
 
@@ -36,7 +38,7 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Police Report#</span>
+      <span class="input-group-addon label-info">Police File #</span>
       <%= f.text_field :police_report, placeholder: '1235463754', class: "form-control" %>
     </div>
 
@@ -47,7 +49,8 @@
 
     <div class="input-group">
       <span class="input-group-addon label-info">Brand</span>
-      <%= f.text_field :brand, placeholder: 'Schwinn', class: "form-control" %>
+      <%= f.text_field :brand, placeholder: 'Schwinn', class: "form-control", autocomplete: "off",
+                       'data-provide'=>'typeahead', 'data-source' => AutoComplete::BRANDS %>
     </div>
 
     <div class="input-group">
@@ -57,7 +60,8 @@
 
     <div class="input-group">
       <span class="input-group-addon label-info">Color</span>
-      <%= f.text_field :color, placeholder: 'Blue/Gray mix', class: "form-control" %>
+      <%= f.text_field :color, placeholder: 'Simple colors!', class: "form-control", autocomplete: "off",
+                       'data-provide'=>'typeahead', 'data-source' => AutoComplete::COLORS %>
     </div>
 
     <div class="input-group">
@@ -75,7 +79,8 @@
     </div>
 
     <div>
-      <%= f.select :verified_ownership, [['YES', true], ['NO', false]], include_blank: 'Do you have proof of ownership?' %>
+      <%= f.select :verified_ownership, [['YES', true], ['NO', false]],
+                   include_blank: 'Do you have proof of ownership?' %>
     </div>
 
     <div>

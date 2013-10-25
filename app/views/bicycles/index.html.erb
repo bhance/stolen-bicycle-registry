@@ -1,3 +1,5 @@
+<% provide(:title, '| Search') %>
+
 <% if @bicycles %>
   <h3 class="highlight center"><%= pluralize(@bicycles.count, "search result") %>.</h3>
   <% if @bicycles.present? %>
@@ -11,7 +13,7 @@
           <td>Stolen</td>
           <td>Year</td>
           <td>Color</td>
-          <td>Make</td>
+          <td>Brand</td>
           <td>Model</td>
           <td>City</td>
           <td>Region</td>
@@ -57,7 +59,8 @@
         </div>
         <div class="input-group">
           <span class="input-group-addon label-info">Brand</span>
-          <%= text_field :query, :brand, placeholder: 'Make', class: "form-control" %>
+          <%= text_field :query, :brand, placeholder: 'Make', class: "form-control", autocomplete: "off",
+                         'data-provide'=>'typeahead', 'data-source' => AutoComplete::BRANDS %>
         </div>
         <div class="input-group">
           <span class="input-group-addon label-info">Model</span>
@@ -65,7 +68,8 @@
         </div>
         <div class="input-group">
           <span class="input-group-addon label-info">Color</span>
-          <%= text_field :query, :color, placeholder: 'Color', class: "form-control" %>
+          <%= text_field :query, :color, placeholder: 'Color', class: "form-control", autocomplete: "off",
+                         'data-provide'=>'typeahead', 'data-source' => AutoComplete::COLORS %>
         </div>
       </div>
       
@@ -78,16 +82,20 @@
         <div class="input-group">
           <span class="input-group-addon label-info">City</span>
           <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
-                          placeholder: 'City', class: "form-control" %>
+                         placeholder: 'City', class: "form-control", autocomplete: "off", 'data-provide'=>'typeahead',
+                        'data-source' => AutoComplete::CITIES %>
         </div>
 
         <div>
           <% if user_signed_in? && current_user.country == 'Canada' %>
-            <%= select :query, :region, Geography::PROVINCES, :include_blank => 'Select Province', selected: current_user.region %>
+            <%= select :query, :region, Geography::PROVINCES, :include_blank => 'Select Province',
+                       selected: current_user.region %>
           <% elsif user_signed_in? && current_user.country == 'United States' %>
-            <%= select :query, :region, Geography::STATES, :include_blank => 'Select Province', selected: current_user.region %>
+            <%= select :query, :region, Geography::STATES, :include_blank => 'Select Province',
+                       selected: current_user.region %>
           <% else %>
-            <%= select :query, :region, Geography::STATES + ['-Canada-'] + Geography::PROVINCES, :include_blank => 'Select Province', :include_blank => 'Select Region' %>
+            <%= select :query, :region, Geography::STATES + ['-Canada-'] + Geography::PROVINCES,
+                       :include_blank => 'Select Province', :include_blank => 'Select Region' %>
           <% end %>
         </div>
 
@@ -99,7 +107,7 @@
         <div="list-group">
           <span class="list-group-item">
           <%= check_box('query', 'recovered') %>
-          <%= label(:recovered, "Include recovered bikes in results") %>
+          <%= label(:recovered, "Include recovered bicycles") %>
           </span>
         </div>
       </div>
@@ -109,4 +117,3 @@
     </div>
   <% end %>
 </div>
-
