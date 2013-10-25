@@ -8,7 +8,7 @@ FactoryGirl.define do
     password_confirmation "foosbars"
     
     factory :american_user do
-      sequence(:email) { |n| "person_#{n}@example.com"}
+      sequence(:email) { |n| "test1_#{n}@example.com"}
       country "United States"
       city "Portland"
       region "OR"
@@ -31,7 +31,7 @@ FactoryGirl.define do
     region 'WA'
     description 'This is my bike. It was stolen on Wednesday, by the parking lot of Walmart at Gringo Station. There is a death to bike theives sticker on it. Please help!'
     country 'United States'
-    sequence(:serial) { |s| "ZC23R45#{s}" }
+    sequence(:serial) { |s| "ZC13R45#{s}" }
     verified_ownership false
     sequence(:police_report) { |p| "WA-12#{p}304#{p+1}" }
     reward 100
