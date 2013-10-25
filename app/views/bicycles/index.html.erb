@@ -1,4 +1,4 @@
-<% provide(:title, 'Search') %>
+<% provide(:title, '| Search') %>
 <div class="well center">
   <h3 class='lead title'>Advanced Search</h3>
   <%= form_tag search_path, method: 'get', :class => "form-horizontal" do %>
@@ -6,16 +6,19 @@
       <div class="col-md-3 col-md-offset-3">
         <p><%= text_field :query, :serial, placeholder: 'Serial #' %></p>
         <p><%= number_field :query, :year, placeholder: 'Year' %></p>
-        <p><%= text_field :query, :brand, placeholder: 'Make' %></p>
+        <p><%= text_field :query, :brand, placeholder: 'Make', autocomplete: "off",
+                       'data-provide'=>'typeahead', 'data-source'=>AutoComplete::BRANDS %></p>
         <p><%= text_field :query, :model, placeholder: 'Model' %></p>
-        <p><%= text_field :query, :color, placeholder: 'Color' %></p>
+        <p><%= text_field :query, :color, placeholder: 'Color', autocomplete: "off",
+                       'data-provide'=>'typeahead', 'data-source'=>AutoComplete::COLORS %></p>
       </div>
       <div class="col-md-3">
         <p><%= text_field :query, :postal_code, placeholder: 'Postal Code' %></p>
 
         <p>
           <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
-                          placeholder: 'City' %>
+                          placeholder: 'City', autocomplete: "off", 'data-provide'=>'typeahead',
+                          'data-source'=>AutoComplete::CITIES %>
         </p>
 
         <p>
