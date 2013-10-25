@@ -1,2 +1,5 @@
-<h1 class='lead title'>Edit</h1>
-<%= render "form" %>
+<% provide(:title, 'Edit Bicycle') %>
+<div id='errors'>
+  <%= render 'shared/errors', object: @bicycle %>
+</div>
+<%= render 'form', object: @bicycle %>
