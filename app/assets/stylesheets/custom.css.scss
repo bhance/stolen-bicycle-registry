@@ -147,7 +147,8 @@
    margin-top: 15px;
    margin-bottom: 15px;
   &:hover{
-    background-color: #2AB765;
+    background-color: #49d684;
+    border-color: #49d684;
   }
 }
 
@@ -157,6 +158,19 @@
 
 .label-info {
   background-color: #3498DB;
+}
+
+.btn-info {
+  background-color: #3498DB;
+  border-color: #3498DB;
+  &:hover{
+    background-color: #4ca0d4;
+    border-color: #4ca0d4;
+  }
+}
+
+.region-search {
+  margin-bottom: 2%;
 }
 
 .pagination a {

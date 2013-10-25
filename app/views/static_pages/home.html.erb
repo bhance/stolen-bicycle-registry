@@ -1,15 +1,18 @@
-<div class="container">
+<div class="container center">
   <div class="title center">
-    <p class="banner-text center">Stolen Bicycle Registry</p>
+    <p class="banner-text">Stolen Bicycle Registry</p>
   </div>
   <p class="lead sign-in">A free resource to register and track stolen bicycles.</p>
 
-  <% if @user %>
-    <%= form_tag search_path, method: 'get' do %>
-      <%= hidden_field_tag :query, @user.city %>
-      <%= submit_tag "See local listings for #{ @user.city }, #{ @user.region }, #{ @user.country }", class: 'btn btn-info', id: 'region-search' %>
+  <div>
+    <% if @user %>
+      <%= form_tag search_path, method: 'get' do %>
+        <%= hidden_field_tag :query, @user.city %>
+        <%= submit_tag "See local listings for #{ @user.city }, #{ @user.region }",
+            class: 'btn btn-info', id: 'region-search' %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
   <div class="row">
     <div class='col-md-4 home-div'>
