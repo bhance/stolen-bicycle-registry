@@ -32,7 +32,51 @@ feature 'User pages' do
     page.should have_content 'Bike Form'
   end
 
-  scenario "should allow a user to mark a bicycle recovered" do
+  scenario "should show bike's default recovered status" do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    recovered_check_box = find('#recovered')
+    recovered_check_box.should_not be_checked
+  end
+
+  scenario "should show bike's default recovered status" do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    hidden_check_box = find('#hidden')
+    hidden_check_box.should_not be_checked
+  end
+
+  scenario "should allow a user to mark a bicycle recovered", js: true do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    check 'recovered'
+    click_button 'Update Status'
+    visit user_path(bicycle.user)
+    bicycle.reload
+    bicycle.recovered.should be_true
+  end
+
+  scenario "should allow a user to mark a listing as hidden", js: true do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    check 'hidden'
+    click_button 'Update Status'
+    visit user_path(bicycle.user)
+    hidden_check_box = find('#hidden')
+    hidden_check_box.should be_checked
+    bicycle.reload
+    bicycle.hidden.should be_true
+  end
+
+  scenario "should load a bicycle's changed recovered status", js: true do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
@@ -44,7 +88,7 @@ feature 'User pages' do
     recovered_check_box.should be_checked
   end
 
-  scenario "should allow a user to mark a listing as hidden" do
+  scenario "should load a bicycle's changed hidden status", js: true do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
@@ -56,7 +100,7 @@ feature 'User pages' do
     hidden_check_box.should be_checked
   end
 
-  scenario "should allow user to update status asynchronously", js:true do
+  scenario "should allow user to update bike status asynchronously", js: true do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
