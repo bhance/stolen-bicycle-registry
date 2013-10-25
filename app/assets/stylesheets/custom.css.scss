@@ -142,16 +142,52 @@
 }
 
 .btn-success {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  background-color: #2ECC71;
+  border-color: #2ECC71;
+   margin-top: 15px;
+   margin-bottom: 15px;
+  &:hover{
+    background-color: #2AB765;
+  }
 }
 
-.twitter-box {
-  border-radius: 6px;
-  border-color: black;
-  background-color: #5bc0de;
-  padding: 2%;
-  margin-left: 20%;
+.label-success {
+  color: #2ECC71;
+}
+
+.label-info {
+  background-color: #3498DB;
+}
+
+.pagination a {
+  color: #2ECC71;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+  background-color: #2ECC71;
+  border-color: #2ECC71;
+}
+
+.highlight {
+  width: 75%;
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #F1C40F;
+  border: 1px solid #F1C40F;
+  border-radius: 4px;
+}
+
+#edit-delete {
+  margin-left: 15px;
+}
+
+.fixed-bottom a {
+  color: inherit;
 }
 
 .twitter-list {

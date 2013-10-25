@@ -65,9 +65,6 @@ feature 'Bicycle Search' do
   end
 
   context 'valid searches' do
-    before do
-
-    end
 
     scenario 'a user clicks basic search with a search term' do
       visit search_path
@@ -86,6 +83,19 @@ feature 'Bicycle Search' do
       fill_in 'query_color', with: 'Green'
       click_button 'advanced-search'
       expect(page).to have_content '2 search results'
+    end
+  end
+
+  context 'paginated searches' do
+    scenario 'a user conducts a search for recovered bicycles that exceeds one page of results' do
+      visit search_path
+      10.times { FactoryGirl.create(:canadian_bicycle) }
+      1.times { FactoryGirl.create(:recovered_bicycle) }
+      select('Canada', from: 'query_country' )
+      check 'query_recovered'
+      click_button 'advanced-search'
+      click_link 'Next', :match => :first
+      page.should have_content '11 search results'
     end
   end
 end

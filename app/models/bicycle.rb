@@ -26,7 +26,7 @@ class Bicycle < ActiveRecord::Base
   def not_approved?
     !self.approved?
   end
-  
+
 private
 
   def convert_year
@@ -34,9 +34,9 @@ private
   end
 
   def self.search_or_none(query, scope)
-    strip_values(query)
+    stripped_query = strip_values(query)
     if query.present?
-      fuzzy_search(query).where(scope)
+      fuzzy_search(stripped_query).where(scope)
     else
       Bicycle.none
     end
@@ -52,7 +52,8 @@ private
 
   def self.strip_values(query)
     if query.present? && query.class != String
-      query.delete_if { |k, v| v.blank? || v == '0' || v == '1' }
+      stripped_query = query.clone
+      stripped_query.delete_if { |k, v| v.blank? || v == '0' || v == '1' }
     end
   end
 end
