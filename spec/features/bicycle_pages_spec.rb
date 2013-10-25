@@ -65,7 +65,6 @@ feature 'Bicycle Search' do
   end
 
   context 'valid searches' do
-
     scenario 'a user clicks basic search with a search term' do
       visit search_path
       bike1

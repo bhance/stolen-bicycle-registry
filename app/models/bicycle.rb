@@ -35,7 +35,7 @@ private
 
   def self.search_or_none(query, scope)
     stripped_query = strip_values(query)
-    if query.present?
+    if stripped_query.present?
       fuzzy_search(stripped_query).where(scope)
     else
       Bicycle.none
@@ -52,8 +52,9 @@ private
 
   def self.strip_values(query)
     if query.present? && query.class != String
-      stripped_query = query.clone
-      stripped_query.delete_if { |k, v| v.blank? || v == '0' || v == '1' }
+      query.clone.delete_if { |k, v| v.blank? || v == '0' || v == '1' }
+    else
+      query
     end
   end
 end
