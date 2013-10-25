@@ -8,14 +8,14 @@ FactoryGirl.define do
     password_confirmation "foosbars"
 
     factory :american_user do
-      sequence(:email) { |n| "test1_#{n}#{Random.new.rand(1..1000000)}@example.com"}
+      sequence(:email) { |n| "test1_#{n}@example.com"}
       country "United States"
       city "Portland"
       region "OR"
       postal_code "55555"
     end
     factory :canadian_user do
-      sequence(:email) { |n| "canadian_serf_#{n}#{Random.new.rand(1..1000000)}@example.com"}
+      sequence(:email) { |n| "canadian_serf_#{n}@example.com"}
       country "Canada"
       city "Toronto"
       region "ON"
@@ -31,7 +31,7 @@ FactoryGirl.define do
     region 'WA'
     description 'This is my bike. It was stolen on Wednesday, by the parking lot of Walmart at Gringo Station. There is a death to bike theives sticker on it. Please help!'
     country 'United States'
-    sequence(:serial) { |s| "ZC13fy5#{s}#{Random.new.rand(1..1000000)}" }
+    sequence(:serial) { |s| "ZC13fy5#{s}" }
     verified_ownership false
     sequence(:police_report) { |p| "WA-12#{p}304#{p+1}" }
     reward 100

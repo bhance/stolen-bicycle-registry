@@ -88,8 +88,7 @@ feature 'Bicycle Search' do
   context 'paginated searches' do
     scenario 'a user conducts a search for recovered bicycles that exceeds one page of results' do
       visit search_path
-      10.times { FactoryGirl.create(:canadian_bicycle) }
-      1.times { FactoryGirl.create(:recovered_bicycle) }
+      11.times { FactoryGirl.create(:canadian_bicycle) }
       select('Canada', from: 'query_country' )
       check 'query_recovered'
       click_button 'advanced-search'
