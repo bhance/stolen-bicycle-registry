@@ -43,7 +43,10 @@ class BicyclesController < ApplicationController
           render 'edit'
         end
       end
-      format.js { render nothing: true }
+      format.js do
+        @bicycle.update(bicycle_params)
+        render nothing: true
+      end
     end
   end
 
