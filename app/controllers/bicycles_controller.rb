@@ -4,9 +4,9 @@ class BicyclesController < ApplicationController
 
   def index
     if params[:query]
-      @bicycles = Bicycle.flexible_search(params[:query]).
-                          paginate(page: params[:page],
-                                   per_page: 15).
+      @bicycles = Bicycle.flexible_search(params[:query])
+      @bicycles = @bicycles.paginate(page: params[:page],
+                                   per_page: 10).
                           order('date DESC')
     end
   end
