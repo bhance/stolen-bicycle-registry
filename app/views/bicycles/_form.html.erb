@@ -9,10 +9,8 @@
       <%= f.text_field :date, id: 'datepicker', class: "form-control" %>
     </div>
     <div>
-      <%= f.select :country,
-                   ['Select Country *', 'Canada', 'United States'],
-                   { selected: @bicycle.country },
-                   { class: 'bicycle-country' } %>
+      <%= f.select :country, [ 'Canada', 'United States'], selected: @bicycle.country,
+                   :include_blank => 'Select Country *', class: 'bicycle-country' %>
     </div>
     <div class="input-group">
       <span class="input-group-addon label-info">City *</span>
@@ -28,7 +26,8 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Description *<div>(30 chars)</div></span>
+      <span class="input-group-addon label-info">Description *<span class='br'>
+        <small>(Min 30 chars)</small></span></span>
       <%= f.text_area :description, placeholder: 'Minimum 30 char.', class: "form-control" %>
     </div>
 
