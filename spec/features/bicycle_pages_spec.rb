@@ -17,7 +17,7 @@ feature 'Bicycle Registration' do
     expect(page).to have_content 'blank'
   end
 
-  scenario 'User submits information', :js => true do
+  scenario 'User submits information' do
     visit new_bicycle_path
     fill_in 'datepicker', with: "01/01/2010"
     select('United States', from: 'bicycle_country' )
@@ -30,7 +30,7 @@ feature 'Bicycle Registration' do
     "#{uri.path}".should == "/bicycles/#{Bicycle.last.id}"
   end
 
-  scenario 'User edits one of their bicycles', js: true do
+  scenario 'User edits one of their bicycles' do
     visit edit_bicycle_path(@bicycle)
     fill_in 'bicycle_color', with: 'Mauve'
     click_button 'Register'

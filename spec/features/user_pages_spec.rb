@@ -50,7 +50,7 @@ feature 'User pages' do
     hidden_check_box.should_not be_checked
   end
 
-  scenario "should allow a user to mark a bicycle recovered", js: true do
+  scenario "should allow a user to mark a bicycle recovered" do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
@@ -62,7 +62,7 @@ feature 'User pages' do
     bicycle.recovered.should be_true
   end
 
-  scenario "should allow a user to mark a listing as hidden", js: true do
+  scenario "should allow a user to mark a listing as hidden" do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
@@ -76,7 +76,7 @@ feature 'User pages' do
     bicycle.hidden.should be_true
   end
 
-  scenario "should load a bicycle's changed recovered status", js: true do
+  scenario "should load a bicycle's changed recovered status" do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
@@ -88,7 +88,7 @@ feature 'User pages' do
     recovered_check_box.should be_checked
   end
 
-  scenario "should load a bicycle's changed hidden status", js: true do
+  scenario "should load a bicycle's changed hidden status" do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
     fill_in 'Password', with: bicycle.user.password
@@ -122,7 +122,7 @@ feature 'User pages' do
     page.should have_content 'Bicycle status updated'
   end
 
-  scenario 'visitors can sign up', js: true do
+  scenario 'visitors can sign up' do
     visit new_user_registration_path
     fill_in 'First Name', with: american_user.first_name
     fill_in 'Last Name', with: american_user.last_name
@@ -142,13 +142,13 @@ feature 'User pages' do
   scenario 'user selects country \'Canada\' and gets selector to specify a province', js: true do
     visit new_user_registration_path
     select('Canada', from: 'user_country')
-    page.has_selector?('Province')
+    page.should have_select('user_region', selected: 'Select Province')
   end
 
   scenario 'user selects country \'United States\' and gets selector to specify a state', js: true do
     visit new_user_registration_path
     select('United States', from: 'user_country')
-    page.has_selector?('States')
+    page.should have_select('user_region', selected: 'Select State')
   end
 
   context 'after signing in' do

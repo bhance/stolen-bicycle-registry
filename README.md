@@ -19,6 +19,14 @@ Read below for the dependencies.
 1. Visit [PhantomJS](http://phantomjs.org/download.html) and install it.
 2. Or, in OSX, run this command: `brew install phantomjs`.
 
+#### If you get errors on tests with PhantomJS enabled, try these steps:
+
+1. Run `ps -e` and find the process number of a postgres request made between rspec and phantomjs processes.
+2. Run `kill -9 (postgres process number)` to kill that process.
+3. Run `ps -e` again to ensure all postgres requests have been killed.
+4. Rebuild the test database with `rake db:test:prepare`.
+5. Re-run the seeds that you had failures on, `rspec spec --seed (your seed number)`
+
 
 ## Authors
 
