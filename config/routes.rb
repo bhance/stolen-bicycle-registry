@@ -3,7 +3,7 @@ StolenBicycleRegistry::Application.routes.draw do
   devise_scope :user do
     match 'sign_in', to: 'devise/sessions#new', via: 'get'
     match 'sign_out', to: 'devise/sessions#destroy', via: 'get'
-    match 'sign_up', to: 'devise/sessions#create', via: 'get'
+    match 'sign_up', to: 'registrations#new', via: 'get'
   end
 
   devise_for :users, :controllers => { :registrations => :registrations }
