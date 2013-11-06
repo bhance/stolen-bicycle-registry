@@ -35,10 +35,11 @@
       <tr>
         <td align="center">
           <h3 class="lead">
-            Have you seen me? Email us now if you have any info on my whereabouts.
+            Contact
           </h3>
+          <%= link_to 'Get this User\'s Email', RecaptchaMailhide::URL.url_for(@bicycle.user.email), target: '_blank', class: 'btn btn-success btn-lg' %>
           <a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg">
-           FOUND IT!
+            Email the Admins about this posting
           </a>
         </td>
       </tr>
