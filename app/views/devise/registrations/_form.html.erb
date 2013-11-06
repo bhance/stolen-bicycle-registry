@@ -1,0 +1,68 @@
+      <div id='errors'>
+        <%= render 'shared/errors', object: resource %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+        </div>
+      <% end %>
+
+      <div class="input-group">
+        <span class="input-group-addon label-info">First Name</span>
+        <%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name', class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon label-info">Last Name</span>
+        <%= f.text_field :last_name, placeholder: 'Last Name', class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon label-info">Email</span>
+        <%= f.email_field :email, :autofocus => true, placeholder: 'Email', class: "form-control" %>
+      </div>
+
+      <div>
+        <%= f.select :country, ['Canada', 'United States'],
+                   { selected: resource.country }, { class: 'user-country' } %>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon label-info">City</span>
+        <%= f.text_field :city, placeholder: 'City', class: "form-control", autocomplete: "off",
+                       'data-provide'=>'typeahead', 'data-source' => AutoComplete::CITIES %>
+      </div>
+
+      <div id="regions-and-postal-codes">
+        <% if resource.country == 'Canada' %>
+          <%= render 'shared/ca_regions_and_postals', f: f %>
+        <% else %>
+          <%= render 'shared/us_regions_and_postals', f: f %>
+        <% end %>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon label-info">Phone</span>
+        <%= f.text_field :phone1, placeholder: 'Phone', class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon label-info">Phone 2</span>
+        <%= f.text_field :phone2, placeholder: 'Phone 2', class: "form-control" %>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Check items to display publicly in your listing:
+        </div>
+        <div class='list-group'>
+          <span class="list-group-item">
+          <%= f.check_box :first_name_public, value: 'test' %> <strong>First Name</strong>
+          </span>
+          <span class="list-group-item">
+          <%= f.check_box :last_name_public %> <strong>Last Name</strong>
+          </span>
+          <span class="list-group-item">
+          <%= f.check_box :email_public %> <strong>Email</strong>
+          </span>
+        </div>
+      </div>

@@ -1,83 +1,28 @@
+<% provide(:title, '| Edit User') %>
 <div class="well">
   <div class='form-center'>
-    <h1 class ='lead title'>Edit <%= resource_name.to_s.humanize %></h1>
+    <h1 class= "lead title">Edit User</h1>
     <hr>
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-      <%= devise_error_messages! %>
+    
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+                           :html => { :method => :put }) do |f| %>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">First Name</span>
-        <%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name', class: "form-control" %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">Last Name</span>
-        <%= f.text_field :last_name, placeholder: 'Last Name', class: "form-control" %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">Email</span>
-        <%= f.email_field :email, :autofocus => true, class: "form-control" %>
-      </div>
-
-      <div>
-        <%= f.select :country, ['Canada', 'United States'],
-                   { selected: @user.country }, { class: 'user-country' } %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">City</span>
-        <%= f.text_field :city, placeholder: 'City', class: "form-control" %>
-      </div>
-
-      <div id="regions-and-postal-codes">
-        <% if @user.country == 'Canada' %>
-          <%= render 'shared/ca_regions_and_postals', f: f %>
-        <% else %>
-          <%= render 'shared/us_regions_and_postals', f: f %>
-        <% end %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">Phone</span>
-        <%= f.text_field :phone1, placeholder: 'Phone', class: "form-control" %>
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon label-info">Phone</span>
-        <%= f.text_field :phone2, placeholder: 'Phone', class: "form-control" %>
-      </div>
-
-      <div class="well">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Check which info to display publicly on your listing:
-          </div>
-          <div class='list-group'>
-            <span class="list-group-item">
-            <%= f.check_box :first_name_public %> <%= f.label :first_name %>
-            </span>
-            <span class="list-group-item">
-            <%= f.check_box :last_name_public %> <%= f.label :last_name %>
-            </span>
-            <span class="list-group-item">
-            <%= f.check_box :email_public %> <%= f.label :email %>
-            </span>
-          </div>
-        </div>
-      </div>
+      <%= render 'form', f: f %>
 
       <div><%= f.label :current_password %> <i>(to confirm your changes)</i>
       <%= f.password_field :current_password, class: "form-control form-center"%></div>
 
-      <div><%= f.submit "Update", class: 'btn btn-success' %></div>
-    <% end %>
+      <div>
+        <%= f.submit "Update", class: 'btn btn-success' %>
+        <%= link_to "Cancel", user_path(resource), class: 'btn btn-warning' %>
+      </div>
+   <% end %>
 
-    <div><h3>Cancel my account</h3><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger' %></div>
+    <div>
+      <h3>Cancel my account</h3>
+      <%= button_to "Cancel my account", registration_path(resource_name),
+                    :data => { :confirm => "Are you sure?" }, :method => :delete,
+                    :class => 'btn btn-danger' %>
+    </div>
   </div>
 </div>
-
