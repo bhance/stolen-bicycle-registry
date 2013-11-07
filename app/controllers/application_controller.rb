@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     session.delete(:previous_url)
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to sign_in_path, :alert => exception.message
+  end
+
 protected
 
   def configure_permitted_parameters
@@ -33,12 +37,6 @@ protected
                    :email_public)
     end
   end
-
-  # def after_inactive_sign_up_path_for(user)
-  #   previous_url = session[:previous_url]
-  #   session.delete(:previous_url)
-  #   user_path(user) || new_bicycle_path
-  # end
 
   def after_sign_up_path_for(user)
     user_path(user)

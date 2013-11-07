@@ -97,3 +97,9 @@ feature 'Bicycle Search' do
     end
   end
 end
+
+feature 'Admin update' do
+  context 'admin homepage' do
+
+  end
+end
