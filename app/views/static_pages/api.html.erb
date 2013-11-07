@@ -1,0 +1,70 @@
+<% provide(:title, '| API Documentation V1') %>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h3 class="center">API Documentation</h3></div>
+  <div class="panel-body">
+    <p>Currently only JSON API is supported. This documentation is for version 1, the only version.</p>
+    <p>The Root URI is: <code>http://www.stolenbicycleregistry.com/api/v1/bicycle</code></p>
+    <p>A simple URI request: <code>../bicycle?query%5Bcity%5D=vancouver</code></p>
+    <p>Parameters are chained together following <code>../bicycle?</code> with <code>&query%5B</code>[argument]<code>%5D</code>, except the first does not use the <code>&</code>.</p>
+    <p>Thus, a complex URI request: <code>../bicycle?query%5Bcity%5D=vancouver&query%5Bbrand%5D=Huffy&query%5Bcolor%5D=red</code></p>
+  </div>
+</div>
+
+<div class='panel panel-info'>
+  <div class='panel-heading'><h4>Standard Arguments</h4></div>
+    <ul class="list-group">
+      <li class='list-group-item'><strong>Theft Details</strong></li>
+      <li class='list-group-item'><code>date</code> - STRING - Date of the theft</li>
+      <li class='list-group-item'><code>city</code> - STRING - City where theft occured</li>
+      <li class='list-group-item'><code>region</code> - STRING - 2 letter abbreviations of where theft occured</li>
+      <li class='list-group-item'><code>postal_code</code> - STRING - Zip/Postal Code where theft occured</li>
+      <li class='list-group-item'><code>country</code> - STRING - Valid values: 'United States' or 'Canada'</li>
+      <li class='list-group-item'><code>recovered</code> - BOOLEAN - True will return recovered &amp; unrecovered results</li>
+      <li class='list-group-item'><strong>Bicycle Details</strong></li>
+      <li class='list-group-item'><code>serial</code> - STRING</li>
+      <li class='list-group-item'><code>brand</code> - STRING</li>
+      <li class='list-group-item'><code>model</code> - STRING</li>
+      <li class='list-group-item'><code>year</code> - STRING, not INTEGER</li>
+      <li class='list-group-item'><code>color</code> - STRING - Recommended values: <%= AutoComplete::COLORS.slice(1..-2) %></li>
+      <li class='list-group-item'><code>size</code> - INTEGER - Height in 'cm' or 'in'.</li>
+      <li class='list-group-item'><code>size_type</code> - STRING - Valid values: 'cm' or 'in'</li>
+      <li class='list-group-item'><code>police_report</code> - STRING - State/Province where theft occured</li>
+    </ul>
+  </div>
+<div>
+
+<div class='panel panel-success'>
+  <div class='panel-heading'><h4>Response Text</h4></div>
+    <pre>
+      [
+        {"id"=>965,
+        "date"=>"2013-03-05",
+        "city"=>"Vancouver",
+        "region"=>"WA",
+        "postal_code"=>"97212",
+        "serial"=>"ZC13fy53",
+        "police_report"=>"WA-1233044",
+        "description"=>"My bike was stolen on Wednesday in
+          the parking lot of Walmart. There is a death to bike
+          thieves sticker on it. Please help!",
+        "brand"=>"Rivendell",
+        "model"=>"Aquarius",
+        "color"=>"Seafoam Green",
+        "size"=>54,
+        "size_type"=>"cm",
+        "country"=>"United States",
+        "year"=>"2002",
+        "recovered"=>false,
+        "recovered_date"=>nil},
+
+        {"id"=>923,
+          "date"=>"2013-03-11",
+          "city"=>"Vancouver",
+          "region"=>"WA",
+
+          ...snip...
+      ]
+    </pre>
+  </div>
+</div>
