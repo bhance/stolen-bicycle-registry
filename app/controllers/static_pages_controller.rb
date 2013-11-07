@@ -20,4 +20,7 @@ class StaticPagesController < ApplicationController
 
   def whitepaper
   end
+
+  def api
+  end
 end
