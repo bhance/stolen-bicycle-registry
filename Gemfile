@@ -14,6 +14,8 @@ gem 'will_paginate', '3.0.4'
 gem 'will_paginate-bootstrap'
 gem 'jquery-ui-rails'
 gem "cancan"
+gem 'recaptcha-mailhide'
+
 
 group :production do
   gem 'lograge'
