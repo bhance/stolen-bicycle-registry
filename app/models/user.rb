@@ -13,7 +13,11 @@ class User < ActiveRecord::Base
   validates :postal_code, presence: true
   has_many :bicycles
 
-  def unapproved_bicycles
-    Bicycle.where(approved: false).order('date DESC')
+  def relevant_bicycles
+    if admin?
+      Bicycle.where(approved: false).order('date DESC')
+    else
+      bicycles
+    end
   end
 end
