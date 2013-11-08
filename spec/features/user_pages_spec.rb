@@ -50,6 +50,16 @@ feature 'User pages' do
     hidden_check_box.should_not be_checked
   end
 
+  scenario 'should allow a user to delete their bicycle' do
+    visit sign_in_path
+    fill_in 'Email', with: bicycle.user.email
+    fill_in 'Password', with: bicycle.user.password
+    click_button 'Sign in'
+    click_link 'Delete'
+    bicycle.reload
+    bicycle.deleted.should be_true
+  end
+
   scenario "should allow a user to mark a bicycle recovered" do
     visit sign_in_path
     fill_in 'Email', with: bicycle.user.email
@@ -215,11 +225,16 @@ feature 'Admin update' do
     it { should_not have_content 'Register a New Bicycle'}
     it { should have_content "1 bicycle currently pending"}
 
-    it 'should allow the admin to change a bicycle\'s listing to approved' do #, js: true FIXME js breaks in crazy ways
+    scenario 'should allow the admin to change a bicycle\'s listing to approved' do #, js: true FIXME js breaks in crazy ways
       check 'approved'
       click_button 'Update Status'
       @bicycle.reload
       @bicycle.approved.should be_true
+    end
+
+    scenario 'should allow the admin to delete a bicycle' do
+      click_link 'Delete'
+      page.should_not have_content '1 bicycle'
     end
   end
 end

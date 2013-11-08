@@ -13,6 +13,7 @@ class Ability
       can :manage, :all
     elsif user.persisted?
       can :new, Bicycle
+      can :destroy, Bicycle
       can :create, Bicycle
       can :edit, Bicycle, user_id: user.id
       can :update, Bicycle, user_id: user.id

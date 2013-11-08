@@ -1,6 +1,4 @@
 class BicyclesController < ApplicationController
-  before_action :user_signed_in?
-  skip_before_action :require_login, only: [:index]
   authorize_resource
 
   def index
@@ -61,8 +59,11 @@ class BicyclesController < ApplicationController
 
   def destroy
     @bicycle = Bicycle.find(params[:id])
-    if current_user = @bicycle.user
+    if current_user.admin?
       @bicycle.destroy
+      redirect_to user_path(current_user)
+    elsif current_user == @bicycle.user
+      @bicycle.update(deleted: true)
       redirect_to user_path(current_user)
     else
       redirect_to user_path(current_user), notice: 'Access denied!'

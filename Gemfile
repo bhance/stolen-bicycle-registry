@@ -15,6 +15,7 @@ gem 'will_paginate-bootstrap'
 gem 'jquery-ui-rails'
 gem "cancan"
 gem 'recaptcha-mailhide'
+gem 'paranoia', '~> 2.0'
 
 
 group :production do

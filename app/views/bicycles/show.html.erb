@@ -15,7 +15,7 @@
   <% if user_signed_in? && current_user == @bicycle.user %>
       <p>
         <%= link_to 'Edit', edit_bicycle_path(@bicycle) %> |
-        <%= link_to 'Delete', bicycle_path(@bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %> |
+        <%= button_to 'Delete', bicycle_path(@bicycle), method: :delete %> |
         <%= link_to 'My Account', user_path(@bicycle.user) %>
       </p>
   <% end %>
