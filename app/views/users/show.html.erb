@@ -21,21 +21,11 @@
     <% end %>
   </div>
   <div class="bike-count">
-    <% if @user.admin? %>
-      <p><%= pluralize(current_user.relevant_bicycles.count, 'bicycle') %> currently <%= @user.admin? ? 'pending:' : 'listed:' %></p>
-    <% else %>
-      <p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently <%= @user.admin? ? 'pending:' : 'listed:' %></p>
-    <% end %>
+    <p><%= pluralize(current_user.relevant_bicycles.count, 'bicycle') %> currently <%= @user.admin? ? 'pending:' : 'listed:' %></p>
   </div>
   <div class="row">
-    <% if @user.admin? %>
-      <% @user.relevant_bicycles.each do |bicycle| %>
-        <%= render 'shared/bicycles', bicycle: bicycle %>
-      <% end %>
-    <% else %>
-      <% @user.bicycles.order('date DESC').each do |bicycle| %>
-        <%= render 'shared/bicycles', bicycle: bicycle %>
-      <% end %>
+    <% @user.relevant_bicycles.each do |bicycle| %>
+      <%= render 'shared/bicycles', bicycle: bicycle %>
     <% end %>
   </div>
 </div>
