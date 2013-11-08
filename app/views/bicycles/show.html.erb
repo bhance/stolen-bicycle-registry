@@ -35,12 +35,11 @@
       </tr>
       <tr>
         <td align="center">
-          <h3 class="lead">
-            Contact
-          </h3>
-          <%= link_to 'Get this User\'s Email', RecaptchaMailhide::URL.url_for(@bicycle.user.email), target: '_blank', class: 'btn btn-success btn-lg' %>
+          <% if @bicycle.user.email_public %>
+            <%= link_to 'Get this User\'s Email', RecaptchaMailhide::URL.url_for(@bicycle.user.email), target: '_blank', class: 'btn btn-success btn-lg' %>
+          <% end %>
           <a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg">
-            Email the Admins about this posting
+            Have info? Contact us
           </a>
         </td>
       </tr>
