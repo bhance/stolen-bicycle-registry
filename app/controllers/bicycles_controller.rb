@@ -1,14 +1,19 @@
 class BicyclesController < ApplicationController
   before_action :user_signed_in?
   skip_before_action :require_login, only: [:index]
+  authorize_resource
 
   def index
     if params[:query]
       @bicycles = Bicycle.flexible_search(params[:query])
       @bicycles = @bicycles.paginate(page: params[:page],
-                                   per_page: 10).
-                          order('date DESC')
+                                     per_page: 10).
+                            order('date DESC')
     end
+  end
+
+  def admin_update
+    @bicycle = Bicycle.find(params[:id])
   end
 
   def new
@@ -38,6 +43,7 @@ class BicyclesController < ApplicationController
     respond_to do |format|
       format.html do
         if @bicycle.update(bicycle_params)
+          flash[:notice] = "Bicycle status updated"
           redirect_to bicycle_path(@bicycle)
         else
           render 'edit'
@@ -45,7 +51,6 @@ class BicyclesController < ApplicationController
       end
       format.js do
         @bicycle.update(bicycle_params)
-        render nothing: true
       end
     end
   end
@@ -67,10 +72,15 @@ class BicyclesController < ApplicationController
   private
 
   def bicycle_params
-    params.require(:bicycle).permit(:date, :city, :region, :country, :postal_code,
-                                    :serial, :verified_ownership, :police_report,
-                                    :description, :reward, :year, :brand, :model,
-                                    :color, :size, :size_type, :photo, :user_id,
-                                    :recovered, :hidden)
+    base_params = [:date, :city, :region, :country, :postal_code,
+                   :serial, :verified_ownership, :police_report,
+                   :description, :reward, :year, :brand, :model,
+                   :color, :size, :size_type, :photo, :user_id,
+                   :recovered, :hidden]
+    if current_user.admin?
+      params.require(:bicycle).permit(*(base_params << :approved))
+    else
+      params.require(:bicycle).permit(*base_params)
+    end
   end
 end

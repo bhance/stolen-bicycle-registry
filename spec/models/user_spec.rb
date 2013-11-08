@@ -67,4 +67,37 @@ describe User do
       user.should_not allow_value("999-9A9-9999").for(:phone1)
     end
   end
+
+  describe '#relevant_bicycles' do
+    describe 'when the user is an admin' do
+
+      before do
+        @admin = FactoryGirl.create(:admin)
+        @unapproved_bikes = []
+        5.times do
+          @unapproved_bikes << FactoryGirl.create(:bicycle)
+          FactoryGirl.create(:bicycle, approved: true)
+        end
+      end
+
+      it 'returns all bicycles in the system that are unapproved' do
+        @admin.relevant_bicycles.should match_array @unapproved_bikes
+      end
+    end
+
+    describe 'when the user is an admin' do
+
+      before do
+        @user = FactoryGirl.create(:american_user)
+        5.times do
+          FactoryGirl.create(:bicycle, user_id: @user.id, approved: true)
+          FactoryGirl.create(:bicycle, approved: true)
+        end
+      end
+
+      it 'returns the user\'s bicycles' do
+        @user.relevant_bicycles.should match_array @user.bicycles
+      end
+    end
+  end
 end

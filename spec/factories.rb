@@ -2,17 +2,26 @@ FactoryGirl.define do
   factory :user do
     first_name "Joe"
     last_name "Bike"
+    sequence(:email) { |n| "test1_#{n}@example.com"}
     phone1 "555-555-5555"
     phone2 "999-999-9999"
     password "foosbars"
     password_confirmation "foosbars"
 
-    factory :american_user do
-      sequence(:email) { |n| "test1_#{n}@example.com"}
+    factory :admin do
+      admin true
       country "United States"
       city "Portland"
       region "OR"
       postal_code "55555"
+    end
+
+    factory :american_user do
+      country "United States"
+      city "Portland"
+      region "OR"
+      postal_code "55555"
+
     end
     factory :canadian_user do
       sequence(:email) { |n| "canadian_serf_#{n}@example.com"}
@@ -22,7 +31,6 @@ FactoryGirl.define do
       postal_code "R0J 0A0"
     end
   end
-
 
   factory :bicycle do
     user { FactoryGirl.create(:american_user) }
