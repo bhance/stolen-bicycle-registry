@@ -1,5 +1,11 @@
 <% provide(:title, '| Listing') %>
-<h1 class="lead"> Stolen Bike Listing: </h1>
+<h1> Stolen Bike Listing: 
+    <% if @bicycle.recovered %>
+      This bicycle has been FOUND!
+    <% else %>
+      This bicycle is still missing.
+    <% end %>
+</h1>
 <div class='row container'>
   <a href="https://twitter.com/share"
      class="twitter-share-button"
@@ -38,7 +44,7 @@
           <h3 class="lead">
             Contact
           </h3>
-          <%= link_to 'Get this User\'s Email', RecaptchaMailhide::URL.url_for(@bicycle.user.email), target: '_blank', class: 'btn btn-success btn-lg' %>
+          <%= link_to 'Get this user\'s email', RecaptchaMailhide::URL.url_for(@bicycle.user.email), target: '_blank', class: 'btn btn-success btn-lg' %>
           <a href="mailto:bhance@gmail.com" class="btn btn-success btn-lg">
             Email the Admins about this posting
           </a>
