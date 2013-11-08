@@ -1,5 +1,11 @@
 <% provide(:title, '| Listing') %>
-<h1 class="lead"> Stolen Bike Listing: </h1>
+<h1> Stolen Bike Listing: 
+    <% if @bicycle.recovered %>
+      This bicycle has been FOUND!
+    <% else %>
+      This bicycle is still missing.
+    <% end %>
+</h1>
 <div class='row container'>
   <a href="https://twitter.com/share"
      class="twitter-share-button"
