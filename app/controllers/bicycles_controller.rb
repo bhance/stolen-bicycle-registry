@@ -43,6 +43,7 @@ class BicyclesController < ApplicationController
     respond_to do |format|
       format.html do
         if @bicycle.update(bicycle_params)
+          flash[:notice] = "Bicycle status updated"
           redirect_to bicycle_path(@bicycle)
         else
           render 'edit'
@@ -50,7 +51,6 @@ class BicyclesController < ApplicationController
       end
       format.js do
         @bicycle.update(bicycle_params)
-        render nothing: true
       end
     end
   end

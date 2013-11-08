@@ -1,8 +1,5 @@
 <% provide(:title, '| My Account') %>
 <div class="container">
-  <div class="alert alert-success">
-    <%= flash[:notice] %>
-  </div>
   <h1 class="lead"><%= @user.admin? ? 'Admin Toolbox' : 'My Account' %></h1>
   <hr>
   <div class="lead">

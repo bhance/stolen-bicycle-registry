@@ -107,8 +107,7 @@ feature 'User pages' do
     click_button 'Sign in'
     check 'hidden'
     click_button 'Update Status'
-    uri = URI.parse(current_url)
-    "#{uri.path}".should == user_path(bicycle.user)
+    page.should have_content 'Bicycle status updated'
   end
 
   scenario "should bring up an alert saying that the user's bicycle has been updated", js: true do
@@ -118,7 +117,6 @@ feature 'User pages' do
     click_button 'Sign in'
     check 'hidden'
     click_button 'Update Status'
-    hidden_check_box = find('#hidden')
     page.should have_content 'Bicycle status updated'
   end
 
@@ -211,19 +209,17 @@ feature 'Admin update' do
       click_button 'Sign in'
     end
 
-    it { page.should have_content 'Admin Toolbox'}
-    it { page.should_not have_content 'Register a New Bicycle'}
-    it { page.should have_content "1 bicycle currently pending"}
+    subject { page }
 
-    it 'should allow the admin to change a bicycle\'s listing to approved', js: true do
+    it { should have_content 'Admin Toolbox'}
+    it { should_not have_content 'Register a New Bicycle'}
+    it { should have_content "1 bicycle currently pending"}
+
+    it 'should allow the admin to change a bicycle\'s listing to approved' do #, js: true FIXME js breaks in crazy ways
       check 'approved'
       click_button 'Update Status'
-      # uri = URI.parse(current_url)
-      # "#{uri.path}".should == user_path(@admin)
-      # # binding.pry
-      # @bicycle.reload
-
-      # @bicycle.approved.should be_true
+      @bicycle.reload
+      @bicycle.approved.should be_true
     end
   end
 end
