@@ -3,7 +3,7 @@
   <div class="alert alert-success">
     <%= flash[:notice] %>
   </div>
-  <h1 class="lead">My Account</h1>
+  <h1 class="lead"><%= @user.admin? ? 'Admin Toolbox' : 'My Account' %></h1>
   <hr>
   <div class="lead">
     <div><strong>Name</strong>: <%= @user.first_name %> <%= @user.last_name %></div>
@@ -17,39 +17,28 @@
     <div class='col-md-2'>
       <%= link_to 'Edit Account Info', edit_user_registration_path, :class => 'btn btn-info' %>
     </div>
-    <div class='col-md-2'>
-      <%= link_to 'Register a New Bicycle', new_bicycle_path, :class => 'btn btn-primary great-success' %>
-    </div>
+    <% if !@user.admin? %>
+      <div class='col-md-2'>
+        <%= link_to 'Register a New Bicycle', new_bicycle_path, :class => 'btn btn-primary great-success' %>
+      </div>
+    <% end %>
   </div>
   <div class="bike-count">
-    <p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently listed:</p>
+    <% if @user.admin? %>
+      <p><%= pluralize(current_user.unapproved_bicycles.count, 'bicycle') %> currently <%= @user.admin? ? 'pending:' : 'listed:' %></p>
+    <% else %>
+      <p><%= pluralize(current_user.bicycles.count, 'bicycle') %> currently <%= @user.admin? ? 'pending:' : 'listed:' %></p>
+    <% end %>
   </div>
   <div class="row">
-    <% @user.bicycles.order('date DESC').each do |bicycle| %>
-      <div class='well col-md-3 bike-listing'>
-        <p>Stolen on: <%= bicycle.date %></p>
-        <p><%= bicycle.year %> <%= bicycle.brand %> <%= bicycle.model %></p>
-        <p><a href=<%= bicycle_path(bicycle) %> ><%= image_tag bicycle.photo.url :thumb %></a></p>
-        <p>
-          <%= link_to 'View', bicycle_path(bicycle) %> |
-          <%= link_to 'Edit', edit_bicycle_path(bicycle) %> |
-          <%= link_to 'Delete', bicycle_path(bicycle), method: 'delete', data: { confirm: "Are you sure you want to delete this listing?" } %>
-        </p>
-        <%= form_for bicycle, remote: true do |f| %>
-          <div>
-            <%= f.check_box :recovered, id: 'recovered' %>
-            <%= f.label :recovered, 'Bicycle Recovered' %>
-          </div>
-          <div>
-            <%= f.check_box :hidden, id: 'hidden' %>
-            <%= f.label :hidden, 'Listing Hidden' %>
-          </div>
-          <div>
-            <%= f.submit 'Update Status', class: 'btn btn-warning btn-xs',
-                                          id: 'status-update' %>
-          </div>
-        <% end %>
-      </div>
+    <% if @user.admin? %>
+      <% @user.unapproved_bicycles.each do |bicycle| %>
+        <%= render 'shared/bicycles', bicycle: bicycle %>
+      <% end %>
+    <% else %>
+      <% @user.bicycles.order('date DESC').each do |bicycle| %>
+        <%= render 'shared/bicycles', bicycle: bicycle %>
+      <% end %>
     <% end %>
   </div>
 </div>

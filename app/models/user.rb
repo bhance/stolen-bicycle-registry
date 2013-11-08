@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   validates :phone2, format: { with: /\A[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}\z/ }, allow_nil: true, allow_blank: true
   validates :postal_code, presence: true
   has_many :bicycles
+
+  def unapproved_bicycles
+    Bicycle.where(approved: false).order('date DESC')
+  end
 end
