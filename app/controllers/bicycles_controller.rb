@@ -72,10 +72,15 @@ class BicyclesController < ApplicationController
   private
 
   def bicycle_params
-    params.require(:bicycle).permit(:date, :city, :region, :country, :postal_code,
-                                    :serial, :verified_ownership, :police_report,
-                                    :description, :reward, :year, :brand, :model,
-                                    :color, :size, :size_type, :photo, :user_id,
-                                    :recovered, :hidden)
+    base_params = [:date, :city, :region, :country, :postal_code,
+                   :serial, :verified_ownership, :police_report,
+                   :description, :reward, :year, :brand, :model,
+                   :color, :size, :size_type, :photo, :user_id,
+                   :recovered, :hidden]
+    if current_user.admin?
+      params.require(:bicycle).permit(*(base_params << :approved))
+    else
+      params.require(:bicycle).permit(*base_params)
+    end
   end
 end

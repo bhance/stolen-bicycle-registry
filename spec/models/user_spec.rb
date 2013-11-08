@@ -67,4 +67,19 @@ describe User do
       user.should_not allow_value("999-9A9-9999").for(:phone1)
     end
   end
+
+  describe '#unapproved_bicycles' do
+    before do
+      @admin = FactoryGirl.create(:admin)
+      @unapproved_bikes = []
+      5.times do
+        @unapproved_bikes << FactoryGirl.create(:bicycle)
+        FactoryGirl.create(:bicycle, approved: true)
+      end
+    end
+
+    it 'returns all bicycles in the system that are unapproved' do
+      @admin.unapproved_bicycles.should match_array(@unapproved_bikes)
+    end
+  end
 end
