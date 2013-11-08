@@ -4,19 +4,23 @@
     <hr>
     <%= form_for @bicycle do |f| %>
     <h5>* = required</h5>
+    
     <div class="input-group">
       <span class="input-group-addon label-info">Theft Date *</span>
       <%= f.text_field :date, id: 'datepicker', class: "form-control" %>
     </div>
+    
     <div>
-      <%= f.select :country, [ 'Canada', 'United States'], selected: @bicycle.country,
-                   :include_blank => 'Select Country *', class: 'bicycle-country' %>
+      <%= f.select :country, ['Canada', 'United States'],
+                 { selected: @bicycle.country }, { class: 'bicycle-country' } %>
     </div>
+
     <div class="input-group">
       <span class="input-group-addon label-info">City *</span>
       <%= f.text_field :city, value: @bicycle.city, class: "form-control", autocomplete: "off",
                        'data-provide'=>'typeahead', 'data-source' => AutoComplete::CITIES %>
     </div>
+
     <div id="regions-and-postal-codes">
       <% if @bicycle.in_canada? %>
         <%= render 'shared/ca_regions_and_postals', f: f %>

@@ -8,30 +8,28 @@
       <% end %>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">First Name</span>
+        <span class="input-group-addon label-info">First Name *</span>
         <%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name', class: "form-control" %>
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Last Name</span>
+        <span class="input-group-addon label-info">Last Name *</span>
         <%= f.text_field :last_name, placeholder: 'Last Name', class: "form-control" %>
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Email</span>
+        <span class="input-group-addon label-info">Email *</span>
         <%= f.email_field :email, :autofocus => true, placeholder: 'Email', class: "form-control" %>
       </div>
-
       <div>
-        <%= f.select :country, ['Canada', 'United States'],
-                   { selected: resource.country }, { class: 'user-country' } %>
+        <%= f.select :country, [ 'Canada', 'United States'], 
+                     { :include_blank => 'Select Country *' }, class: 'user-country' %>
       </div>
       <div class="input-group">
-        <span class="input-group-addon label-info">City</span>
+        <span class="input-group-addon label-info">City *</span>
         <%= f.text_field :city, placeholder: 'City', class: "form-control", autocomplete: "off",
                        'data-provide'=>'typeahead', 'data-source' => AutoComplete::CITIES %>
       </div>
-
       <div id="regions-and-postal-codes">
         <% if resource.country == 'Canada' %>
           <%= render 'shared/ca_regions_and_postals', f: f %>
