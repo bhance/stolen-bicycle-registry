@@ -1,5 +1,6 @@
 class Bicycle < ActiveRecord::Base
   include Geography
+  acts_as_paranoid
 
   has_attached_file :photo,
                     styles: { medium: "250x250>",

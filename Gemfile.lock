@@ -111,6 +111,8 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paranoia (2.0.1)
+      activerecord (~> 4.0)
     pg (0.17.0)
     poltergeist (1.4.1)
       capybara (~> 2.1.0)
@@ -224,6 +226,7 @@ DEPENDENCIES
   launchy
   lograge
   paperclip
+  paranoia (~> 2.0)
   pg
   poltergeist
   pry

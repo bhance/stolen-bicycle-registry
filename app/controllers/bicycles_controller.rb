@@ -60,7 +60,7 @@ class BicyclesController < ApplicationController
   def destroy
     @bicycle = Bicycle.find(params[:id])
     if current_user.admin?
-      @bicycle.destroy
+      @bicycle.destroy!
       redirect_to user_path(current_user)
     elsif current_user == @bicycle.user
       @bicycle.update(deleted: true)
