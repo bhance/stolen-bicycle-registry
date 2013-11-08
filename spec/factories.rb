@@ -16,6 +16,19 @@ FactoryGirl.define do
       postal_code "55555"
     end
 
+    factory :bryan do
+      admin true
+      country 'United States'
+      city 'Portland'
+      region 'OR'
+      postal_code '97214'
+      first_name 'Bryan'
+      last_name 'Hance'
+      email 'bhance@gmail.com'
+      password 'deathtobikethieves'
+      password_confirmation 'deathtobikethieves'
+    end
+
     factory :american_user do
       country "United States"
       city "Portland"

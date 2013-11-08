@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/thomas-mcdonald/bootstrap-sass
-  revision: 46f0b7e37f4c3fd3f7f43a2b8ef471ea85056d3a
+  revision: ac8ffd34c711e82f1a5c9fd9b999b9f39371e6d2
   specs:
-    bootstrap-sass (3.0.1.0.rc)
+    bootstrap-sass (3.0.2.0)
       sass (~> 3.2)
 
 GEM
@@ -70,7 +70,7 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    diff-lcs (1.2.4)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -193,7 +193,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
-    uglifier (2.3.0)
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
