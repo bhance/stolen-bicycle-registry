@@ -1,6 +1,6 @@
 class Bicycle < ActiveRecord::Base
   include Geography
-
+  default_scope { order('date DESC') }
   has_attached_file :photo,
                     styles: { medium: "250x250>",
                               thumb: "100x100>" },
@@ -16,7 +16,6 @@ class Bicycle < ActiveRecord::Base
   validates :size_type, :inclusion => { :in => %w( cm in ) }, allow_blank: true
   validates :serial, uniqueness: true, allow_nil: true, allow_blank: true
   validates_with StringYearValidator
-  # validates :year, numericality: true, inclusion: { in: (0..2100) }, allow_nil: true
   before_save :convert_year
 
   def self.flexible_search(query)

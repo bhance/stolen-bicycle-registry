@@ -7,13 +7,13 @@ class BicyclesController < ApplicationController
     if params[:query]
       @bicycles = Bicycle.flexible_search(params[:query])
       @bicycles = @bicycles.paginate(page: params[:page],
-                                     per_page: 10).
-                            order('date DESC')
+                                     per_page: 10)
     end
   end
 
   def admin_update
-    @bicycle = Bicycle.find(params[:id])
+    @bicycle = Bicycle.find(params[:id]).paginate(page: params[:page],
+                                     per_page: 10)
   end
 
   def new
