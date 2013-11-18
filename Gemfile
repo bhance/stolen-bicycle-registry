@@ -16,6 +16,7 @@ gem 'jquery-ui-rails'
 gem "cancan"
 gem 'recaptcha-mailhide'
 gem 'paranoia', '~> 2.0'
+gem 'smarter_csv'
 
 
 group :production do

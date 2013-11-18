@@ -26,5 +26,6 @@ StolenBicycleRegistry::Application.routes.draw do
   end
 
   resources :bicycles
-  resources :users, only: [:show]
+  resources :imports, only: [:create] 
+  resources :users, only: [:show, :index]
 end

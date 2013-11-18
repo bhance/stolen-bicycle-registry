@@ -1,0 +1,46 @@
+<% provide(:title, '| Search') %>
+
+<h2>User Index
+<hr>
+ <%= form_tag users_path, method: 'get', :class => 'navbar-form navbar-left' do %>
+    <div class="form-group">
+      <%= text_field_tag :query_user, nil, placeholder: 'Search', :class => 'form-control' %>
+    </div>
+    <button type="submit" class="btn btn-default" id='user-search'><span class="glyphicon glyphicon-search"></span></button>
+  <% end %>
+<% if @users %>
+  <h3 class="highlight center"><%= pluralize(@users.count, "search result") %>.</h3>
+  <% if @users.present? %>
+    <div class="center">
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    </div>
+    <div class="table-responsive">
+      <table class='table table-hover'>
+        <tr>
+          <td>Email</td>
+          <td>First Name</td>
+          <td>Last Name</td>
+          <td>City</td>
+          <td>Region</td>
+          <td>Postal</td>
+          <td>Country</td>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td><a href=<%= bicycle_path(user) %><%= user.email %>
+            </a></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.city %></td>
+            <td><%= user.region %></td>
+            <td><%= user.postal_code %></td>
+            <td><%= user.country %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="center">
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    </div>
+  <% end %>
+<% end %>

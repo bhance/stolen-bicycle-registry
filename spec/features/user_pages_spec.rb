@@ -167,6 +167,7 @@ feature 'User pages' do
       click_button 'Sign in'
     end
 
+
     scenario 'the user can see all of their bicycles' do
       visit user_path(user)
       page.should have_content bicycle.date
@@ -221,9 +222,10 @@ feature 'Admin update' do
 
     subject { page }
 
-    it { should have_content 'Admin Toolbox'}
-    it { should_not have_content 'Register a New Bicycle'}
-    it { should have_content "1 bicycle currently pending"}
+    it { should have_content 'Admin Toolbox' }
+    it { should_not have_content 'Register a New Bicycle' }
+    it { should have_content '1 bicycle currently pending' }
+    it { should have_link 'User search' } 
 
     scenario 'should allow the admin to change a bicycle\'s listing to approved' do #, js: true FIXME js breaks in crazy ways
       check 'approved'
@@ -236,5 +238,40 @@ feature 'Admin update' do
       click_link 'Delete'
       page.should_not have_content '1 bicycle'
     end
+
+    context 'admin search' do
+      before do
+        click_link 'User search'
+        @user = FactoryGirl.create(:american_user, email: 'foo@bar.com')
+      end
+
+      scenario 'should allow admin to visit user index page' do
+        page.should have_content 'User Index'
+      end
+
+      scenario 'admin searches for user by email' do
+        fill_in 'query_user', with: 'foo@bar.com'
+        click_button 'user-search'
+        page.should have_content @user.first_name
+      end
+    end
+  end
+end
+
+feature 'CSV upload' do
+  before do
+    @admin = FactoryGirl.create(:admin)
+    visit sign_in_path
+    fill_in 'Email', with: @admin.email
+    fill_in 'Password', with: @admin.password
+    click_button 'Sign in'
+  end
+
+  subject { page }
+
+  it { should have_content 'CSV upload' }
+
+  scenario 'admin uploads a file to ' do
+
   end
 end
