@@ -12,7 +12,7 @@ describe API::V1::BicyclesController do
   it 'retrieves only bicycles from the city of Vancouver' do
     FactoryGirl.create(:bicycle, city: 'Dallas')
     2.times { FactoryGirl.create(:bicycle) }
-    get :index, { :query => { city: 'vancouver' }}
+    get :index, { :query => { city: 'vancouver' } }
     json = JSON.parse(response.body)
     expect(json.length).to eq(2)
   end
@@ -21,7 +21,7 @@ describe API::V1::BicyclesController do
     FactoryGirl.create(:bicycle, color: 'blue')
     FactoryGirl.create(:bicycle, city: 'Dallas')
     2.times { FactoryGirl.create(:bicycle, city: 'Dallas', color: 'blue') }
-    get :index, { :query => { city: 'dallas', color: 'blue' }}
+    get :index, { :query => { city: 'dallas', color: 'blue' } }
     json = JSON.parse(response.body)
     expect(json.length).to eq(2)
   end
@@ -43,4 +43,12 @@ describe API::V1::BicyclesController do
       'user_id'
       )
   end
+
+  # it "allows insertion of a new user/bike into the database" do
+  #   bicycle = FactoryGirl.create(:bicycle).to_json
+  #   post :create, bicycle
+  #   json = JSON.parse(response.body)
+  #   json.should equal "user and bike created"
+  #   expect(json).to eq("user and bike created")
+  # end
 end

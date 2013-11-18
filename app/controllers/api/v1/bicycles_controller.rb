@@ -1,4 +1,5 @@
 class API::V1::BicyclesController < ApplicationController
+  respond_to :json
   def index
     if params[:query]
       @bicycles = Bicycle.flexible_search(params[:query]).order('date DESC')
