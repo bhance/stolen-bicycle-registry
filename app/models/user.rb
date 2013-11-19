@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Geography
   acts_as_paranoid
+  # accepts_nested_attributes_for :bicycle
+
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
