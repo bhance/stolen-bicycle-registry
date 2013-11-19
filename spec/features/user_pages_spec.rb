@@ -271,7 +271,10 @@ feature 'CSV upload' do
 
   it { should have_content 'CSV upload' }
 
-  scenario 'admin uploads a file to ' do
-
-  end
+  # scenario 'admin uploads a file to the site' do
+  #   save_and_open_page
+  #   attach_file 'file', File.join(Rails.root, 'spec/CSVs/test.csv')
+  #   click_button 'Import'
+  #   Bicycle.all.count.should_not == 0
+  # end
 end

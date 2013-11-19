@@ -16,7 +16,8 @@
       <% if @user.admin? %>
         <%= link_to('User search', users_path, :class => 'btn-info') %>
         <h3>CSV upload</h3>
-        <%= form_tag import_bicycles_path, multipart: true do %>
+        <%= form_tag imports_path, multipart: true do %>
+          
           <%= file_field_tag :file %>
           <%= submit_tag 'Import' %> 
         <% end %>
