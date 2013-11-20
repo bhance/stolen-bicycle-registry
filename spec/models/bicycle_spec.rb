@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Bicycle do
 
-  it { should validate_presence_of :user_id }
+  it { should validate_presence_of :user }
   it { should respond_to :date }
   it { should respond_to :serial }
   it { should respond_to :verified_ownership }

@@ -7,6 +7,14 @@ describe API::V1::UsersController do
       post :create, user: user_attributes
       response.status.should eq 201
     end
+
+    it "allows insertion of a bicycle through nested attributes" do
+
+      user_attributes = FactoryGirl.attributes_for(:canadian_user)
+      user_attributes[:bicycles_attributes] = [FactoryGirl.attributes_for(:canadian_bicycle)]
+      post :create, { user: user_attributes }
+      Bicycle.count.should eq 1
+    end
   end
 
   it "responds with the created json object when a user is successfully added" do

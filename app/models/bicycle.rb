@@ -7,9 +7,9 @@ class Bicycle < ActiveRecord::Base
                               thumb: "100x100>" },
                     default_url: "bike_:style.png"
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :bicycles
+  validates :user, presence: true
 
-  validates :user_id, presence: true
   validates :date, presence: true
   validates :region, presence: true, inclusion: { in: Geography::PROVINCES + Geography::STATES }
   validates :city, presence: true
