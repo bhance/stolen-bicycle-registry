@@ -50,7 +50,7 @@ FactoryGirl.define do
     date '5/3/2011'
     city 'Vancouver'
     region 'WA'
-    description 'This is my bike. It was stolen on Wednesday, by the parking lot of Walmart at Gringo Station. There is a death to bike theives sticker on it. Please help!'
+    description 'This is my bike. It was stolen on Wednesday, by the parking lot of Walmart at 82nd. There is a death to bike thieves sticker on it. Please help!'
     country 'United States'
     sequence(:serial) { |s| "ZC13fy5#{s}" }
     verified_ownership false

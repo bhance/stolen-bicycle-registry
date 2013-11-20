@@ -2,7 +2,6 @@ class API::V1::UsersController < ApplicationController
 
   def create 
     @user = User.new(user_params)
-    # binding.pry
     if @user.save
       render json: @user, except: [:first_name_public, :last_name_public, :email_public, :created_at,
                          :updated_at, :encrypted_password, :reset_password_token, :reset_password_sent_at,

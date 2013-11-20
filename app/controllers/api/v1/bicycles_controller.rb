@@ -1,13 +1,13 @@
 class API::V1::BicyclesController < ApplicationController
+  serialization_scope nil
+
   def index
     if params[:query]
       @bicycles = Bicycle.flexible_search(params[:query])
     else
       @bicycles = Bicycle.all
     end
-    render json: @bicycles, except: [:approved, :hidden, :created_at, :updated_at,
-                                     :photo_file_name, :photo_content_type, :photo_updated_at,
-                                     :photo_file_size, :user_id, :verified_ownership]
+    render json: @bicycles
   end
 
   def create

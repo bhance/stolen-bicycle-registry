@@ -7,6 +7,6 @@ describe "an API get request via the direct URL", :type => :api do
     2.times { FactoryGirl.create(:bicycle, city: 'Dallas', color: 'blue') }
     get "http://localhost:3000/api/v1/bicycles", { :query => { city: 'dallas', color: 'blue' }}
     json = JSON.parse(response.body)
-    expect(json.first["city"]).to eq("Dallas")
+    expect(json['bicycles'].first['city']).to eq("Dallas")
   end
 end

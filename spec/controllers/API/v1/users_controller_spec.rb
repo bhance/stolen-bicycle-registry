@@ -12,8 +12,8 @@ describe API::V1::UsersController do
 
       user_attributes = FactoryGirl.attributes_for(:canadian_user)
       user_attributes[:bicycles_attributes] = [FactoryGirl.attributes_for(:canadian_bicycle)]
-      post :create, { user: user_attributes }
-      Bicycle.count.should eq 1
+      expect { post :create, { user: user_attributes } }.to change { Bicycle.count }.by 1
+      # Bicycle.count.should eq 1
     end
   end
 
