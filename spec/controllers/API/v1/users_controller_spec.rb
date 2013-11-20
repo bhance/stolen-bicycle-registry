@@ -12,8 +12,7 @@ describe API::V1::UsersController do
 
       user_attributes = FactoryGirl.attributes_for(:canadian_user)
       user_attributes[:bicycles_attributes] = [FactoryGirl.attributes_for(:canadian_bicycle)]
-      expect { post :create, { user: user_attributes } }.to change { Bicycle.count }.by 1
-      # Bicycle.count.should eq 1
+      post(:create, { user: user_attributes }).should change { Bicycle.count }.by 1
     end
   end
 
@@ -21,8 +20,7 @@ describe API::V1::UsersController do
     user_attributes = FactoryGirl.attributes_for(:canadian_user)
     post :create, user: user_attributes
     json = JSON.parse(response.body)
-    expect(json["first_name"]).to eq(user_attributes[:first_name])
-    # response.body.should eq User.first.to_json
+    json["first_name"].should eq(user_attributes[:first_name])
   end
 
   it "should have only allowed attributes in the response object" do

@@ -7,7 +7,7 @@ describe API::V1::BicyclesController do
       get :index
       json = JSON.parse(response.body)
       response.status.should eql(200)
-      expect(json['bicycles'].length).to eq(2)
+      json['bicycles'].length.should eq(2)
     end
 
     it 'retrieves bicycles based on query' do
@@ -16,7 +16,7 @@ describe API::V1::BicyclesController do
 
       get :index, { :query => { city: 'vancouver' } }
       json = JSON.parse(response.body)
-      expect(json['bicycles'].length).to eq(2)
+      json['bicycles'].length.should eq(2)
     end
 
     it "retrieves bicycles based on multiple parameters" do
@@ -25,7 +25,7 @@ describe API::V1::BicyclesController do
       2.times { FactoryGirl.create(:bicycle, city: 'Dallas', color: 'blue') }
       get :index, { :query => { city: 'dallas', color: 'blue' } }
       json = JSON.parse(response.body)
-      expect(json['bicycles'].length).to eq(2)
+      json['bicycles'].length.should eq(2)
     end
   end
 
@@ -42,7 +42,7 @@ describe API::V1::BicyclesController do
       bicycle_attributes = FactoryGirl.attributes_for(:bicycle, :user_id => user.id)
       post :create, bicycle: bicycle_attributes
       json = JSON.parse(response.body)
-      expect(json['bicycle']["description"]).to eql(bicycle_attributes[:description])
+      json['bicycle']["description"].should eql(bicycle_attributes[:description])
     end
 
     it "should fail if the request does not include all required information" do
@@ -57,8 +57,8 @@ describe API::V1::BicyclesController do
       bicycle_attributes = FactoryGirl.attributes_for(:bicycle, date: nil)
       post :create, bicycle: bicycle_attributes
       json = JSON.parse(response.body)
-      expect(json['user']).to eql ['can\'t be blank']
-      expect(json['date']).to eql ['can\'t be blank']
+      json['user'].should eql ['can\'t be blank']
+      json['date'].should eql ['can\'t be blank']
     end
   end
 end
