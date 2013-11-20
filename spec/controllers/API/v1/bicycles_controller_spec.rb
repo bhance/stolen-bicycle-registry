@@ -10,7 +10,7 @@ describe API::V1::BicyclesController do
       expect(json['bicycles'].length).to eq(2)
     end
 
-    it 'retrieves only bicycles from the city of Vancouver' do
+    it 'retrieves bicycles based on query' do
       FactoryGirl.create(:bicycle, city: 'Dallas')
       2.times { FactoryGirl.create(:bicycle) }
 
@@ -19,7 +19,7 @@ describe API::V1::BicyclesController do
       expect(json['bicycles'].length).to eq(2)
     end
 
-    it "retrieves only 'blue' bicycles from 'Dallas'" do
+    it "retrieves bicycles based on multiple parameters" do
       FactoryGirl.create(:bicycle, color: 'blue')
       FactoryGirl.create(:bicycle, city: 'Dallas')
       2.times { FactoryGirl.create(:bicycle, city: 'Dallas', color: 'blue') }
