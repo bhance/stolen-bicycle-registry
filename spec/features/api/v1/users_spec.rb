@@ -5,7 +5,7 @@ require "spec_helper"
       user_attributes = FactoryGirl.attributes_for(:canadian_user)
       post "http://localhost:3000/api/v1/users", { :user => user_attributes }
       json = JSON.parse(response.body)
-      expect(json["city"]).to eq("Toronto")
+      json['user']['city'].should eql("Toronto")
     end
   end
 

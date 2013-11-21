@@ -9,10 +9,10 @@ describe API::V1::UsersController do
     end
 
     it "allows insertion of a bicycle through nested attributes" do
-
       user_attributes = FactoryGirl.attributes_for(:canadian_user)
       user_attributes[:bicycles_attributes] = [FactoryGirl.attributes_for(:canadian_bicycle)]
-      post(:create, { user: user_attributes }).should change { Bicycle.count }.by 1
+      post(:create, user: user_attributes)
+      Bicycle.count.should eq 1
     end
   end
 
@@ -20,7 +20,7 @@ describe API::V1::UsersController do
     user_attributes = FactoryGirl.attributes_for(:canadian_user)
     post :create, user: user_attributes
     json = JSON.parse(response.body)
-    json["first_name"].should eq(user_attributes[:first_name])
+    json['user']['first_name'].should eql(user_attributes[:first_name])
   end
 
   it "should have only allowed attributes in the response object" do
