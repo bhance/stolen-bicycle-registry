@@ -42,7 +42,7 @@ describe API::V1::BicyclesController do
       bicycle_attributes = FactoryGirl.attributes_for(:bicycle, :user_id => user.id)
       post :create, bicycle: bicycle_attributes
       json = JSON.parse(response.body)
-      json['bicycle']["description"].should eql(bicycle_attributes[:description])
+      json['bicycle']["description"].should eq(bicycle_attributes[:description])
     end
 
     it "should fail if the request does not include all required information" do
