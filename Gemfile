@@ -17,6 +17,7 @@ gem 'cancan'
 gem 'recaptcha-mailhide'
 gem 'paranoia', '~> 2.0'
 gem 'smarter_csv'
+gem 'active_model_serializers'
 
 group :production do
   gem 'lograge'
