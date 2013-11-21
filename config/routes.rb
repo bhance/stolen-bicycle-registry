@@ -21,7 +21,8 @@ StolenBicycleRegistry::Application.routes.draw do
 
   namespace :api, :defaults => { :format => :json } do
     namespace :v1 do
-      resources :bicycles
+      resources :bicycles, only: [:index, :create]
+      resources :users, only: :create
     end
   end
 

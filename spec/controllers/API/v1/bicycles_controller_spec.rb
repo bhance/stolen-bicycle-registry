@@ -1,54 +1,64 @@
 require 'spec_helper'
 
 describe API::V1::BicyclesController do
-  it 'retrieves all bicycles' do
-    2.times { FactoryGirl.create(:bicycle) }
-    get :index
-    json = JSON.parse(response.body)
-    expect(response).to be_success
-    expect(json.length).to eq(2)
+  describe "get index" do
+    it 'retrieves all bicycles' do
+      2.times { FactoryGirl.create(:bicycle) }
+      get :index
+      json = JSON.parse(response.body)
+      response.status.should eql(200)
+      json['bicycles'].length.should eq(2)
+    end
+
+    it 'retrieves bicycles based on query' do
+      FactoryGirl.create(:bicycle, city: 'Dallas')
+      2.times { FactoryGirl.create(:bicycle) }
+
+      get :index, { :query => { city: 'vancouver' } }
+      json = JSON.parse(response.body)
+      json['bicycles'].length.should eq(2)
+    end
+
+    it "retrieves bicycles based on multiple parameters" do
+      FactoryGirl.create(:bicycle, color: 'blue')
+      FactoryGirl.create(:bicycle, city: 'Dallas')
+      2.times { FactoryGirl.create(:bicycle, city: 'Dallas', color: 'blue') }
+      get :index, { :query => { city: 'dallas', color: 'blue' } }
+      json = JSON.parse(response.body)
+      json['bicycles'].length.should eq(2)
+    end
   end
 
-  it 'retrieves only bicycles from the city of Vancouver' do
-    FactoryGirl.create(:bicycle, city: 'Dallas')
-    2.times { FactoryGirl.create(:bicycle) }
-    get :index, { :query => { city: 'vancouver' } }
-    json = JSON.parse(response.body)
-    expect(json.length).to eq(2)
-  end
+  describe "post create" do
+    it "allows insertion of a bicycle to the database" do
+      user = FactoryGirl.create(:canadian_user)
+      bicycle_attributes = FactoryGirl.attributes_for(:bicycle, :user_id => user.id)
+      post :create, bicycle: bicycle_attributes
+      response.status.should eql(201)
+    end
 
-  it "retrieves only 'blue' bicycles from 'Dallas'" do
-    FactoryGirl.create(:bicycle, color: 'blue')
-    FactoryGirl.create(:bicycle, city: 'Dallas')
-    2.times { FactoryGirl.create(:bicycle, city: 'Dallas', color: 'blue') }
-    get :index, { :query => { city: 'dallas', color: 'blue' } }
-    json = JSON.parse(response.body)
-    expect(json.length).to eq(2)
-  end
+    it "responds with the created json object when a bicycle is successfully added" do
+      user = FactoryGirl.create(:canadian_user)
+      bicycle_attributes = FactoryGirl.attributes_for(:bicycle, :user_id => user.id)
+      post :create, bicycle: bicycle_attributes
+      json = JSON.parse(response.body)
+      json['bicycle']["description"].should eq(bicycle_attributes[:description])
+    end
 
-  it "does not return certain attributes" do
-    FactoryGirl.create(:bicycle)
-    get :index
-    json = JSON.parse(response.body)
-    json.first.should_not include(
-      'approved',
-      'hidden',
-      'created_at',
-      'updated_at',
-      'photo_file_name',
-      'photo_content_type',
-      'photo_file_size',
-      'photo_updated_at',
-      'verified_ownership',
-      'user_id'
-      )
-  end
+    it "should fail if the request does not include all required information" do
+      user = FactoryGirl.create(:canadian_user)
+      bicycle_attributes = FactoryGirl.attributes_for(:bicycle, user_id: nil)
+      post :create, bicycle: bicycle_attributes
+      response.should_not be_success
+    end
 
-  # it "allows insertion of a new user/bike into the database" do
-  #   bicycle = FactoryGirl.create(:bicycle).to_json
-  #   post :create, bicycle
-  #   json = JSON.parse(response.body)
-  #   json.should equal "user and bike created"
-  #   expect(json).to eq("user and bike created")
-  # end
+    it "includes the errors if the request fails validation" do
+      user = FactoryGirl.create(:canadian_user)
+      bicycle_attributes = FactoryGirl.attributes_for(:bicycle, date: nil)
+      post :create, bicycle: bicycle_attributes
+      json = JSON.parse(response.body)
+      json['user'].should eql ['can\'t be blank']
+      json['date'].should eql ['can\'t be blank']
+    end
+  end
 end
