@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Geography
   acts_as_paranoid
   
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :bicycles, inverse_of: :user

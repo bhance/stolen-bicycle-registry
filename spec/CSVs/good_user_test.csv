@@ -1,0 +1,2 @@
+email,first_name,last_name,city,region,postal_code,country,phone1,phone2,first_name_public,last_name_public,email_public
+bill@example.net,Joe,Smith,SLC,UT,84596,United States,435-123-0495,,t,f,f
