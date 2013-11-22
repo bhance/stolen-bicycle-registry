@@ -1,0 +1,11 @@
+<% provide(:title, '| CSV Import') %>
+<div>
+  <%= form_tag({controller: 'imports', :action => 'create'},
+               :enctype =>"multipart/form-data") do %>
+    <%= label_tag :user_file %>
+    <%= file_field_tag :user_file %>
+    <%= label_tag :bicycle_file %>
+    <%= file_field_tag :bicycle_file %>
+    <%= submit_tag "Import", class: 'btn btn-success' %>
+  <% end %>
+</div>

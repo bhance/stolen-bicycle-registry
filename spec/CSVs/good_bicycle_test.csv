@@ -1,2 +1,2 @@
-date,city,region,postal_code,year,brand,model,color,size,serial,description,country,police_report
-10/17/2013,Portland,OR,97201,2013,Schwinn,Men's 700,Red,28,,Red Frame and yadda yadda Red Frame and yadda yadda,USA,T1300634
+date,city,region,postal_code,year,brand,model,color,size,serial,description,country,police_report,owneroid
+10/17/2013,Portland,OR,97201,2013,Schwinn,Men's 700,Red,28,,Red Frame and yadda yadda Red Frame and yadda yadda,USA,T1300634,3

@@ -173,6 +173,11 @@ feature 'User pages' do
       page.should have_content bicycle.date
     end
 
+    scenario 'the user cannot see an admin link' do
+      visit user_path(user)
+      page.should_not have_content 'CSV upload' 
+    end
+
     scenario 'the user cannot see someone else\'s bicycles' do
       visit user_path(canadian_user)
       page.should have_content 'Access denied'
@@ -225,7 +230,8 @@ feature 'Admin update' do
     it { should have_content 'Admin Toolbox' }
     it { should_not have_content 'Register a New Bicycle' }
     it { should have_content '1 bicycle currently pending' }
-    it { should have_link 'User search' } 
+    it { should have_link 'User search' }
+    it { should have_content 'CSV upload' }
 
     scenario 'should allow the admin to change a bicycle\'s listing to approved' do #, js: true FIXME js breaks in crazy ways
       check 'approved'
@@ -255,26 +261,26 @@ feature 'Admin update' do
         page.should have_content @user.first_name
       end
     end
+
+    context 'CSV upload' do
+      before do
+        click_link 'CSV upload'
+        attach_file('user_file', File.join(Rails.root, 'spec/CSVs/good_user_test.csv')) 
+      end
+      
+      it 'allows an admin to upload users' do
+        expect {click_button('Import')}.to change { User.all.count }.by 1
+      end
+
+      it 'allows an admin to upload users + bicycles' do
+        attach_file('bicycle_file', File.join(Rails.root, 'spec/CSVs/good_bicycle_test.csv'))
+        expect {click_button('Import')}.to change { Bicycle.all.count }.by 1
+      end
+
+      it 'redirects the admin and gives a confirmation page' do
+        click_button('Import')
+        page.should have_content 'Import Successful'
+      end
+    end
   end
-end
-
-feature 'CSV upload' do
-  before do
-    @admin = FactoryGirl.create(:admin)
-    visit sign_in_path
-    fill_in 'Email', with: @admin.email
-    fill_in 'Password', with: @admin.password
-    click_button 'Sign in'
-  end
-
-  subject { page }
-
-  it { should have_content 'CSV upload' }
-
-  # scenario 'admin uploads a file to the site' do
-  #   save_and_open_page
-  #   attach_file 'file', File.join(Rails.root, 'spec/CSVs/test.csv')
-  #   click_button 'Import'
-  #   Bicycle.all.count.should_not == 0
-  # end
 end
