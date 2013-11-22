@@ -236,5 +236,17 @@ feature 'Admin update' do
       click_link 'Delete'
       page.should_not have_content '1 bicycle'
     end
+
+    scenario 'should paginate unapproved bicycle results' do
+      13.times { FactoryGirl.create(:bicycle) }
+      click_link 'My Account'
+      page.should have_content 'Next'
+    end
+
+    scenario 'unapproved bicycle listings should refresh when a bicycle is approved' do
+      check 'approved'
+      click_button 'Update Status'
+      page.should_not have_content '1 bicycle'
+    end
   end
 end
