@@ -37,18 +37,20 @@ class BicyclesController < ApplicationController
   end
 
   def update
-    @bicycle = Bicycle.find(params[:id])
-    respond_to do |format|
-      format.html do
-        if @bicycle.update(bicycle_params)
-          flash[:notice] = "Bicycle status updated"
-          redirect_to bicycle_path(@bicycle)
-        else
-          render 'edit'
-        end
+    @bicycle = Bicycle.find(params[:id])        
+    if current_user.admin?
+      if @bicycle.update(bicycle_params)
+        flash[:notice] = "Bicycle status updated"
+        redirect_to user_path(current_user)
+      else
+        render 'show'
       end
-      format.js do
-        @bicycle.update(bicycle_params)
+    else 
+      if @bicycle.update(bicycle_params)
+        flash[:notice] = "Bicycle status updated"
+        redirect_to bicycle_path(@bicycle)
+      else
+        render 'edit'
       end
     end
   end
