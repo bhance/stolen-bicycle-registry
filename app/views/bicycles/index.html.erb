@@ -50,24 +50,24 @@
       <h1 class='lead center'>Bicycle Search</h1>
       <div class="col-md-4 col-md-offset-2">
         <div class="input-group">
-          <span class="input-group-addon label-info">Serial #</span>
+          <span class="input-group-addon label-info form-text">Serial #</span>
           <%= text_field :query, :serial, placeholder: 'Serial #', class: "form-control" %>
         </div>
         <div class="input-group">
-          <span class="input-group-addon label-info">Year</span>
+          <span class="input-group-addon label-info form-text">Year</span>
           <%= number_field :query, :year, placeholder: 'Year', class: "form-control" %>
         </div>
         <div class="input-group">
-          <span class="input-group-addon label-info">Brand</span>
+          <span class="input-group-addon label-info form-text">Brand</span>
           <%= text_field :query, :brand, placeholder: 'Make', class: "form-control", autocomplete: "off",
                          'data-provide'=>'typeahead', 'data-source' => AutoComplete::BRANDS %>
         </div>
         <div class="input-group">
-          <span class="input-group-addon label-info">Model</span>
+          <span class="input-group-addon label-info form-text">Model</span>
           <%= text_field :query, :model, placeholder: 'Model', class: "form-control" %>
         </div>
         <div class="input-group">
-          <span class="input-group-addon label-info">Color</span>
+          <span class="input-group-addon label-info form-text">Color</span>
           <%= text_field :query, :color, placeholder: 'Color', class: "form-control", autocomplete: "off",
                          'data-provide'=>'typeahead', 'data-source' => AutoComplete::COLORS %>
         </div>
@@ -75,12 +75,12 @@
       
       <div class="col-md-4">
         <div class="input-group">
-          <span class="input-group-addon label-info">Postal Code</span>
+          <span class="input-group-addon label-info form-text">Postal Code</span>
           <%= text_field :query, :postal_code, placeholder: 'Postal Code', class: "form-control" %>
         </div>
 
         <div class="input-group">
-          <span class="input-group-addon label-info">City</span>
+          <span class="input-group-addon label-info form-text">City</span>
           <%= text_field :query, :city, value: user_signed_in? ? current_user.city : '',
                          placeholder: 'City', class: "form-control", autocomplete: "off", 'data-provide'=>'typeahead',
                         'data-source' => AutoComplete::CITIES %>

@@ -8,17 +8,17 @@
       <% end %>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">First Name *</span>
+        <span class="input-group-addon label-info form-text">First Name *</span>
         <%= f.text_field :first_name, :autofocus => true, placeholder: 'First Name', class: "form-control" %>
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Last Name *</span>
+        <span class="input-group-addon label-info form-text">Last Name *</span>
         <%= f.text_field :last_name, placeholder: 'Last Name', class: "form-control" %>
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Email *</span>
+        <span class="input-group-addon label-info form-text">Email *</span>
         <%= f.email_field :email, :autofocus => true, placeholder: 'Email', class: "form-control" %>
       </div>
       <div>
@@ -26,7 +26,7 @@
                      { :include_blank => 'Select Country *' }, class: 'user-country' %>
       </div>
       <div class="input-group">
-        <span class="input-group-addon label-info">City *</span>
+        <span class="input-group-addon label-info form-text">City *</span>
         <%= f.text_field :city, placeholder: 'City', class: "form-control", autocomplete: "off",
                        'data-provide'=>'typeahead', 'data-source' => AutoComplete::CITIES %>
       </div>
@@ -39,12 +39,12 @@
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Phone</span>
+        <span class="input-group-addon label-info form-text">Phone</span>
         <%= f.text_field :phone1, placeholder: 'Phone', class: "form-control" %>
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Phone 2</span>
+        <span class="input-group-addon label-info form-text">Phone 2</span>
         <%= f.text_field :phone2, placeholder: 'Phone 2', class: "form-control" %>
       </div>
 
