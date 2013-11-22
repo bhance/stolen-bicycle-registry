@@ -11,7 +11,7 @@ class BicyclesController < ApplicationController
 
   def admin_update
     @bicycle = Bicycle.find(params[:id]).paginate(page: params[:page],
-                                     per_page: 10)
+                                                  per_page: 10)
   end
 
   def new
