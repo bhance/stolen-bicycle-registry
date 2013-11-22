@@ -11,6 +11,7 @@ StolenBicycleRegistry::Application.routes.draw do
   match '/twitter' => 'static_pages#twitter', via: 'get'
   match '/rfid_tags' => 'static_pages#whitepaper', via: 'get'
   match '/api_doc' => 'static_pages#api', via: 'get'
+  match '/team_epicodus' => 'static_pages#team_epicodus', via: 'get'
 
   devise_for :users, :controllers => { :registrations => :registrations }
   devise_scope :user do
