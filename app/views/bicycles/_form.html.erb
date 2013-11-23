@@ -6,7 +6,7 @@
     <h5>* = required</h5>
     
     <div class="input-group">
-      <span class="input-group-addon label-info">Theft Date *</span>
+      <span class="input-group-addon label-info form-text">Theft Date *</span>
       <%= f.text_field :date, id: 'datepicker', class: "form-control" %>
     </div>
     
@@ -16,7 +16,7 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">City *</span>
+      <span class="input-group-addon label-info form-text">City *</span>
       <%= f.text_field :city, value: @bicycle.city, class: "form-control", autocomplete: "off",
                        'data-provide'=>'typeahead', 'data-source' => AutoComplete::CITIES %>
     </div>
@@ -30,45 +30,45 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Description *<span class='br'>
+      <span class="input-group-addon label-info form-text">Description *<span class='br'>
         <small>(Min 30 chars)</small></span></span>
       <%= f.text_area :description, placeholder: 'Minimum 30 char.', class: "form-control" %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Serial</span>
+      <span class="input-group-addon label-info form-text">Serial</span>
       <%= f.text_field :serial, placeholder: 'PP123495877', class: "form-control" %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Police File #</span>
+      <span class="input-group-addon label-info form-text">Police File #</span>
       <%= f.text_field :police_report, placeholder: '1235463754', class: "form-control" %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Year #</span>
+      <span class="input-group-addon label-info form-text">Year #</span>
       <%= f.text_field :year, placeholder: '2007', class: "form-control" %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Brand</span>
+      <span class="input-group-addon label-info form-text">Brand</span>
       <%= f.text_field :brand, placeholder: 'Schwinn', class: "form-control", autocomplete: "off",
                        'data-provide'=>'typeahead', 'data-source' => AutoComplete::BRANDS %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Model</span>
+      <span class="input-group-addon label-info form-text">Model</span>
       <%= f.text_field :model, placeholder: 'Le Tour', class: "form-control" %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Color</span>
+      <span class="input-group-addon label-info form-text">Color</span>
       <%= f.text_field :color, placeholder: 'Simple colors!', class: "form-control", autocomplete: "off",
                        'data-provide'=>'typeahead', 'data-source' => AutoComplete::COLORS %>
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Size</span>
+      <span class="input-group-addon label-info form-text">Size</span>
       <%= f.text_field :size, placeholder: '27', class: "form-control" %>
     </div>
 
@@ -77,7 +77,7 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-addon label-info">Photo</span>
+      <span class="input-group-addon label-info form-text">Photo</span>
       <%= f.file_field :photo %>
     </div>
 

@@ -165,6 +165,10 @@
   background-color: #3498DB;
 }
 
+.form-text {
+  color: #fff;
+}
+
 .btn-info {
   background-color: #3498DB;
   border-color: #3498DB;
@@ -314,6 +318,10 @@ select {
   height: 32px;
 }
 
+a {
+  color: #000;
+}
+
 .bike-listing {
   margin-left: 1%;
 }
@@ -409,4 +417,62 @@ li {
 
 .list-group-item {
   padding-bottom: .45%;
+}
+
+.links a {
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+.team {
+  margin-top: 1.5%;
+  position: relative;
+}
+
+.bottom-row {
+  margin-top: 2.5%;
+}
+
+.name {
+  font-family: monospace;
+  font-size: 18px;
+}
+
+.ch-info {
+    position: center;
+    background: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    transform: scale(0);
+}
+
+.ch-info p {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 22px;
+    height: 140px;
+}
+
+.ch-item:hover {
+  opacity: 1;
+  filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
+    filter: gray; /* IE5+ */
+    -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+
+}
+
+.ch-item:hover .ch-info p {
+    opacity: 1;
+}
+
+.ch-item:hover .ch-info {
+    transform: scale(1);
+    opacity: 1;
 }

@@ -27,9 +27,15 @@
   <div class="bike-count">
     <p><%= pluralize(current_user.relevant_bicycles.count, 'bicycle') %> currently <%= @user.admin? ? 'pending:' : 'listed:' %></p>
   </div>
+  <div class="center">
+    <%= will_paginate @bicycles, renderer: BootstrapPagination::Rails %>
+  </div>
   <div class="row">
-    <% @user.relevant_bicycles.each do |bicycle| %>
+    <% @bicycles.each do |bicycle| %>
       <%= render 'shared/bicycles', bicycle: bicycle %>
     <% end %>
+  </div>
+  <div class="center">
+    <%= will_paginate @bicycles, renderer: BootstrapPagination::Rails %>
   </div>
 </div>

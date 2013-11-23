@@ -1,4 +1,4 @@
-# [Stolen Bicycle Registry](http://stolen-bicycle-registry.herokuapp.com)
+ # [Stolen Bicycle Registry](http://stolen-bicycle-registry.herokuapp.com)
 
 Stolen Bicycle Registry is an online database that tracks stolen bicycles. This is an overhaul on the site first introduced in fall 2013.
 
@@ -32,12 +32,11 @@ Read below for the dependencies.
 
 ##### Corbin Dahl
   * [Github](http://github.com/corbindarras)
+  * [Twitter](http://twitter.com/corbindarras)
 
 ##### Dan Griffin
   * [Github](http://github.com/dangoldgriff)
-
-##### Niccoli Hersey
-  * [Github](http://github.com/niccoli)
+  * [Twitter](http://twitter.com/dangoldgriff)
 
 ##### Abby Ihrig
   * [Github](http://github.com/abbysmalls)
