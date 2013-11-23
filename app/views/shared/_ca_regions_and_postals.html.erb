@@ -1,7 +1,7 @@
 <div id='bicycle-ca-provinces'>
   <%= f.select :region, Geography::PROVINCES, :include_blank => 'Select Province *' %>
 </div>
-<div class="input-group" id='bicycle-ca-postal'>
-  <span class="input-group-addon label-info">Postal Code *</span>
+<div class="input-group form-text" id='bicycle-ca-postal'>
+  <span class="input-group-addon label-info form-text">Postal Code *</span>
   <%= f.text_field :postal_code, placeholder: 'Zip/Postal Code', class: "form-control" %>
 </div>

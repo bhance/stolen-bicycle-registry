@@ -4,12 +4,12 @@
     <hr>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <div class="input-group">
-        <span class="input-group-addon label-info">Email</span>
+        <span class="input-group-addon label-info form-text">Email</span>
         <%= f.email_field :email, :autofocus => true, placeholder: 'Email', class: "form-control" %>
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon label-info">Password</span>
+        <span class="input-group-addon label-info form-text">Password</span>
         <%= f.password_field :password, placeholder: 'Password', class: "form-control" %>
       </div>
 
